@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'splash1', // Keep splash1 as the default starting page
+    redirectTo: 'splash1',
     pathMatch: 'full',
   },
   {
@@ -25,19 +25,30 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./signup/signup.page').then((m) => m.SignupPage),
   },
+  // The pages are now top-level routes without the "/tabs/" prefix
   {
-    path: 'tabs',
-    loadComponent: () => import('./tabs/tabs.page').then((m) => m.TabsPage),
-    children: [
-      {
-        path: 'home',
-        loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/home',
-        pathMatch: 'full',
-      },
-    ],
+    path: 'home',
+    loadComponent: () =>
+      import('./pages/home/home.page').then((m) => m.HomePage),
+  },
+  {
+    path: 'explore',
+    loadComponent: () =>
+      import('./pages/explore/explore.page').then((m) => m.ExplorePage),
+  },
+  {
+    path: 'wardrobe',
+    loadComponent: () =>
+      import('./pages/wardrobe/wardrobe.page').then((m) => m.WardrobePage),
+  },
+  {
+    path: 'outfit',
+    loadComponent: () =>
+      import('./pages/outfit/outfit.page').then((m) => m.OutfitPage),
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./pages/profile/profile.page').then((m) => m.ProfilePage),
   },
 ];

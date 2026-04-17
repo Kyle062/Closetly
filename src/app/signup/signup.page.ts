@@ -35,11 +35,7 @@ import {
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonButton,
-    IonButtons,
     IonIcon,
     IonItem,
     IonLabel,

@@ -1,7 +1,11 @@
-<ion-content [fullscreen]="true" class="home-content">
+<ion-content [fullscreen]="true" class="home-content" scroll-y="true">
   <div class="header-section">
     <div class="top-nav">
-      <img src="../../assets/homepage/iconLogo.png" class="mini-logo" alt="logo" />
+      <img
+        src="../../../assets/homepage/iconLogo.png"
+        class="mini-logo"
+        alt="logo"
+      />
 
       <div class="search-input">
         <ion-icon name="search-outline"></ion-icon>
@@ -14,7 +18,10 @@
 
     <div class="user-card">
       <ion-avatar>
-        <img src="../../assets/homepage/profileClosetly.png" alt="Profile" />
+        <img
+          src="../../../assets/splash4/BackgroundImageClosetly.png"
+          alt="Profile"
+        />
       </ion-avatar>
       <div class="user-info">
         <h2>Hello Kyle!</h2>
@@ -32,13 +39,13 @@
       <h3>Today's Suggestion</h3>
       <div class="outfit-preview">
         <div class="img-wrapper">
-          <img src="../../assets/homepage/cloth1.png" />
+          <img src="../../../assets/homepage/cloth1.png" alt="Cloth 1" />
         </div>
         <div class="img-wrapper">
-          <img src="../../assets/homepage/cloth2.png" />
+          <img src="../../../assets/homepage/cloth2.png" alt="Cloth 2" />
         </div>
         <div class="img-wrapper">
-          <img src="../../assets/homepage/cloth3.png" />
+          <img src="../../../assets/homepage/cloth3.png" alt="Cloth 3" />
         </div>
       </div>
       <p class="outfit-desc">Street Wear & Comfortable</p>
@@ -48,10 +55,22 @@
     </div>
 
     <div class="stats-row">
-      <div class="stat-box"><strong>24</strong><span>Items</span></div>
-      <div class="stat-box"><strong>8</strong><span>Outfits</span></div>
-      <div class="stat-box"><strong>3</strong><span>Categories</span></div>
-      <div class="stat-box"><strong>12</strong><span>Favorites</span></div>
+      <div class="stat-box">
+        <strong>24</strong>
+        <span>Items</span>
+      </div>
+      <div class="stat-box">
+        <strong>8</strong>
+        <span>Outfits</span>
+      </div>
+      <div class="stat-box">
+        <strong>3</strong>
+        <span>Categories</span>
+      </div>
+      <div class="stat-box">
+        <strong>12</strong>
+        <span>Favorites</span>
+      </div>
     </div>
 
     <h4 class="section-title">Quick Actions</h4>
@@ -81,5 +100,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Extra spacing for better scrolling -->
+    <div class="bottom-spacer"></div>
   </div>
 </ion-content>
+<app-bottom-nav></app-bottom-nav>
