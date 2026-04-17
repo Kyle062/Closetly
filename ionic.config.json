@@ -1,0 +1,7 @@
+{
+  "name": "Closetly",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
