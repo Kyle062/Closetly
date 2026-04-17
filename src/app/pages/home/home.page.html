@@ -18,37 +18,46 @@
 
     <div class="user-card">
       <ion-avatar>
-        <img
-          src="../../../assets/homepage/profileClosetly.png"
-          alt="Profile"
-        />
+        <img src="../../../assets/homepage/profileClosetly.png" alt="Profile" />
       </ion-avatar>
       <div class="user-info">
         <h2>Hello Kyle!</h2>
         <p>explore and discover outfit ideas</p>
-        <div class="weather-row">
-          <ion-icon name="cloudy-outline"></ion-icon>
-          <span>22°C Sunny</span>
+        <div class="weather-row" *ngIf="!isLoading; else loadingTemplate">
+          <ion-icon [name]="weatherData.icon"></ion-icon>
+          <span>{{ weatherData.temperature }} {{ weatherData.condition }}</span>
+          <span class="feels-like">({{ weatherData.feelsLike }})</span>
+          <span class="city-name">{{ weatherData.city }}</span>
         </div>
+        <ng-template #loadingTemplate>
+          <div class="weather-row">
+            <ion-icon name="cloudy-outline"></ion-icon>
+            <span>Loading weather for Davao City...</span>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
 
   <div class="main-container">
     <div class="suggestion-card">
-      <h3>Today's Suggestion</h3>
+      <h3>{{ currentSuggestion.title }}</h3>
       <div class="outfit-preview">
-        <div class="img-wrapper">
-          <img src="../../../assets/homepage/cloth1.png" alt="Cloth 1" />
-        </div>
-        <div class="img-wrapper">
-          <img src="../../../assets/homepage/cloth2.png" alt="Cloth 2" />
-        </div>
-        <div class="img-wrapper">
-          <img src="../../../assets/homepage/cloth3.png" alt="Cloth 3" />
+        <div
+          class="img-wrapper"
+          *ngFor="let cloth of currentSuggestion.clothes"
+          [ngClass]="getClothingClass(cloth)"
+        >
+          <img
+            [src]="cloth.image"
+            [alt]="cloth.alt"
+            [style.width]="cloth.width || 'auto'"
+            [style.height]="cloth.height || 'auto'"
+            [style.object-fit]="cloth.objectFit || 'contain'"
+          />
         </div>
       </div>
-      <p class="outfit-desc">Street Wear & Comfortable</p>
+      <p class="outfit-desc">{{ currentSuggestion.description }}</p>
       <ion-button expand="block" class="view-outfit-btn"
         >View Full Outfit</ion-button
       >

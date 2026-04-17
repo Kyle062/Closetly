@@ -1,26 +1,66 @@
 <div class="nav-container">
-  <div class="nav-item" routerLink="/home" routerLinkActive="active">
-    <ion-icon name="home-outline"></ion-icon>
+  <div
+    class="nav-item"
+    routerLink="/home"
+    routerLinkActive="active"
+    (click)="onNavClick('home')"
+  >
+    <div class="nav-icon-wrapper">
+      <ion-icon name="home-outline"></ion-icon>
+    </div>
     <span>Home</span>
+    <div class="active-indicator"></div>
   </div>
 
-  <div class="nav-item" routerLink="/explore" routerLinkActive="active">
-    <ion-icon name="search-outline"></ion-icon>
+  <div
+    class="nav-item"
+    routerLink="/explore"
+    routerLinkActive="active"
+    (click)="onNavClick('explore')"
+  >
+    <div class="nav-icon-wrapper">
+      <ion-icon name="search-outline"></ion-icon>
+    </div>
     <span>Explore</span>
+    <div class="active-indicator"></div>
   </div>
 
-  <div class="nav-item" routerLink="/wardrobe" routerLinkActive="active">
-    <ion-icon name="grid-outline"></ion-icon>
+  <div
+    class="nav-item"
+    routerLink="/wardrobe"
+    routerLinkActive="active"
+    (click)="onNavClick('wardrobe')"
+  >
+    <div class="nav-icon-wrapper">
+      <ion-icon name="grid-outline"></ion-icon>
+    </div>
     <span>Wardrobe</span>
+    <div class="active-indicator"></div>
   </div>
 
-  <div class="nav-item" routerLink="/outfit" routerLinkActive="active">
-    <ion-icon name="shirt-outline"></ion-icon>
+  <div
+    class="nav-item"
+    routerLink="/outfit"
+    routerLinkActive="active"
+    (click)="onNavClick('outfit')"
+  >
+    <div class="nav-icon-wrapper">
+      <ion-icon name="shirt-outline"></ion-icon>
+    </div>
     <span>Outfit</span>
+    <div class="active-indicator"></div>
   </div>
 
-  <div class="nav-item" routerLink="/profile" routerLinkActive="active">
-    <ion-icon name="person-outline"></ion-icon>
+  <div
+    class="nav-item"
+    routerLink="/profile"
+    routerLinkActive="active"
+    (click)="onNavClick('profile')"
+  >
+    <div class="nav-icon-wrapper">
+      <ion-icon name="person-outline"></ion-icon>
+    </div>
     <span>Profile</span>
+    <div class="active-indicator"></div>
   </div>
 </div>

@@ -28,4 +28,9 @@ export class BottomNavComponent {
       personOutline,
     });
   }
+
+  // Optional: Add haptic feedback or analytics
+  onNavClick(navItem: string) {
+    console.log(`Navigated to: ${navItem}`);
+  }
 }
