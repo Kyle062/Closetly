@@ -93,7 +93,7 @@
       .accent-line {
         height: 4px;
         width: 100%;
-        background: linear-gradient(90deg, #ffd700, #ffa500, #ffd700);
+        background: linear-gradient(90deg, #000000, #353535, #303030);
         border-radius: 2px;
         animation: expandWidth 0.8s ease-out;
       }
@@ -188,12 +188,12 @@
       cursor: pointer;
 
       &.active {
-        background: linear-gradient(90deg, #ffd700, #ffa500);
+        background: linear-gradient(90deg, #000000, #000000);
         width: 35px;
       }
 
       &:hover {
-        background: #ffd700;
+        background: #000000;
         transform: scaleY(1.2);
       }
     }

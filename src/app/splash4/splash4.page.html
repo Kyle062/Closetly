@@ -31,8 +31,12 @@
     </p>
 
     <div class="button-row">
-      <ion-button fill="outline" class="login-btn">LOG IN</ion-button>
-      <ion-button class="signup-btn">SIGN UP</ion-button>
+      <!-- ADDED - (click) event to call goToLogin() method -->
+      <ion-button fill="outline" class="login-btn" (click)="goToLogin()"
+        >LOG IN</ion-button
+      >
+      <!-- ADDED - (click) event to call goToSignup() method -->
+      <ion-button class="signup-btn" (click)="goToSignup()">SIGN UP</ion-button>
     </div>
 
     <div class="pagination-dots">
