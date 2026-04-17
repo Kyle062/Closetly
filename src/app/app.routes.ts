@@ -18,4 +18,12 @@ export const routes: Routes = [
     path: 'splash4',
     loadComponent: () => import('./splash4/splash4.page').then( m => m.Splash4Page)
   },
+  {
+    path: 'login',
+    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
+  },
+  {
+    path: 'signup',
+    loadComponent: () => import('./signup/signup.page').then( m => m.SignupPage)
+  },
 ];
