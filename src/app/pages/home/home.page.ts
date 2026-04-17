@@ -216,21 +216,21 @@ export class HomePage implements OnInit {
       description: 'Street Wear & Comfortable',
       clothes: [
         {
-          image: '../../../assets/homepage/cloth1.png',
+          image: '../../../assets/homepage/Comfortable/Closetlycloth13.png',
           alt: 'Casual top',
           width: '110px',
           height: '160px',
           objectFit: 'contain' as const,
         },
         {
-          image: '../../../assets/homepage/cloth2.png',
+          image: '../../../assets/homepage/Comfortable/Closetlycloth14.png.png',
           alt: 'Jeans',
           width: '105px',
           height: '155px',
           objectFit: 'contain' as const,
         },
         {
-          image: '../../../assets/homepage/cloth3.png',
+          image: '../../../assets/homepage/Comfortable/Closetlycloth15.png',
           alt: 'Sneakers',
           width: '100px',
           height: '140px',
