@@ -1,0 +1,24 @@
+.splash1-bg {
+  --background: #000000; // Solid black background
+
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .fade-in-logo {
+    width: 200px;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
