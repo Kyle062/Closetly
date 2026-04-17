@@ -236,4 +236,40 @@
     font-size: 9px;
     color: #d0d0d0;
   }
+
+  /* Error message styles */
+  .error-message {
+    margin: -8px 0 8px 5px;
+    font-size: 11px;
+
+    ion-text {
+      font-family: "Poppins", sans-serif;
+    }
+  }
+
+  .input-item.error-item {
+    --border-color: #462323;
+    --border-width: 1px;
+    --border-style: solid;
+    
+  }
+
+  /* Eye icon hover effect */
+  .eye-icon {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  /* Button active effect */
+  .signup-button {
+    transition: transform 0.2s ease;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
 }

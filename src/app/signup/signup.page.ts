@@ -24,6 +24,7 @@ import {
   keyOutline,
   lockClosedOutline,
   eyeOffOutline,
+  eyeOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -56,6 +57,17 @@ export class SignupPage implements OnInit {
   confirmPassword = '';
   rememberMe = false;
 
+  // Password visibility properties
+  showPassword = false;
+  showConfirmPassword = false;
+
+  // Error message properties
+  usernameError = '';
+  emailError = '';
+  passwordError = '';
+  confirmPasswordError = '';
+  generalError = '';
+
   constructor(private router: Router) {
     // Register required icons
     addIcons({
@@ -65,6 +77,7 @@ export class SignupPage implements OnInit {
       keyOutline,
       lockClosedOutline,
       eyeOffOutline,
+      eyeOutline,
     });
   }
 
@@ -72,30 +85,117 @@ export class SignupPage implements OnInit {
 
   // Navigation Methods
   goBack() {
-    this.router.navigateByUrl('/splash4'); // Adjust back route as needed
+    this.router.navigateByUrl('/splash4');
   }
 
   goToLogin() {
     this.router.navigateByUrl('/login');
   }
 
-  // Action Methods
-  onSignup() {
-    console.log('Signup attempted with:', {
-      username: this.username,
-      email: this.email,
-      password: this.password,
-      confirmPassword: this.confirmPassword,
-      rememberMe: this.rememberMe,
-    });
-    // Add logic here (e.g., validate passwords match, API call)
+  // Toggle password visibility
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
+  // Validation Methods
+  validateForm(): boolean {
+    let isValid = true;
+
+    // Clear previous errors
+    this.usernameError = '';
+    this.emailError = '';
+    this.passwordError = '';
+    this.confirmPasswordError = '';
+    this.generalError = '';
+
+    // Validate Username
+    if (!this.username.trim()) {
+      this.usernameError = 'Username is required';
+      isValid = false;
+    } else if (this.username.length < 3) {
+      this.usernameError = 'Username must be at least 3 characters';
+      isValid = false;
+    }
+
+    // Validate Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!this.email.trim()) {
+      this.emailError = 'Email is required';
+      isValid = false;
+    } else if (!emailRegex.test(this.email)) {
+      this.emailError = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    // Validate Password
+    if (!this.password) {
+      this.passwordError = 'Password is required';
+      isValid = false;
+    } else if (this.password.length < 6) {
+      this.passwordError = 'Password must be at least 6 characters';
+      isValid = false;
+    } else if (!/(?=.*[A-Z])/.test(this.password)) {
+      this.passwordError =
+        'Password must contain at least one uppercase letter';
+      isValid = false;
+    } else if (!/(?=.*[0-9])/.test(this.password)) {
+      this.passwordError = 'Password must contain at least one number';
+      isValid = false;
+    }
+
+    // Validate Confirm Password
+    if (!this.confirmPassword) {
+      this.confirmPasswordError = 'Please confirm your password';
+      isValid = false;
+    } else if (this.password !== this.confirmPassword) {
+      this.confirmPasswordError = 'Passwords do not match';
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
+  // Signup Method
+  onSignup() {
+    if (this.validateForm()) {
+      // Simulate successful registration
+      console.log('Signup successful with:', {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        confirmPassword: this.confirmPassword,
+        rememberMe: this.rememberMe,
+      });
+
+      // Store user data if remember me is checked
+      if (this.rememberMe) {
+        localStorage.setItem('userEmail', this.email);
+        localStorage.setItem('userUsername', this.username);
+      }
+
+      // Show success message and navigate to login
+      this.generalError = ''; // Clear any previous errors
+      alert('Registration successful! Please login to continue.');
+      this.router.navigateByUrl('/login');
+    } else {
+      console.log('Form validation failed');
+    }
+  }
+
+  // Social login methods
   signupWithGoogle() {
     console.log('Sign up with Google');
+    // Add your Google signup logic here
+    alert('Google signup coming soon!');
   }
 
   signupWithFacebook() {
     console.log('Sign up with Facebook');
+    // Add your Facebook signup logic here
+    alert('Facebook signup coming soon!');
   }
 }

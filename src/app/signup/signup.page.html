@@ -27,8 +27,13 @@
 
   <div class="signup-card">
     <div class="form-container">
+      <!-- Username Field -->
       <ion-label class="form-label">Username:</ion-label>
-      <ion-item lines="none" class="input-item">
+      <ion-item
+        lines="none"
+        class="input-item"
+        [class.error-item]="usernameError"
+      >
         <ion-icon slot="start" name="person-outline"></ion-icon>
         <ion-input
           type="text"
@@ -36,9 +41,13 @@
           [(ngModel)]="username"
         ></ion-input>
       </ion-item>
+      <div class="error-message" *ngIf="usernameError">
+        <ion-text color="danger">{{ usernameError }}</ion-text>
+      </div>
 
+      <!-- Email Field -->
       <ion-label class="form-label">Email:</ion-label>
-      <ion-item lines="none" class="input-item">
+      <ion-item lines="none" class="input-item" [class.error-item]="emailError">
         <ion-icon slot="start" name="mail-outline"></ion-icon>
         <ion-input
           type="email"
@@ -46,44 +55,77 @@
           [(ngModel)]="email"
         ></ion-input>
       </ion-item>
+      <div class="error-message" *ngIf="emailError">
+        <ion-text color="danger">{{ emailError }}</ion-text>
+      </div>
 
+      <!-- Password Field -->
       <ion-label class="form-label">Create Password:</ion-label>
-      <ion-item lines="none" class="input-item">
+      <ion-item
+        lines="none"
+        class="input-item"
+        [class.error-item]="passwordError"
+      >
         <ion-icon slot="start" name="key-outline"></ion-icon>
         <ion-input
-          type="password"
+          [type]="showPassword ? 'text' : 'password'"
           placeholder="············"
           [(ngModel)]="password"
         ></ion-input>
-        <ion-icon slot="end" name="eye-off-outline" class="eye-icon"></ion-icon>
+        <ion-icon
+          slot="end"
+          [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+          class="eye-icon"
+          (click)="togglePasswordVisibility()"
+        ></ion-icon>
       </ion-item>
+      <div class="error-message" *ngIf="passwordError">
+        <ion-text color="danger">{{ passwordError }}</ion-text>
+      </div>
 
+      <!-- Confirm Password Field -->
       <ion-label class="form-label">Confirm Password:</ion-label>
-      <ion-item lines="none" class="input-item">
+      <ion-item
+        lines="none"
+        class="input-item"
+        [class.error-item]="confirmPasswordError"
+      >
         <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
         <ion-input
-          type="password"
+          [type]="showConfirmPassword ? 'text' : 'password'"
           placeholder="············"
           [(ngModel)]="confirmPassword"
         ></ion-input>
-        <ion-icon slot="end" name="eye-off-outline" class="eye-icon"></ion-icon>
+        <ion-icon
+          slot="end"
+          [name]="showConfirmPassword ? 'eye-outline' : 'eye-off-outline'"
+          class="eye-icon"
+          (click)="toggleConfirmPasswordVisibility()"
+        ></ion-icon>
       </ion-item>
+      <div class="error-message" *ngIf="confirmPasswordError">
+        <ion-text color="danger">{{ confirmPasswordError }}</ion-text>
+      </div>
 
+      <!-- Remember Me Checkbox -->
       <ion-item lines="none" class="remember-me-item">
         <ion-checkbox slot="start" [(ngModel)]="rememberMe"></ion-checkbox>
         <ion-label>Remember me</ion-label>
       </ion-item>
 
+      <!-- Sign Up Button -->
       <ion-button expand="block" class="signup-button" (click)="onSignup()">
         SIGN UP
       </ion-button>
 
+      <!-- Divider -->
       <div class="divider">
         <div class="line"></div>
         <span>or continue with</span>
         <div class="line"></div>
       </div>
 
+      <!-- Social Logins -->
       <div class="social-logins">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
@@ -99,6 +141,7 @@
         />
       </div>
 
+      <!-- Login Link -->
       <div class="login-section">
         <p>
           Already have an account?
@@ -106,6 +149,7 @@
         </p>
       </div>
 
+      <!-- Footer -->
       <div class="footer-section">
         <p>© 2026 Closetly. All rights reserved.</p>
       </div>
