@@ -1,12 +1,46 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonIcon,
+  IonInput,
+  IonAvatar,
+  IonButton,
+  IonLabel,
+  IonItem,
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import {
+  gridOutline,
+  searchOutline,
+  scanOutline,
+  optionsOutline,
+  cloudyOutline,
+  shirtOutline, sunnyOutline, addOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  standalone: true,
+  // Add all used components to this array
+  imports: [
+    IonContent,
+    IonTitle,
+    IonToolbar,
+    IonIcon,
+    IonInput,
+    IonAvatar,
+    IonButton,
+    IonLabel,
+    IonItem,
+  ],
 })
 export class HomePage {
-  constructor() {}
+  constructor() {
+    // Register the icons specifically for the Home Page
+    addIcons({searchOutline,scanOutline,optionsOutline,cloudyOutline,sunnyOutline,shirtOutline,addOutline,gridOutline,});
+  }
 }

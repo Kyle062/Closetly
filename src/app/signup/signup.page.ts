@@ -25,6 +25,7 @@ import {
   lockClosedOutline,
   eyeOffOutline,
   eyeOutline,
+  checkmarkCircleOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -68,6 +69,11 @@ export class SignupPage implements OnInit {
   confirmPasswordError = '';
   generalError = '';
 
+  // Custom alert properties
+  showCustomAlert = false;
+  alertMessage = '';
+  alertType: 'success' | 'error' = 'success';
+
   constructor(private router: Router) {
     // Register required icons
     addIcons({
@@ -78,6 +84,7 @@ export class SignupPage implements OnInit {
       lockClosedOutline,
       eyeOffOutline,
       eyeOutline,
+      checkmarkCircleOutline,
     });
   }
 
@@ -90,6 +97,23 @@ export class SignupPage implements OnInit {
 
   goToLogin() {
     this.router.navigateByUrl('/login');
+  }
+
+  // Show custom pill alert
+  showAlert(message: string, type: 'success' | 'error' = 'success') {
+    this.alertMessage = message;
+    this.alertType = type;
+    this.showCustomAlert = true;
+
+    // Auto hide after 2 seconds
+    setTimeout(() => {
+      this.hideAlert();
+    }, 2000);
+  }
+
+  hideAlert() {
+    this.showCustomAlert = false;
+    this.alertMessage = '';
   }
 
   // Toggle password visibility
@@ -177,25 +201,30 @@ export class SignupPage implements OnInit {
         localStorage.setItem('userUsername', this.username);
       }
 
-      // Show success message and navigate to login
-      this.generalError = ''; // Clear any previous errors
-      alert('Registration successful! Please login to continue.');
-      this.router.navigateByUrl('/login');
+      // Show custom pill alert
+      this.showAlert(
+        'Registration successful! Redirecting to login...',
+        'success',
+      );
+
+      // Navigate to login after alert
+      setTimeout(() => {
+        this.router.navigateByUrl('/login');
+      }, 2000);
     } else {
-      console.log('Form validation failed');
+      // Show error alert for validation failures
+      this.showAlert('Please fix the errors above', 'error');
     }
   }
 
   // Social login methods
   signupWithGoogle() {
     console.log('Sign up with Google');
-    // Add your Google signup logic here
-    alert('Google signup coming soon!');
+    this.showAlert('Google signup coming soon!', 'error');
   }
 
   signupWithFacebook() {
     console.log('Sign up with Facebook');
-    // Add your Facebook signup logic here
-    alert('Facebook signup coming soon!');
+    this.showAlert('Facebook signup coming soon!', 'error');
   }
 }

@@ -1,4 +1,16 @@
 <ion-content [fullscreen]="true" class="signup-content">
+  <!-- Custom Pill Alert -->
+  <div class="custom-alert-overlay" *ngIf="showCustomAlert">
+    <div
+      class="custom-alert-pill"
+      [class.success]="alertType === 'success'"
+      [class.error]="alertType === 'error'"
+    >
+      <ion-icon name="checkmark-circle-outline" class="alert-icon"></ion-icon>
+      <span class="alert-message">{{ alertMessage }}</span>
+    </div>
+  </div>
+
   <div class="top-section-container">
     <div class="header-overlay">
       <ion-icon

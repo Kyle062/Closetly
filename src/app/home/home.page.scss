@@ -1,27 +1,232 @@
-#container {
-  text-align: center;
+.home-content {
+  // Use your background image here
+  --background: url("../../assets/splash4/BackgroundImageClosetly.png") no-repeat center
+    top / cover;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+  .header-section {
+    padding: 60px 20px 40px 20px; // Extra top padding for status bar area
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 30px;
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+      .mini-logo {
+        width: 24px;
+        height: 24px;
+        filter: brightness(0) invert(1); // Makes placeholder white if it's dark
+      }
 
-  color: #8c8c8c;
+      .search-input {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        padding: 2px 12px;
+        height: 40px;
 
-  margin: 0;
-}
+        ion-icon {
+          color: #999;
+          font-size: 18px;
+        }
+        ion-input {
+          --padding-start: 8px;
+          font-size: 14px;
+        }
+      }
 
-#container a {
-  text-decoration: none;
+      .filter-icon {
+        color: white;
+        font-size: 24px;
+      }
+    }
+  }
+
+  .user-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.3); // Darker frosted look
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 30px;
+    color: white;
+
+    ion-avatar {
+      width: 60px;
+      height: 60px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .user-info {
+      h2 {
+        margin: 0;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+      p {
+        margin: 2px 0;
+        font-size: 13px;
+        opacity: 0.8;
+      }
+      .weather-row {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        margin-top: 4px;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .main-container {
+    background: #fdfaf5;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+    padding: 30px 20px;
+    min-height: 100vh;
+    margin-top: 10px; // Peek at the background
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .suggestion-card {
+    background: #fff8ee;
+    border-radius: 35px;
+    padding: 25px 15px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 0;
+      color: #333;
+    }
+
+    .outfit-preview {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0;
+
+      .img-wrapper {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 18px;
+        overflow: hidden;
+        img {
+          width: 85px;
+          height: 130px;
+          object-fit: cover;
+          display: block;
+        }
+      }
+    }
+
+    .outfit-desc {
+      color: #a8a095;
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .view-outfit-btn {
+      --background: #000;
+      --border-radius: 18px;
+      --padding-top: 18px;
+      --padding-bottom: 18px;
+      font-weight: 600;
+      text-transform: none;
+      margin-top: 20px;
+    }
+  }
+
+  .stats-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+
+    .stat-box {
+      background: white;
+      padding: 15px 5px;
+      border-radius: 20px;
+      text-align: center;
+      width: 23%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+
+      strong {
+        display: block;
+        font-size: 20px;
+        color: #333;
+      }
+      span {
+        font-size: 11px;
+        color: #888;
+      }
+    }
+  }
+
+  .section-title {
+    font-size: 16px;
+    margin: 20px 0 15px 5px;
+    color: #333;
+  }
+
+  .quick-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    .action-card {
+      height: 110px;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+
+      .overlay-text {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        ion-icon {
+          font-size: 24px;
+          margin-bottom: 4px;
+        }
+        span {
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .weather-action {
+      background-image: url("../../assets/homepage/action1.png");
+    }
+    .random-action {
+      background-image: url("../../assets/homepage/action2.png");
+    }
+    .search-action {
+      background-image: url("../../assets/homepage/action3.png");
+    }
+    .add-action {
+      background: #888; // Matches the gray "Add Item" block
+      .overlay-text {
+        background: none;
+        height: 100%;
+        justify-content: center;
+      }
+      ion-icon {
+        font-size: 40px;
+      }
+    }
+  }
 }

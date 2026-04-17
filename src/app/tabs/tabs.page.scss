@@ -1,0 +1,51 @@
+// src/app/tabs/tabs.page.scss
+
+ion-tab-bar {
+  --background: #ffffff;
+  --border: none;
+
+  // Create that distinct curved "shelf" look from the image
+  border-radius: 30px 30px 0 0;
+
+  // Add a very subtle elevation shadow
+  box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.05);
+
+  // Give it some height for a luxury feel
+  height: 85px;
+  padding-bottom: 10px;
+  padding-top: 5px;
+  border: none;
+  contain: none;
+}
+
+ion-tab-button {
+  --color: #000000; // Inactive icon color
+  --color-selected: #000000; // Active color
+
+  // Increase spacing between icon and label
+  ion-icon {
+    font-size: 28px; // Make icons bold and clear like the mockup
+    margin-bottom: 4px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  ion-label {
+    font-size: 10px !important; // Small, clean uppercase labels
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  // Visual feedback when a tab is active
+  &.tab-selected {
+    ion-icon {
+      transform: scale(1.1); // Subtle pop when selected
+    }
+  }
+}
+
+// Ensure the content behind the tabs doesn't get cut off oddly
+// because of the rounded corners
+ion-tabs {
+  background: transparent;
+}
