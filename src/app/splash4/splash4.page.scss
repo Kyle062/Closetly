@@ -1,71 +1,296 @@
+// Import fonts at the top of the file
+@import url("https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@400;500;600;700&display=swap");
+// Note: Libertinus Serif Display is not available on Google Fonts, using alternative or system fallback
+
 .splash4-container {
-  /* Placeholder for the closet image background [cite: 50] */
-  --background: #2a2a2a;
+  --background: #000000;
 
   .background-image-area {
     height: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    overflow: hidden;
 
-    .top-logo {
-      width: 140px;
-      margin-bottom: 5px;
+    .bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
 
-    p {
-      color: white;
-      font-size: 0.8rem;
-      letter-spacing: 1px;
+    .overlay-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.6) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+      );
+    }
+
+    .logo-overlay {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      padding: 20px;
+      animation: fadeInUp 0.8s ease-out;
+
+      /* INCREASED LOGO SIZE - Changed from 260px to 350px */
+      .top-logo {
+        width: 450px;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+        filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+        animation: logoFloat 3s ease-in-out infinite;
+      }
+
+      p {
+        color: white;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        font-weight: 500;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(5px);
+        padding: 8px 20px;
+        border-radius: 30px;
+        background: rgba(0, 0, 0, 0.3);
+        margin-top: -120px;
+        font-family: "Lusitana";
+      }
     }
   }
 
   .onboarding-card {
     height: 40%;
     background: white;
-    border-radius: 40px 40px 0 0;
-    padding: 30px;
+    border-radius: 35px 35px 0 0;
+    padding: 30px 25px;
     text-align: center;
     position: relative;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.6s ease-out;
 
-    h1 {
-      font-family: serif;
-      font-weight: bold;
-      margin-bottom: 15px;
+    .card-decoration {
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+
+      .accent-line {
+        height: 4px;
+        width: 100%;
+        background: linear-gradient(90deg, #ffd700, #ffa500, #ffd700);
+        border-radius: 2px;
+        animation: expandWidth 0.8s ease-out;
+      }
     }
 
-    p {
+    h1 {
+      /* ADDED FONTS - Applying all three fonts as a font stack */
+      font-family:
+        "Lusitana", "Libertinus Serif Display", "Libre Bodoni", "Georgia", serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .description {
+      /* ADDED FONTS - Applying Libre Bodoni to description text */
+      font-family: "Libre Bodoni", "Georgia", serif;
       font-size: 0.9rem;
-      color: #555;
-      line-height: 1.5;
-      margin-bottom: 30px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      text-align: center;
     }
 
     .button-row {
       display: flex;
-      gap: 10px;
+      gap: 12px;
+      margin-bottom: 25px;
 
       ion-button {
         flex: 1;
-        --border-radius: 8px;
-        font-weight: bold;
+        --border-radius: 25px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        height: 48px;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        /* ADDED FONTS - Applying Lusitana to button text */
+        font-family: "Lusitana", "Arial", sans-serif;
+
+        &:active {
+          transform: scale(0.97);
+        }
+      }
+
+      .login-btn {
+        --border-color: #1a1a1a;
+        --color: #1a1a1a;
+        --background: transparent;
+        --background-hover: rgba(0, 0, 0, 0.05);
+
+        &:hover {
+          --border-color: #ffd700;
+          --color: #ffd700;
+        }
+      }
+
+      .signup-btn {
+        --background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+        --background-hover: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+        --color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
       }
     }
   }
 
   .pagination-dots {
-    margin-top: 20px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
     .dot {
       height: 4px;
-      width: 15px;
-      background: #ddd;
+      width: 20px;
+      background: #e0e0e0;
       display: inline-block;
-      margin: 0 2px;
       border-radius: 2px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
       &.active {
-        background: #000;
-        width: 25px;
+        background: linear-gradient(90deg, #ffd700, #ffa500);
+        width: 35px;
       }
+
+      &:hover {
+        background: #ffd700;
+        transform: scaleY(1.2);
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 1;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .onboarding-card {
+    padding: 25px 20px;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .description {
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .button-row ion-button {
+      height: 44px;
+      font-size: 0.85rem;
+    }
+  }
+
+  .background-image-area .logo-overlay {
+    /* INCREASED LOGO SIZE - Changed from 200px to 280px for mobile */
+    .top-logo {
+      width: 280px;
+    }
+
+    p {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .onboarding-card {
+    padding: 35px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .description {
+      font-size: 1rem;
+    }
+  }
+
+  .background-image-area .logo-overlay {
+    /* INCREASED LOGO SIZE - Tablet adjustment */
+    .top-logo {
+      width: 400px;
     }
   }
 }

@@ -1,8 +1,16 @@
 <ion-content class="splash4-container">
+  <!-- Background Image with Overlay -->
   <div class="background-image-area">
+    <img
+      src="../../assets/splash4/BackgroundImageClosetly.png"
+      alt="Closet Background"
+      class="bg-image"
+    />
+    <div class="overlay-gradient"></div>
+
     <div class="logo-overlay">
       <img
-        src="../../assets/closetlyLogo2.png"
+        src="../../assets/splash4/closetlyLogo2.png"
         alt="Closetly Logo"
         class="top-logo"
       />
@@ -11,18 +19,20 @@
   </div>
 
   <div class="onboarding-card">
-    <h1>Let’s get you Started!</h1>
-    <p>
+    <div class="card-decoration">
+      <div class="accent-line"></div>
+    </div>
+
+    <h1>Let's get you Started!</h1>
+    <p class="description">
       Organize your closet, discover outfit ideas, and never feel like you have
-      "nothing to wear" again[cite: 14, 15]. Snap photos of your clothes and let
-      Closetly suggest outfits based on the weather[cite: 8, 16].
+      "nothing to wear" again. Snap photos of your clothes and let Closetly
+      suggest outfits based on the weather.
     </p>
 
     <div class="button-row">
-      <ion-button fill="outline" color="dark" class="login-btn"
-        >LOG IN</ion-button
-      >
-      <ion-button color="dark" class="signup-btn">SIGN UP</ion-button>
+      <ion-button fill="outline" class="login-btn">LOG IN</ion-button>
+      <ion-button class="signup-btn">SIGN UP</ion-button>
     </div>
 
     <div class="pagination-dots">

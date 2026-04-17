@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-// Add IonButton to this import line
 import {
   IonContent,
   IonHeader,
@@ -15,7 +14,6 @@ import {
   templateUrl: './splash4.page.html',
   styleUrls: ['./splash4.page.scss'],
   standalone: true,
-  // Add IonButton here in the imports array
   imports: [
     IonContent,
     IonHeader,
@@ -28,5 +26,6 @@ import {
 })
 export class Splash4Page implements OnInit {
   constructor() {}
+
   ngOnInit() {}
 }

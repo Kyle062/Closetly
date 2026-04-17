@@ -16,5 +16,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./splash4/splash4.page').then((m) => m.Splash4Page),
   },
-  // Add routes for login and signup here when ready [cite: 77, 78]
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./login/login.page').then((m) => m.LoginPage),
+  },
+  {
+    path: 'signup',
+    loadComponent: () =>
+      import('./signup/signup.page').then((m) => m.SignupPage),
+  }
 ];
