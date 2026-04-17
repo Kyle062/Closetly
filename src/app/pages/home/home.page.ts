@@ -162,21 +162,21 @@ export class HomePage implements OnInit {
       description: 'Stay Dry & Fashionable in the Rain',
       clothes: [
         {
-          image: '../../../assets/homepage/rainy/cloth1.png',
+          image: '../../../assets/homepage/rainy/Closetlycloth7.png',
           alt: 'Raincoat',
           width: '120px',
           height: '170px',
           objectFit: 'contain' as const,
         },
         {
-          image: '../../../assets/homepage/rainy/cloth2.png',
+          image: '../../../assets/homepage/rainy/Closetlycloth8.png',
           alt: 'Waterproof boots',
           width: '100px',
           height: '140px',
           objectFit: 'contain' as const,
         },
         {
-          image: '../../../assets/homepage/rainy/cloth3.png',
+          image: '../../../assets/homepage/rainy/Closetlycloth9.png',
           alt: 'Umbrella',
           width: '95px',
           height: '130px',
@@ -189,21 +189,21 @@ export class HomePage implements OnInit {
       description: 'Cozy & Warm Layered Look',
       clothes: [
         {
-          image: '../../../assets/homepage/cold/cloth1.png',
+          image: '../../../assets/homepage/cold/Closetlycloth10.png',
           alt: 'Jacket',
           width: '115px',
           height: '165px',
           objectFit: 'contain' as const,
         },
         {
-          image: '../../../assets/homepage/cold/cloth2.png',
+          image: '../../../assets/homepage/cold/Closetlycloth11.png',
           alt: 'Long pants',
           width: '105px',
           height: '155px',
           objectFit: 'contain' as const,
         },
         {
-          image: '../../../assets/homepage/cold/cloth3.png',
+          image: '../../../assets/homepage/cold/Closetlycloth12.png',
           alt: 'Closed shoes',
           width: '100px',
           height: '140px',
