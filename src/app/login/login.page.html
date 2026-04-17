@@ -1,4 +1,16 @@
 <ion-content [fullscreen]="true" class="login-content">
+  <!-- Custom Pill Alert -->
+  <div class="custom-alert-overlay" *ngIf="showCustomAlert">
+    <div
+      class="custom-alert-pill"
+      [class.success]="alertType === 'success'"
+      [class.error]="alertType === 'error'"
+    >
+      <ion-icon name="checkmark-circle-outline" class="alert-icon"></ion-icon>
+      <span class="alert-message">{{ alertMessage }}</span>
+    </div>
+  </div>
+
   <div class="top-section-container">
     <div class="header-overlay">
       <ion-icon
@@ -10,7 +22,6 @@
     </div>
 
     <div class="top-section">
-      <!-- CHANGED: Replaced h1 with img tag for Closetly logo -->
       <img
         src="../../assets/ClosetlyLogoBlack.png"
         alt="Closetly Logo"
@@ -26,12 +37,12 @@
 
   <div class="login-card">
     <div class="form-container">
-      <ion-label class="form-label">Email/ Username:</ion-label>
+      <ion-label class="form-label">Username/Email:</ion-label>
       <ion-item lines="none" class="login-input-item">
         <ion-icon slot="start" name="person-outline"></ion-icon>
         <ion-input
-          type="email"
-          placeholder="kylebernard@gmail.com"
+          type="text"
+          placeholder="username or email"
           [(ngModel)]="email"
         ></ion-input>
       </ion-item>

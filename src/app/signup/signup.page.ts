@@ -4,11 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonButton,
-  IonButtons,
   IonIcon,
   IonItem,
   IonLabel,
@@ -71,7 +67,6 @@ export class SignupPage implements OnInit {
   alertType: 'success' | 'error' = 'success';
 
   constructor(private router: Router) {
-    // Register required icons
     addIcons({
       arrowBackOutline,
       personOutline,
@@ -101,7 +96,6 @@ export class SignupPage implements OnInit {
     this.alertType = type;
     this.showCustomAlert = true;
 
-    // Auto hide after 2 seconds
     setTimeout(() => {
       this.hideAlert();
     }, 2000);
@@ -158,13 +152,6 @@ export class SignupPage implements OnInit {
     } else if (this.password.length < 6) {
       this.passwordError = 'Password must be at least 6 characters';
       isValid = false;
-    } else if (!/(?=.*[A-Z])/.test(this.password)) {
-      this.passwordError =
-        'Password must contain at least one uppercase letter';
-      isValid = false;
-    } else if (!/(?=.*[0-9])/.test(this.password)) {
-      this.passwordError = 'Password must contain at least one number';
-      isValid = false;
     }
 
     // Validate Confirm Password
@@ -179,25 +166,47 @@ export class SignupPage implements OnInit {
     return isValid;
   }
 
-  // Signup Method
+  // Signup Method - Save user to localStorage
   onSignup() {
     if (this.validateForm()) {
-      // Simulate successful registration
-      console.log('Signup successful with:', {
+      // Check if username already exists
+      const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+      const userExists = existingUsers.some(
+        (user: any) => user.username === this.username,
+      );
+
+      if (userExists) {
+        this.showAlert(
+          'Username already exists! Please choose another.',
+          'error',
+        );
+        return;
+      }
+
+      // Create new user object
+      const newUser = {
         username: this.username,
         email: this.email,
         password: this.password,
-        confirmPassword: this.confirmPassword,
-        rememberMe: this.rememberMe,
-      });
+        createdAt: new Date().toISOString(),
+      };
 
-      // Store user data if remember me is checked
+      // Save to localStorage
+      existingUsers.push(newUser);
+      localStorage.setItem('users', JSON.stringify(existingUsers));
+
+      // Store current user if remember me is checked
       if (this.rememberMe) {
-        localStorage.setItem('userEmail', this.email);
-        localStorage.setItem('userUsername', this.username);
+        localStorage.setItem(
+          'currentUser',
+          JSON.stringify({
+            username: this.username,
+            email: this.email,
+          }),
+        );
       }
 
-      // Show custom pill alert
+      // Show success alert
       this.showAlert(
         'Registration successful! Redirecting to login...',
         'success',
@@ -208,19 +217,16 @@ export class SignupPage implements OnInit {
         this.router.navigateByUrl('/login');
       }, 2000);
     } else {
-      // Show error alert for validation failures
       this.showAlert('Please fix the errors above', 'error');
     }
   }
 
   // Social login methods
   signupWithGoogle() {
-    console.log('Sign up with Google');
     this.showAlert('Google signup coming soon!', 'error');
   }
 
   signupWithFacebook() {
-    console.log('Sign up with Facebook');
     this.showAlert('Facebook signup coming soon!', 'error');
   }
 }

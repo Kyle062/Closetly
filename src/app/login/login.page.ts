@@ -21,8 +21,7 @@ import {
   eyeOffOutline,
   eyeOutline,
   logoGoogle,
-  logoFacebook,
-} from 'ionicons/icons';
+  logoFacebook, checkmarkCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-login',
@@ -48,22 +47,59 @@ export class LoginPage implements OnInit {
   email: string = '';
   password: string = '';
   rememberMe: boolean = false;
-  showPassword: boolean = false; // Property to track password visibility
+  showPassword: boolean = false;
+
+  // Error message
+  loginError: string = '';
+  showCustomAlert: boolean = false;
+  alertMessage: string = '';
+  alertType: 'success' | 'error' = 'error';
+
+  // Default admin account
+  private defaultAdmin = {
+    username: 'admin',
+    password: 'admin123',
+  };
 
   constructor(private router: Router) {
-    // Register the icons
-    addIcons({
-      arrowBackOutline,
-      personOutline,
-      lockClosedOutline,
-      eyeOffOutline,
-      eyeOutline,
-      logoGoogle,
-      logoFacebook,
-    });
+    addIcons({checkmarkCircleOutline,arrowBackOutline,personOutline,lockClosedOutline,eyeOffOutline,eyeOutline,logoGoogle,logoFacebook,});
+
+    // Initialize default admin account if not exists
+    this.initializeDefaultAdmin();
   }
 
   ngOnInit() {}
+
+  // Initialize default admin account
+  initializeDefaultAdmin() {
+    const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const adminExists = existingUsers.some(
+      (user: any) => user.username === this.defaultAdmin.username,
+    );
+
+    if (!adminExists) {
+      existingUsers.push({
+        username: this.defaultAdmin.username,
+        email: 'admin@closetly.com',
+        password: this.defaultAdmin.password,
+        createdAt: new Date().toISOString(),
+        isAdmin: true,
+      });
+      localStorage.setItem('users', JSON.stringify(existingUsers));
+    }
+  }
+
+  // Show custom pill alert
+  showAlert(message: string, type: 'success' | 'error' = 'error') {
+    this.alertMessage = message;
+    this.alertType = type;
+    this.showCustomAlert = true;
+
+    setTimeout(() => {
+      this.showCustomAlert = false;
+      this.alertMessage = '';
+    }, 2000);
+  }
 
   // Method to go back to previous page
   goBack() {
@@ -75,39 +111,87 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('/signup');
   }
 
-  // Method to handle login
-  onLogin() {
-    // Add your login logic here
-    console.log(
-      'Login attempted with:',
-      this.email,
-      this.password,
-      this.rememberMe,
-    );
-    // Navigate to home page after successful login
-    // this.router.navigateByUrl('/home');
-  }
-
   // Method to toggle password visibility
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
+  // Method to handle login with validation
+  onLogin() {
+    this.loginError = '';
+
+    // Check if fields are empty
+    if (!this.email.trim()) {
+      this.showAlert('Please enter username/email', 'error');
+      return;
+    }
+
+    if (!this.password.trim()) {
+      this.showAlert('Please enter password', 'error');
+      return;
+    }
+
+    // Get users from localStorage
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+    // Find user by username or email
+    const user = users.find(
+      (u: any) => u.username === this.email || u.email === this.email,
+    );
+
+    // Check if user exists and password matches
+    if (user && user.password === this.password) {
+      // Successful login
+      console.log('Login successful for:', user.username);
+
+      // Store current user session
+      if (this.rememberMe) {
+        localStorage.setItem(
+          'currentUser',
+          JSON.stringify({
+            username: user.username,
+            email: user.email,
+            isAdmin: user.isAdmin || false,
+          }),
+        );
+      } else {
+        sessionStorage.setItem(
+          'currentUser',
+          JSON.stringify({
+            username: user.username,
+            email: user.email,
+            isAdmin: user.isAdmin || false,
+          }),
+        );
+      }
+
+      // Show success message
+      this.showAlert(`Welcome , ${user.username}!`, 'success');
+
+      // Navigate to home page after short delay
+      setTimeout(() => {
+        this.router.navigateByUrl('/home');
+      }, 1500);
+    } else {
+      // Failed login
+      this.showAlert(
+        'Invalid username/email or password. Please try again.',
+        'error',
+      );
+    }
+  }
+
   // Method for forgot password
   forgotPassword() {
-    console.log('Forgot password clicked');
-    // Navigate to forgot password page
-    // this.router.navigateByUrl('/forgot-password');
+    this.showAlert('Please contact support to reset your password', 'error');
   }
 
   // Social login methods
   loginWithGoogle() {
-    console.log('Login with Google');
-    // Add Google login logic
+    this.showAlert('Google login coming soon!', 'error');
   }
 
   loginWithFacebook() {
-    console.log('Login with Facebook');
-    // Add Facebook login logic
+    this.showAlert('Facebook login coming soon!', 'error');
   }
 }
