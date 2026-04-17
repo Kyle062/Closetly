@@ -28,10 +28,10 @@ import {
 interface ClothingItem {
   image: string;
   alt: string;
-  width?: string; // Custom width (e.g., '100px', '80%', 'auto')
-  height?: string; // Custom height (e.g., '150px', 'auto')
-  objectFit?: 'contain' | 'cover' | 'fill' | 'scale-down'; // How the image fits
-  customClass?: string; // Optional custom CSS class
+  width?: string;
+  height?: string;
+  objectFit?: 'contain' | 'cover' | 'fill' | 'scale-down';
+  customClass?: string;
 }
 
 @Component({
@@ -55,7 +55,7 @@ export class HomePage implements OnInit {
     temperature: '--',
     condition: 'Loading...',
     icon: 'cloudy-outline',
-    city: 'Davao City',
+    city: 'Davao de Oro',
     feelsLike: '--',
   };
 
@@ -93,7 +93,7 @@ export class HomePage implements OnInit {
 
   // Working API key for OpenWeatherMap
   private apiKey = '35efb00415742337258dd1ba28238572';
-  private city = 'Davao City';
+  private city = 'Davao de Oro'; // CHANGED: Updated to Davao de Oro
   private country = 'PH';
   private apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${this.city},${this.country}&appid=${this.apiKey}&units=metric`;
 
@@ -102,7 +102,7 @@ export class HomePage implements OnInit {
     Sunny: {
       title: '☀️ Sunny Day Outfit',
       description:
-        "Light & Breezy Summer Look - Perfect for Davao's sunny weather!",
+        "Light & Breezy Summer Look - Perfect for Davao de Oro's sunny weather!",
       clothes: [
         {
           image: '../../../assets/homepage/sunny/cloth1.png',
@@ -275,7 +275,7 @@ export class HomePage implements OnInit {
     return cloth.customClass || '';
   }
 
-  // Fetch weather data from API for Davao City
+  // Fetch weather data from API for Davao de Oro
   getWeatherData() {
     this.isLoading = true;
 
@@ -287,7 +287,7 @@ export class HomePage implements OnInit {
         return response.json();
       })
       .then((data) => {
-        console.log('Weather API Response:', data);
+        console.log('Weather API Response for Davao de Oro:', data);
         this.updateWeatherUI(data);
         this.updateOutfitSuggestion(data.main.temp, data.weather[0].main);
         this.isLoading = false;
@@ -382,7 +382,7 @@ export class HomePage implements OnInit {
       temperature: '28°C',
       condition: 'Sunny',
       feelsLike: 'Feels like 30°C',
-      city: 'Davao City',
+      city: 'Davao de Oro',
       icon: 'sunny-outline',
     };
   }
