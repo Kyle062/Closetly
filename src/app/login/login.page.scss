@@ -1,0 +1,289 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap");
+
+:host {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Background Setup */
+.login-content {
+  --background: url("../../assets/closetlyBackground2.jpg") no-repeat center /
+    cover;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-section-container {
+  position: relative;
+  padding-top: 30px;
+}
+
+/* Header (Back arrow & Sign Up) */
+.header-overlay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  margin-bottom: 10px;
+
+  .back-icon {
+    font-size: 28px;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .sign-up-text {
+    font-size: 13px;
+    color: #000000;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+/* Centered Top Text block */
+.top-section {
+  text-align: center;
+  padding: 0 20px 20px;
+
+  /* CHANGED: Replaced h1 styling with img styling */
+  .closetly-logo-img {
+    width: 200px;
+    max-width: 70%;
+    height: auto;
+    margin: 0 auto 10px;
+    display: block;
+  }
+
+  .motto {
+    font-size: 10px;
+    margin: 5px 0 25px;
+    color: #ffffff;
+    font-weight: 400;
+  }
+
+  .welcome-back {
+    font-family: "Playfair Display", serif;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0 0 5px;
+    color: #000000;
+  }
+
+  .to-your-collection {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 5px;
+    color: #ffffff;
+  }
+
+  .please-sign-in {
+    font-size: 12px;
+    margin: 0;
+    color: #ffffff;
+  }
+}
+
+/* Gradient Frosted Card */
+.login-card {
+  /* Mimicking the top-to-bottom white to dark-grey fade */
+  background: linear-gradient(180deg, #f3f3f3 0%, #dcdcdc 35%, #a6a6a6 100%);
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  flex: 1; /* stretches bottom card to fill remaining space */
+  padding: 35px 30px 20px;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  /* ADDED: Remove margin at bottom */
+  margin-bottom: 0;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .form-label {
+    font-family: "Playfair Display", serif;
+    font-size: 13px;
+    color: #000000;
+    margin-bottom: 8px;
+    padding-left: 5px;
+  }
+
+  /* Solid White Inputs */
+  .login-input-item {
+    --background: #ffffff;
+    --border-radius: 14px;
+    margin-bottom: 15px;
+    --padding-start: 15px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+
+    ion-icon {
+      color: #666;
+      font-size: 18px;
+    }
+
+    ion-input {
+      --color: #333;
+      font-size: 14px;
+      font-family: "Playfair Display", serif;
+      --placeholder-color: #888;
+      --placeholder-opacity: 0.8;
+      --padding-top: 14px;
+      --padding-bottom: 14px;
+    }
+
+    .eye-icon {
+      color: #000000;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .forgot-password {
+    display: block;
+    text-align: right;
+    margin: -5px 5px 20px 0;
+    color: #333333;
+    font-size: 11px;
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .remember-me-item {
+    --background: transparent;
+    margin-bottom: 25px;
+    --padding-start: 5px;
+
+    ion-checkbox {
+      --size: 16px;
+      --background: #ffffff;
+      --border-color: #999;
+      --checkmark-color: #000000;
+      --background-checked: #ffffff;
+      --border-color-checked: #999;
+      margin-right: 12px;
+    }
+
+    ion-label {
+      font-family: "Playfair Display", serif;
+      font-size: 13px;
+      color: #000000;
+    }
+  }
+
+  /* Solid Black Button */
+  .login-button {
+    --background: #000000;
+    --border-radius: 14px;
+    --color: #ffffff;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 16px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  /* Divider line with text */
+  .divider {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+
+    .line {
+      flex: 1;
+      height: 1px;
+      background: #777777;
+    }
+
+    span {
+      padding: 0 15px;
+      font-family: "Playfair Display", serif;
+      font-size: 10px;
+      color: #222222;
+    }
+  }
+
+  /* Isolated Social Icons */
+  .social-logins {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-bottom: 40px;
+
+    .social-icon {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+
+  .register-section {
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    font-size: 11px;
+    color: #000000;
+    margin-top: auto;
+    margin-bottom: 25px;
+
+    .register-link {
+      color: #ffffff;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 2px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .footer-section {
+    text-align: center;
+    font-size: 9px;
+    color: #e0e0e0;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .top-section {
+    .closetly-logo-img {
+      width: 150px;
+    }
+
+    .welcome-back {
+      font-size: 28px;
+    }
+  }
+
+  .login-card {
+    padding: 30px 20px 20px;
+  }
+}
