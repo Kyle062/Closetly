@@ -7,13 +7,14 @@
   --padding-top: 0;
 
   .header-section {
+    margin-top: -20px;
     padding: 60px 20px 40px 20px;
 
     .top-nav {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 30px;
+      margin-bottom: 15px;
 
       .mini-logo {
         width: 32px;
@@ -27,9 +28,10 @@
         border-radius: 25px;
         display: flex;
         align-items: center;
-        padding: 8px 16px;
+        padding: 8px 13px;
         gap: 8px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        color: black;
 
         ion-icon {
           color: #999;
@@ -70,10 +72,9 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 
     ion-avatar {
-      width: 70px;
-      height: 70px;
-      border: 2px solid rgba(255, 255, 255, 0.5);
-
+      width: 90px;
+      height: 90px;
+        
       img {
         object-fit: cover;
       }
@@ -111,11 +112,11 @@
   }
 
   .main-container {
-    background: #fdfaf5;
+    background: #fdfaf5f1;
     border-top-left-radius: 45px;
     border-top-right-radius: 45px;
     padding: 30px 20px 40px;
-    margin-top: 20px;
+    margin-top: 5px;
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
     min-height: calc(100vh - 280px);
   }
@@ -152,8 +153,8 @@
         }
 
         img {
-          width: 95px;
-          height: 140px;
+          width: 105px;
+          height: 160px;
           object-fit: cover;
           display: block;
         }
@@ -176,6 +177,8 @@
       text-transform: none;
       margin-top: 20px;
       --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      color: rgb(255, 255, 255);
+      font-family: "Poppins";
 
       &:active {
         transform: scale(0.98);
@@ -361,8 +364,8 @@ ion-content {
       padding: 16px;
 
       ion-avatar {
-        width: 60px;
-        height: 60px;
+        width: 90px;
+        height: 90px;
       }
 
       .user-info h2 {
@@ -378,8 +381,8 @@ ion-content {
       padding: 20px 15px;
 
       .outfit-preview .img-wrapper img {
-        width: 75px;
-        height: 110px;
+        width: 105px;
+        height: 180px;
       }
     }
 
