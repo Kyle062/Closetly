@@ -4,11 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonButton,
-  IonButtons,
   IonIcon,
   IonItem,
   IonLabel,
@@ -35,11 +31,7 @@ import {
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonButton,
-    IonButtons,
     IonIcon,
     IonItem,
     IonLabel,
@@ -56,7 +48,7 @@ export class LoginPage implements OnInit {
   email: string = '';
   password: string = '';
   rememberMe: boolean = false;
-  showPassword: boolean = false; // ADDED: Property to track password visibility
+  showPassword: boolean = false; // Property to track password visibility
 
   constructor(private router: Router) {
     // Register the icons
@@ -65,7 +57,7 @@ export class LoginPage implements OnInit {
       personOutline,
       lockClosedOutline,
       eyeOffOutline,
-      eyeOutline, // ADDED: Import eye outline icon
+      eyeOutline,
       logoGoogle,
       logoFacebook,
     });
@@ -96,7 +88,7 @@ export class LoginPage implements OnInit {
     // this.router.navigateByUrl('/home');
   }
 
-  // ADDED: Method to toggle password visibility
+  // Method to toggle password visibility
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }

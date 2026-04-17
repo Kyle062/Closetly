@@ -85,17 +85,15 @@
 
 /* Gradient Frosted Card */
 .login-card {
-  /* Mimicking the top-to-bottom white to dark-grey fade */
   background: linear-gradient(180deg, #f3f3f3 0%, #dcdcdc 35%, #a6a6a6 100%);
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
-  flex: 1; /* stretches bottom card to fill remaining space */
   padding: 35px 30px 20px;
   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  /* ADDED: Remove margin at bottom */
-  margin-bottom: 0;
+  margin-bottom: -100px;
+  margin-top: 70px; 
 }
 
 .form-container {
