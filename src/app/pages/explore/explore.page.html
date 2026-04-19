@@ -1,18 +1,20 @@
 <ion-content [fullscreen]="true" class="explore-page">
-  <img
-    src="https://via.placeholder.com/800x1200?text=Wardrobe+Background"
-    class="page-background"
-    alt="background"
-  />
+  <div class="top-nav">
+    <img
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
+    />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
+  </div>
 
-  <div class="overlay-container">
-    <div class="top-nav">
-      <img src="https://via.placeholder.com/40" class="brand-logo" alt="logo" />
-      <ion-icon name="options-outline" class="menu-icon"></ion-icon>
-    </div>
-
+  <div class="bottom-sheet">
     <div class="header-row">
-      <ion-icon name="arrow-back-outline" class="back-btn"></ion-icon>
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
       <h1 class="page-title">Find Inspiration</h1>
       <div class="spacer"></div>
     </div>
@@ -20,19 +22,29 @@
     <div class="search-container">
       <div class="search-box">
         <ion-icon name="search-outline" class="search-icon"></ion-icon>
-        <input type="text" placeholder="Search here..." />
+        <input
+          type="text"
+          placeholder="Search here..."
+          [(ngModel)]="searchQuery"
+        />
       </div>
-      <ion-icon name="options-outline" class="filter-icon"></ion-icon>
+      <ion-icon
+        name="options-outline"
+        class="filter-icon"
+        (click)="openFilter()"
+      ></ion-icon>
     </div>
 
     <div class="popular-searches">
       <h3 class="section-title">Popular Searches</h3>
       <div class="pill-container">
-        <div class="pill">Formal style</div>
-        <div class="pill">Bohemian Style</div>
-        <div class="pill">Streetwear Style</div>
-        <div class="pill">Vintage Style</div>
-        <div class="pill">Chic Style</div>
+        <div class="pill" (click)="searchStyle('Formal')">Formal style</div>
+        <div class="pill" (click)="searchStyle('Bohemian')">Bohemian Style</div>
+        <div class="pill" (click)="searchStyle('Streetwear')">
+          Streetwear Style
+        </div>
+        <div class="pill" (click)="searchStyle('Vintage')">Vintage Style</div>
+        <div class="pill" (click)="searchStyle('Chic')">Chic Style</div>
       </div>
     </div>
 
@@ -40,75 +52,26 @@
       <h3 class="section-title">Results</h3>
 
       <div class="results-grid">
-        <div class="result-card">
-          <img
-            src="https://via.placeholder.com/200x250"
-            class="card-img"
-            alt="Minimalist Style"
-          />
+        <div
+          class="result-card"
+          *ngFor="let style of styleResults"
+          (click)="viewStyle(style)"
+        >
+          <img [src]="style.image" class="card-img" [alt]="style.title" />
           <div class="card-content">
-            <h4>Minimalist Style</h4>
-            <span class="subtitle">Bold, Colorful, Elegant</span>
-            <p>
-              Style Suggestion:<br />Bright blazer + neutral pants + statement
-              shoes
-            </p>
-          </div>
-        </div>
-
-        <div class="result-card">
-          <img
-            src="https://via.placeholder.com/200x250"
-            class="card-img"
-            alt="Eclectic Style"
-          />
-          <div class="card-content">
-            <h4>Eclectic Style</h4>
-            <span class="subtitle">Vintage, Eclectic, Bold</span>
-            <p>
-              Style Suggestion:<br />Patterned shirt + high-waisted trousers +
-              loafers
-            </p>
-          </div>
-        </div>
-
-        <div class="result-card">
-          <img
-            src="https://via.placeholder.com/200x250"
-            class="card-img"
-            alt="Romantic Style"
-          />
-          <div class="card-content">
-            <h4>Romantic Style</h4>
-            <span class="subtitle">Bold, Colorful, Elegant</span>
-            <p>
-              Style Suggestion:<br />Bright blazer + neutral pants + statement
-              shoes
-            </p>
-          </div>
-        </div>
-
-        <div class="result-card">
-          <img
-            src="https://via.placeholder.com/200x250"
-            class="card-img"
-            alt="Retro Style"
-          />
-          <div class="card-content">
-            <h4>Retro Style</h4>
-            <span class="subtitle">Bold, Colorful, Elegant</span>
-            <p>
-              Style Suggestion:<br />Bright blazer + neutral pants + statement
-              shoes
-            </p>
+            <h4>{{ style.title }}</h4>
+            <span class="subtitle">{{ style.tags }}</span>
+            <p>Style Suggestion:<br />{{ style.suggestion }}</p>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="bottom-spacer"></div>
   </div>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button class="custom-fab">
+    <ion-fab-button class="custom-fab" (click)="navigateToAddItem()">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
