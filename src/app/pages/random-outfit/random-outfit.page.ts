@@ -73,22 +73,22 @@ export class RandomOutfitPage implements OnInit {
     ],
     bottoms: [
       {
-        image: '../../../assets/homepage/random/bottom1.png',
+        image: '../../../assets/random-outfit/bottom/bottom1.png',
         title: 'Black Jeans',
         category: 'Bottom',
       },
       {
-        image: '../../../assets/homepage/random/bottom2.png',
+        image: '../../../assets/random-outfit/bottom/bottom2.png',
         title: 'Khaki Pants',
         category: 'Bottom',
       },
       {
-        image: '../../../assets/homepage/random/bottom3.png',
+        image: '../../../assets/random-outfit/bottom/bottom3.png',
         title: 'Denim Shorts',
         category: 'Bottom',
       },
       {
-        image: '../../../assets/homepage/random/bottom4.png',
+        image: '../../../assets/random-outfit/bottom/bottom4.png',
         title: 'Joggers',
         category: 'Bottom',
       },
