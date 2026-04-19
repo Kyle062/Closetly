@@ -95,22 +95,22 @@ export class RandomOutfitPage implements OnInit {
     ],
     layers: [
       {
-        image: '../../../assets/homepage/random/layer1.png',
+        image: '../../../assets/random-outfit/layer/layer1.png',
         title: 'Denim Jacket',
         category: 'Layer',
       },
       {
-        image: '../../../assets/homepage/random/layer2.png',
+        image: '../../../assets/random-outfit/layer/layer2.png',
         title: 'Cardigan',
         category: 'Layer',
       },
       {
-        image: '../../../assets/homepage/random/layer3.png',
+        image: '../../../assets/random-outfit/layer/layer3.png',
         title: 'Blazer',
         category: 'Layer',
       },
       {
-        image: '../../../assets/homepage/random/layer4.png',
+        image: '../../../assets/random-outfit/layer/layer4.png',
         title: 'Bomber Jacket',
         category: 'Layer',
       },
@@ -120,17 +120,17 @@ export class RandomOutfitPage implements OnInit {
   // Default placeholder outfit
   private defaultOutfit: OutfitItem[] = [
     {
-      image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+      image: '../../../assets/random-outfit/top/top1.png',
       title: 'White T-Shirt',
       category: 'Top',
     },
     {
-      image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+      image: '../../../assets/random-outfit/bottom/bottom1.png',
       title: 'Black Jeans',
       category: 'Bottom',
     },
     {
-      image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+      image: '../../../assets/random-outfit/layer/layer1.png',
       title: 'Denim Jacket',
       category: 'Layer',
     },
