@@ -359,6 +359,10 @@ export class HomePage implements OnInit {
     this.router.navigate(['/add-item']);
   }
 
+  viewFullOutfit(){
+    this.router.navigate(['/wardrobe']);
+  }
+
   getClothingStyles(cloth: ClothingItem) {
     return {
       width: cloth.width || 'auto',
