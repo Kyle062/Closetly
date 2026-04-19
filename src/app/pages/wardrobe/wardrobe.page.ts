@@ -114,7 +114,7 @@ export class WardrobePage implements OnInit {
     },
     {
       id: 10,
-      image: '../../../assets/homepage/hot/accessory.png',
+      image: '../../../assets/homepage/hot/sunglasses.png',
       name: 'Sunglasses',
       category: 'Accessories',
       isFavorite: false,
