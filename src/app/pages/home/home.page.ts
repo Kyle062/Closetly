@@ -352,7 +352,7 @@ export class HomePage implements OnInit {
   }
 
   navigateToSearch() {
-    this.router.navigate(['/search']);
+    this.router.navigate(['/explore']);
   }
 
   navigateToAddItem() {

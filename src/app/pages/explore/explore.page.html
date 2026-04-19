@@ -57,7 +57,12 @@
           *ngFor="let style of styleResults"
           (click)="viewStyle(style)"
         >
-          <img [src]="style.image" class="card-img" [alt]="style.title" />
+          <img
+            [src]="style.image"
+            class="card-img"
+            [alt]="style.title"
+            style="object-fit: cover; background: #f5f5f5"
+          />
           <div class="card-content">
             <h4>{{ style.title }}</h4>
             <span class="subtitle">{{ style.tags }}</span>
