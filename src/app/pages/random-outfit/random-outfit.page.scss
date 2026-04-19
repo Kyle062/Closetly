@@ -1,0 +1,196 @@
+/* Page Background */
+ion-content.random-page::part(background) {
+  background: url("../../../assets/splash4/BackgroundImageClosetly.png")
+    no-repeat center center / cover;
+}
+
+.random-page {
+  /* Top Navigation */
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px 20px 20px; /* Safe area padding */
+
+    .brand-logo {
+      border-radius: 8px;
+    }
+
+    .menu-icon {
+      font-size: 32px;
+      color: white;
+    }
+  }
+
+  /* Main Overlapping Card */
+  .bottom-sheet {
+    background: #f4f3f0; /* Off-white/beige background */
+    border-radius: 40px 40px 0 0;
+    margin-top: 20px;
+    min-height: 85vh;
+    padding: 30px 20px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Header area with back button */
+  .page-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+
+    .back-btn {
+      font-size: 28px;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .title {
+      flex: 1;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 800;
+      margin: 0;
+      color: #000;
+      letter-spacing: 0.5px;
+    }
+
+    .spacer {
+      width: 28px; /* Balances flex layout against the back button */
+    }
+  }
+
+  /* Shake Button Area */
+  .shake-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .shake-button {
+      background-color: #000;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      .shake-icon {
+        font-size: 50px;
+        margin-bottom: 5px;
+      }
+
+      .shake-text {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+
+    .shake-instruction {
+      font-size: 14px;
+      color: #555;
+      margin-top: 20px;
+      font-weight: 500;
+    }
+  }
+
+  /* White Output Card */
+  .outfit-card {
+    background: #ffffff;
+    width: 100%;
+    border-radius: 30px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: #111;
+    }
+
+    .outfit-list {
+      background: transparent;
+
+      .outfit-item {
+        --padding-start: 0;
+        --inner-padding-end: 0;
+        --background: transparent;
+        margin-bottom: 15px;
+
+        ion-thumbnail {
+          --size: 85px;
+          --border-radius: 16px;
+          margin-right: 15px;
+          background: #f0f0f0;
+        }
+
+        h3 {
+          font-weight: 700;
+          font-size: 16px;
+          color: #000;
+          margin-bottom: 5px;
+        }
+
+        p {
+          font-size: 14px;
+          color: #555;
+          margin: 0;
+        }
+      }
+    }
+
+    /* Side-by-side buttons */
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+
+      ion-button {
+        flex: 1;
+        margin: 0;
+        --border-radius: 16px;
+        height: 55px;
+        font-weight: 700;
+        font-size: 15px;
+        text-transform: none;
+        --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .btn-save {
+        --background: #2b2b2b;
+        --background-hover: #1a1a1a;
+        --color: #ffffff;
+      }
+
+      .btn-retry {
+        --background: #ffffff;
+        --background-hover: #f5f5f5;
+        --color: #000000;
+        border: 1px solid #eaeaea;
+        border-radius: 16px;
+      }
+    }
+  }
+}
