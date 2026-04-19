@@ -148,7 +148,7 @@ export class WeatherOutfitPage implements OnInit {
         },
         {
           image: '../../../assets/homepage/rainy/Closetlycloth9.png',
-          title: 'Umbrella',
+          title: 'Hat',
           description: 'Perfect for rainy weather',
         },
       ],

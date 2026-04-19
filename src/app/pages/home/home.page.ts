@@ -180,7 +180,7 @@ export class HomePage implements OnInit {
         },
         {
           image: '../../../assets/homepage/rainy/Closetlycloth9.png',
-          alt: 'Umbrella',
+          alt: 'Hat',
           width: '95px',
           height: '130px',
           objectFit: 'contain' as const,
