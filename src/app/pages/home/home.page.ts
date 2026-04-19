@@ -405,7 +405,7 @@ export class HomePage implements OnInit {
   // Fallback mock data if API fails
   setMockWeatherData() {
     this.weatherData = {
-      temperature: '28°C',
+      temperature: '8°C',
       condition: 'Sunny',
       feelsLike: 'Feels like 30°C',
       city: 'Davao de Oro',
