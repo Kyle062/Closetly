@@ -1,13 +1,95 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>add-item</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="add-item-page">
+  <img
+    src="https://via.placeholder.com/800x1200?text=Background"
+    class="page-background"
+    alt="background"
+  />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">add-item</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="overlay-container">
+    <div class="top-nav">
+      <img src="https://via.placeholder.com/40" class="brand-logo" alt="logo" />
+      <ion-icon name="options-outline" class="menu-icon"></ion-icon>
+    </div>
+
+    <div class="header-row">
+      <ion-icon name="arrow-back-outline" class="back-btn"></ion-icon>
+      <h1 class="page-title">Add New Item</h1>
+      <div class="spacer"></div>
+    </div>
+
+    <div class="camera-container">
+      <img
+        src="https://via.placeholder.com/600x400?text=Wardrobe+Image"
+        class="camera-bg"
+        alt="Wardrobe"
+      />
+      <div class="dark-tint"></div>
+
+      <div class="viewfinder top-left"></div>
+      <div class="viewfinder top-right"></div>
+      <div class="viewfinder bottom-left"></div>
+      <div class="viewfinder bottom-right"></div>
+
+      <div class="action-overlay">
+        <div class="primary-action">
+          <ion-icon name="camera-outline"></ion-icon>
+          <span>Take Photo</span>
+        </div>
+
+        <div class="secondary-action">
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+          <span>Upload from Gallery</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="input-group">
+        <label>Categories:</label>
+        <div class="select-wrapper">
+          <select>
+            <option value="tops">Tops</option>
+            <option value="bottoms">Bottoms</option>
+            <option value="dresses">Dresses</option>
+          </select>
+          <ion-icon
+            name="chevron-down-outline"
+            class="dropdown-icon"
+          ></ion-icon>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Color:</label>
+        <div class="select-wrapper">
+          <select>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+            <option value="red">Red</option>
+          </select>
+          <ion-icon
+            name="chevron-down-outline"
+            class="dropdown-icon"
+          ></ion-icon>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Season:</label>
+        <div class="select-wrapper">
+          <select>
+            <option value="all">All Season</option>
+            <option value="summer">Summer</option>
+            <option value="winter">Winter</option>
+          </select>
+          <ion-icon
+            name="chevron-down-outline"
+            class="dropdown-icon"
+          ></ion-icon>
+        </div>
+      </div>
+
+      <ion-button expand="block" class="submit-btn">ADD TO WARDROBE</ion-button>
+    </div>
+  </div>
 </ion-content>
