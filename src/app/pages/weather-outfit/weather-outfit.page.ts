@@ -122,7 +122,7 @@ export class WeatherOutfitPage implements OnInit {
         },
         {
           image: '../../../assets/homepage/hot/cloth2.png',
-          title: 'Linen Pants',
+          title: 'Pants',
           description: 'Perfect for hot weather',
         },
         {

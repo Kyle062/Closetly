@@ -146,7 +146,7 @@ export class HomePage implements OnInit {
         },
         {
           image: '../../../assets/homepage/hot/cloth2.png',
-          alt: 'Linen pants',
+          alt: 'Pants',
           width: '100px',
           height: '150px',
           objectFit: 'contain' as const,
