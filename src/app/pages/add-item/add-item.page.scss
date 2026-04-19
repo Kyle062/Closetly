@@ -1,36 +1,16 @@
+/* Page Background */
+ion-content.add-item-page::part(background) {
+  background: url("../../../assets/splash4/BackgroundImageClosetly.png")
+    no-repeat center center / cover;
+}
+
 .add-item-page {
-  --background: transparent;
-
-  /* Full page background */
-  .page-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    opacity: 0.8; /* Adjust to match the lighter overlay look */
-  }
-
-  .overlay-container {
-    padding: 20px;
-    padding-top: 45px; /* Safe area spacing */
-    min-height: 100%;
-    background-color: rgba(
-      245,
-      244,
-      239,
-      0.85
-    ); /* Creates the frosted beige look */
-  }
-
   /* Top Navigation */
   .top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    padding: 50px 20px 20px 20px;
 
     .brand-logo {
       border-radius: 8px;
@@ -38,18 +18,28 @@
 
     .menu-icon {
       font-size: 32px;
-      color: #333;
+      color: white;
     }
+  }
+
+  /* Main Overlapping Card */
+  .bottom-sheet {
+    background: #f4f3f0;
+    border-radius: 40px 40px 0 0;
+    margin-top: 20px;
+    min-height: 85vh;
+    padding: 30px 20px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
   }
 
   /* Header row with back button */
   .header-row {
     display: flex;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 
     .back-btn {
-      font-size: 24px;
+      font-size: 28px;
       color: #000;
       cursor: pointer;
     }
@@ -57,120 +47,139 @@
     .page-title {
       flex: 1;
       text-align: center;
-      font-size: 22px;
-      font-weight: 800;
+      font-size: 24px;
+      font-weight: 700;
       margin: 0;
       color: #000;
     }
 
     .spacer {
-      width: 24px; /* Balances against back button */
+      width: 28px;
     }
   }
 
-  /* Camera Container Box */
+  /* Camera Container */
   .camera-container {
-    position: relative;
-    width: 100%;
-    height: 240px;
-    border-radius: 20px;
-    overflow: hidden;
     margin-bottom: 25px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 
-    .camera-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .camera-placeholder {
+      position: relative;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+      height: 240px;
+      border-radius: 25px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 
-    .dark-tint {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-    }
-
-    /* White Viewfinder Corners */
-    .viewfinder {
-      position: absolute;
-      width: 35px;
-      height: 35px;
-      border: 3px solid rgba(255, 255, 255, 0.8);
-    }
-
-    .top-left {
-      top: 15px;
-      left: 15px;
-      border-right: none;
-      border-bottom: none;
-    }
-    .top-right {
-      top: 15px;
-      right: 15px;
-      border-left: none;
-      border-bottom: none;
-    }
-    .bottom-left {
-      bottom: 15px;
-      left: 15px;
-      border-right: none;
-      border-top: none;
-    }
-    .bottom-right {
-      bottom: 15px;
-      right: 15px;
-      border-left: none;
-      border-top: none;
-    }
-
-    /* Centered Actions */
-    .action-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-
-      .primary-action {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 40px;
-        cursor: pointer;
-
-        ion-icon {
-          font-size: 48px;
-          margin-bottom: 5px;
-        }
-        span {
-          font-size: 14px;
-          font-weight: 600;
-        }
+      .dark-tint {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 1;
       }
 
-      .secondary-action {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        cursor: pointer;
+      /* White Viewfinder Corners */
+      .viewfinder {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        border: 3px solid rgba(255, 255, 255, 0.8);
+        z-index: 2;
+      }
 
-        ion-icon {
-          font-size: 18px;
+      .top-left {
+        top: 15px;
+        left: 15px;
+        border-right: none;
+        border-bottom: none;
+        border-radius: 8px 0 0 0;
+      }
+
+      .top-right {
+        top: 15px;
+        right: 15px;
+        border-left: none;
+        border-bottom: none;
+        border-radius: 0 8px 0 0;
+      }
+
+      .bottom-left {
+        bottom: 15px;
+        left: 15px;
+        border-right: none;
+        border-top: none;
+        border-radius: 0 0 0 8px;
+      }
+
+      .bottom-right {
+        bottom: 15px;
+        right: 15px;
+        border-left: none;
+        border-top: none;
+        border-radius: 0 0 8px 0;
+      }
+
+      /* Centered Actions */
+      .action-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        z-index: 3;
+
+        .primary-action {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 40px;
+          cursor: pointer;
+          transition: transform 0.2s ease;
+
+          &:active {
+            transform: scale(0.95);
+          }
+
+          ion-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+          }
+
+          span {
+            font-size: 14px;
+            font-weight: 600;
+          }
         }
-        span {
-          font-size: 12px;
-          font-weight: 500;
+
+        .secondary-action {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          transition: transform 0.2s ease;
+
+          &:active {
+            transform: scale(0.95);
+          }
+
+          ion-icon {
+            font-size: 18px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+          }
+
+          span {
+            font-size: 12px;
+            font-weight: 500;
+          }
         }
       }
     }
@@ -181,7 +190,7 @@
     background: #ffffff;
     border-radius: 30px;
     padding: 30px 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
 
     .input-group {
       margin-bottom: 25px;
@@ -202,24 +211,31 @@
         select {
           width: 100%;
           appearance: none;
-          background-color: #f0f0f0;
-          border: none;
-          border-radius: 12px;
-          padding: 16px 20px;
+          background-color: #f8f8f8;
+          border: 1px solid #e0e0e0;
+          border-radius: 15px;
+          padding: 14px 16px;
           font-size: 15px;
-          color: #888;
+          color: #333;
           font-weight: 500;
           outline: none;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:focus {
+            border-color: #0084ff;
+            background: white;
+          }
         }
 
         .dropdown-icon {
           position: absolute;
-          right: 20px;
+          right: 16px;
           top: 50%;
           transform: translateY(-50%);
-          font-size: 18px;
-          color: #333;
-          pointer-events: none; /* Allows clicking through the icon to the select */
+          font-size: 20px;
+          color: #666;
+          pointer-events: none;
         }
       }
     }
@@ -227,13 +243,101 @@
     .submit-btn {
       margin-top: 35px;
       height: 55px;
-      --border-radius: 16px;
+      --border-radius: 15px;
       --background: #2b2b2b;
       --background-hover: #1a1a1a;
-      --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
       font-weight: 700;
       font-size: 15px;
-      letter-spacing: 0.5px;
+      text-transform: none;
+      color: white;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
     }
+  }
+}
+
+/* Modern Pill Alert Styles */
+:host {
+  .modern-pill-alert {
+    --backdrop-opacity: 0.6;
+
+    .alert-wrapper {
+      border-radius: 30px !important;
+      background: #ffffff !important;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+      padding: 0 !important;
+      max-width: 320px !important;
+      animation: alertPopIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    }
+
+    .alert-head {
+      padding: 25px 20px 15px !important;
+      text-align: center !important;
+
+      h2 {
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        color: #1a1a1a !important;
+        margin-bottom: 8px !important;
+        letter-spacing: -0.5px !important;
+      }
+    }
+
+    .alert-message {
+      padding: 0 20px 20px !important;
+      text-align: center !important;
+      color: #666 !important;
+      font-size: 15px !important;
+      font-weight: 400 !important;
+      line-height: 1.4 !important;
+    }
+
+    .alert-button-group {
+      padding: 0 !important;
+      border-top: 1px solid #f0f0f0 !important;
+
+      .alert-button {
+        margin: 0 !important;
+        padding: 16px !important;
+        border-radius: 0 0 30px 30px !important;
+        background: transparent !important;
+        color: #1a1a1a !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        text-transform: none !important;
+
+        &:hover {
+          background: #f8f8f8 !important;
+        }
+
+        &:active {
+          background: #f0f0f0 !important;
+          transform: scale(0.98) !important;
+        }
+
+        .alert-button-inner {
+          justify-content: center !important;
+        }
+      }
+    }
+  }
+}
+
+@keyframes alertPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
