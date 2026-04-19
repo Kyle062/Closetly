@@ -88,7 +88,7 @@ export class WeatherOutfitPage implements OnInit {
 
   private apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.lon}&appid=${this.apiKey}&units=metric`;
 
-  // Outfit suggestions for different weather conditions
+  // Outfit suggestions for different weather conditions (5 items each)
   private outfitSuggestions: { [key: string]: WeatherOutfitSuggestion } = {
     Sunny: {
       title: 'Suggested Outfit',
@@ -96,18 +96,28 @@ export class WeatherOutfitPage implements OnInit {
       items: [
         {
           image: '../../../assets/homepage/sunny/cloth1.png',
-          title: 'White Shirt',
-          description: 'Perfect for sunny weather',
+          title: 'Summer Top',
+          description: 'Light and breathable',
         },
         {
           image: '../../../assets/homepage/sunny/cloth2.png',
-          title: 'Tan Pants',
-          description: 'Perfect for sunny weather',
+          title: 'Shorts',
+          description: 'Comfortable and cool',
         },
         {
           image: '../../../assets/homepage/sunny/cloth4.png',
           title: 'Sunglasses',
-          description: 'Perfect for sunny weather',
+          description: 'UV protection',
+        },
+        {
+          image: '../../../assets/homepage/sunny/shoes.png',
+          title: 'Sandals',
+          description: 'Perfect for warm weather',
+        },
+        {
+          image: '../../../assets/homepage/sunny/accessory.png',
+          title: 'Watch',
+          description: 'Stylish accessory',
         },
       ],
     },
@@ -118,17 +128,27 @@ export class WeatherOutfitPage implements OnInit {
         {
           image: '../../../assets/homepage/hot/cloth1.png',
           title: 'Tank Top',
-          description: 'Perfect for hot weather',
+          description: 'Maximum breathability',
         },
         {
           image: '../../../assets/homepage/hot/cloth2.png',
-          title: 'Pants',
-          description: 'Perfect for hot weather',
+          title: 'Brown Shorts',
+          description: 'Lightweight and airy',
         },
         {
           image: '../../../assets/homepage/hot/cloth3.png',
           title: 'Sun Hat',
-          description: 'Perfect for hot weather',
+          description: 'Sun protection',
+        },
+        {
+          image: '../../../assets/homepage/hot/shoes.png',
+          title: 'Flip Flops',
+          description: 'Easy and comfortable',
+        },
+        {
+          image: '../../../assets/homepage/hot/accessory.png',
+          title: 'Sunglasses',
+          description: 'Eye protection',
         },
       ],
     },
@@ -139,17 +159,27 @@ export class WeatherOutfitPage implements OnInit {
         {
           image: '../../../assets/homepage/rainy/Closetlycloth7.png',
           title: 'Raincoat',
-          description: 'Perfect for rainy weather',
+          description: 'Waterproof protection',
         },
         {
           image: '../../../assets/homepage/rainy/Closetlycloth8.png',
           title: 'Waterproof Boots',
-          description: 'Perfect for rainy weather',
+          description: 'Keep feet dry',
+        },
+        {
+          image: '../../../assets/homepage/rainy/Umbrella.png',
+          title: 'Umbrella',
+          description: 'Essential rain gear',
         },
         {
           image: '../../../assets/homepage/rainy/Closetlycloth9.png',
-          title: 'Hat',
-          description: 'Perfect for rainy weather',
+          title: 'Rain Hat',
+          description: 'Stylish and functional',
+        },
+        {
+          image: '../../../assets/homepage/rainy/Waterproof bag.png',
+          title: 'Waterproof Bag',
+          description: 'Protect your belongings',
         },
       ],
     },
@@ -160,17 +190,27 @@ export class WeatherOutfitPage implements OnInit {
         {
           image: '../../../assets/homepage/cold/Closetlycloth10.png',
           title: 'Jacket',
-          description: 'Perfect for cold weather',
+          description: 'Warm outer layer',
         },
         {
           image: '../../../assets/homepage/cold/Closetlycloth11.png',
           title: 'Long Pants',
-          description: 'Perfect for cold weather',
+          description: 'Insulated bottoms',
         },
         {
           image: '../../../assets/homepage/cold/Closetlycloth12.png',
           title: 'Closed Shoes',
-          description: 'Perfect for cold weather',
+          description: 'Keep feet warm',
+        },
+        {
+          image: '../../../assets/homepage/cold/scarf.png',
+          title: 'Scarf',
+          description: 'Neck warmth',
+        },
+        {
+          image: '../../../assets/homepage/cold/gloves.png',
+          title: 'Gloves',
+          description: 'Hand protection',
         },
       ],
     },
@@ -195,7 +235,6 @@ export class WeatherOutfitPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
   ) {
-    // Register the icons used in the template
     addIcons({
       arrowBackOutline,
       partlySunnyOutline,
@@ -215,12 +254,10 @@ export class WeatherOutfitPage implements OnInit {
     this.getWeatherData();
   }
 
-  // Navigate back to home page
   goBack() {
     this.router.navigate(['/home']);
   }
 
-  // Fetch weather data from API using coordinates
   getWeatherData() {
     this.isLoading = true;
     this.weatherError = '';
@@ -245,15 +282,12 @@ export class WeatherOutfitPage implements OnInit {
       });
   }
 
-  // Determine weather category based on temperature and condition
   determineWeatherCategory(temperature: number, condition: string): string {
-    // First check for rain condition
     const rainConditions = ['Rain', 'Drizzle', 'Thunderstorm', 'Mist', 'Fog'];
     if (rainConditions.some((cond) => condition.includes(cond))) {
       return 'Rainy';
     }
 
-    // Then check temperature
     if (temperature >= 30) {
       return 'Hot';
     } else if (temperature >= 25 && temperature < 30) {
@@ -265,25 +299,21 @@ export class WeatherOutfitPage implements OnInit {
     }
   }
 
-  // Update UI with real weather data
   updateWeatherUI(data: any) {
     const temperature = Math.round(data.main.temp);
     const feelsLike = Math.round(data.main.feels_like);
     const condition = data.weather[0].main;
 
-    // Try to get a more specific location name if available
     let cityName = data.name;
     if (cityName === '' || !cityName) {
       cityName = 'Davao de Oro';
     }
 
-    // Get weather category
     const weatherCategory = this.determineWeatherCategory(
       temperature,
       condition,
     );
 
-    // Set current weather (this never changes with category clicks)
     this.currentWeather = {
       temperature: `${temperature}°C`,
       condition: weatherCategory,
@@ -292,28 +322,20 @@ export class WeatherOutfitPage implements OnInit {
       category: weatherCategory,
     };
 
-    // Set selected category to match current weather initially
     this.selectedCategory = weatherCategory;
-
-    // Update forecast banner (based on actual weather only)
     this.updateForecastBanner(weatherCategory);
-
-    // Load outfit suggestions for current weather
     this.loadOutfitForCategory(weatherCategory);
   }
 
-  // Update forecast banner based on actual weather
   updateForecastBanner(category: string) {
     this.forecastBackground =
       this.forecastBackgrounds[category] || this.forecastBackgrounds['Sunny'];
     this.forecastIcon = this.forecastIcons[category] || 'partly-sunny-outline';
   }
 
-  // Load outfit for selected category
   loadOutfitForCategory(category: string) {
     let suggestion = this.outfitSuggestions[category];
 
-    // Fallback to Sunny if category not found
     if (!suggestion) {
       suggestion = this.outfitSuggestions['Sunny'];
     }
@@ -321,13 +343,11 @@ export class WeatherOutfitPage implements OnInit {
     this.currentOutfit = suggestion.items;
   }
 
-  // Handle category button click - only changes outfit display, NOT weather forecast
   onCategoryClick(category: string) {
     this.selectedCategory = category;
     this.loadOutfitForCategory(category);
   }
 
-  // Save outfit with modern pill-style alert
   async saveOutfit() {
     const alert = await this.alertController.create({
       header: 'Outfit Saved!',
@@ -346,9 +366,48 @@ export class WeatherOutfitPage implements OnInit {
     });
 
     await alert.present();
+
+    setTimeout(() => {
+      const alertElement = document.querySelector('.modern-pill-alert');
+      if (alertElement) {
+        const wrapper = alertElement.querySelector('.alert-wrapper');
+        if (wrapper) {
+          const iconContainer = document.createElement('div');
+          iconContainer.style.cssText = `
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            z-index: 10;
+          `;
+
+          const icon = document.createElement('ion-icon');
+          icon.setAttribute('name', 'checkmark-circle-outline');
+          icon.style.cssText = `
+            font-size: 36px;
+            color: white;
+          `;
+
+          iconContainer.appendChild(icon);
+          wrapper.appendChild(iconContainer);
+
+          const header = wrapper.querySelector('.alert-head');
+          if (header) {
+            header.setAttribute('style', 'padding-top: 45px !important');
+          }
+        }
+      }
+    }, 50);
   }
 
-  // Fallback mock data if API fails
   setMockWeatherData() {
     this.currentWeather = {
       temperature: '28°C',
@@ -364,7 +423,6 @@ export class WeatherOutfitPage implements OnInit {
     this.loadOutfitForCategory('Sunny');
   }
 
-  // Refresh weather
   refreshWeather() {
     this.getWeatherData();
   }
