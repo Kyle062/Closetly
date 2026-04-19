@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Add this import
+import { Router } from '@angular/router';
 import { BottomNavComponent } from '../../components/bottom-nav/bottom-nav.component';
 import { CommonModule } from '@angular/common';
 import {
@@ -25,7 +25,6 @@ import {
   partlySunnyOutline,
 } from 'ionicons/icons';
 
-// Interface for clothing item with custom dimensions
 interface ClothingItem {
   image: string;
   alt: string;
@@ -51,7 +50,6 @@ interface ClothingItem {
   ],
 })
 export class HomePage implements OnInit {
-  // Weather properties
   weatherData: any = {
     temperature: '--',
     condition: 'Loading...',
@@ -63,7 +61,6 @@ export class HomePage implements OnInit {
   isLoading: boolean = true;
   weatherError: string = '';
 
-  // Outfit suggestion properties
   currentSuggestion: any = {
     title: "Today's Suggestion",
     description: 'Loading suggestion...',
@@ -89,16 +86,26 @@ export class HomePage implements OnInit {
         height: '180px',
         objectFit: 'contain',
       },
+      {
+        image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+        alt: 'Clothing item 4',
+        width: 'auto',
+        height: '180px',
+        objectFit: 'contain',
+      },
+      {
+        image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+        alt: 'Clothing item 5',
+        width: 'auto',
+        height: '180px',
+        objectFit: 'contain',
+      },
     ],
   };
 
-  // Working API key for OpenWeatherMap
   private apiKey = '35efb00415742337258dd1ba28238572';
-
-  // Using Compostela Valley coordinates
   private lat = 7.68333;
   private lon = 126.11667;
-
   private apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.lon}&appid=${this.apiKey}&units=metric`;
 
   private outfitSuggestions = {
@@ -131,6 +138,22 @@ export class HomePage implements OnInit {
           objectFit: 'contain' as const,
           customClass: 'sunny-accessory',
         },
+        {
+          image: '../../../assets/homepage/sunny/shoes.png',
+          alt: 'Sandals',
+          width: '95px',
+          height: '130px',
+          objectFit: 'contain' as const,
+          customClass: 'sunny-shoes',
+        },
+        {
+          image: '../../../assets/homepage/sunny/accessory.png',
+          alt: 'Watch',
+          width: '85px',
+          height: '110px',
+          objectFit: 'contain' as const,
+          customClass: 'sunny-watch',
+        },
       ],
     },
     Hot: {
@@ -146,7 +169,7 @@ export class HomePage implements OnInit {
         },
         {
           image: '../../../assets/homepage/hot/cloth2.png',
-          alt: 'Pants',
+          alt: 'Linen pants',
           width: '100px',
           height: '150px',
           objectFit: 'contain' as const,
@@ -156,6 +179,20 @@ export class HomePage implements OnInit {
           alt: 'Hat',
           width: '90px',
           height: '120px',
+          objectFit: 'contain' as const,
+        },
+        {
+          image: '../../../assets/homepage/hot/shoes.png',
+          alt: 'Flip flops',
+          width: '95px',
+          height: '130px',
+          objectFit: 'contain' as const,
+        },
+        {
+          image: '../../../assets/homepage/hot/accessory.png',
+          alt: 'Sunglasses',
+          width: '85px',
+          height: '110px',
           objectFit: 'contain' as const,
         },
       ],
@@ -179,10 +216,24 @@ export class HomePage implements OnInit {
           objectFit: 'contain' as const,
         },
         {
-          image: '../../../assets/homepage/rainy/Closetlycloth9.png',
-          alt: 'Hat',
+          image: '../../../assets/homepage/rainy/Umbrella.png',
+          alt: 'Umbrella',
           width: '95px',
           height: '130px',
+          objectFit: 'contain' as const,
+        },
+        {
+          image: '../../../assets/homepage/rainy/Closetlycloth9.png',
+          alt: 'Rain boots',
+          width: '100px',
+          height: '140px',
+          objectFit: 'contain' as const,
+        },
+        {
+          image: '../../../assets/homepage/rainy/Waterproof bag.png',
+          alt: 'Waterproof bag',
+          width: '90px',
+          height: '120px',
           objectFit: 'contain' as const,
         },
       ],
@@ -212,6 +263,20 @@ export class HomePage implements OnInit {
           height: '140px',
           objectFit: 'contain' as const,
         },
+        {
+          image: '../../../assets/homepage/cold/scarf.png',
+          alt: 'Scarf',
+          width: '90px',
+          height: '120px',
+          objectFit: 'contain' as const,
+        },
+        {
+          image: '../../../assets/homepage/cold/gloves.png',
+          alt: 'Gloves',
+          width: '85px',
+          height: '110px',
+          objectFit: 'contain' as const,
+        },
       ],
     },
     default: {
@@ -226,7 +291,7 @@ export class HomePage implements OnInit {
           objectFit: 'contain' as const,
         },
         {
-          image: '../../../assets/homepage/Comfortable/Closetlycloth14.png.png',
+          image: '../../../assets/homepage/Comfortable/Closetlycloth14.png',
           alt: 'Jeans',
           width: '105px',
           height: '155px',
@@ -239,12 +304,25 @@ export class HomePage implements OnInit {
           height: '140px',
           objectFit: 'contain' as const,
         },
+        {
+          image: '../../../assets/homepage/Comfortable/accessory1.png',
+          alt: 'Watch',
+          width: '85px',
+          height: '110px',
+          objectFit: 'contain' as const,
+        },
+        {
+          image: '../../../assets/homepage/Comfortable/accessory2.png',
+          alt: 'Bag',
+          width: '90px',
+          height: '120px',
+          objectFit: 'contain' as const,
+        },
       ],
     },
   };
 
   constructor(private router: Router) {
-    // Add Router to constructor
     addIcons({
       searchOutline,
       scanOutline,
@@ -265,7 +343,6 @@ export class HomePage implements OnInit {
     this.getWeatherData();
   }
 
-  // Navigation methods for Quick Actions
   navigateToWeatherOutfit() {
     this.router.navigate(['/weather-outfit']);
   }
@@ -282,7 +359,6 @@ export class HomePage implements OnInit {
     this.router.navigate(['/add-item']);
   }
 
-  // Get dynamic styles for each clothing item
   getClothingStyles(cloth: ClothingItem) {
     return {
       width: cloth.width || 'auto',
@@ -291,12 +367,10 @@ export class HomePage implements OnInit {
     };
   }
 
-  // Get custom class for clothing item
   getClothingClass(cloth: ClothingItem): string {
     return cloth.customClass || '';
   }
 
-  // Fetch weather data from API using coordinates
   getWeatherData() {
     this.isLoading = true;
     this.weatherError = '';
@@ -323,15 +397,12 @@ export class HomePage implements OnInit {
       });
   }
 
-  // Determine weather category based on temperature and condition
   determineWeatherCategory(temperature: number, condition: string): string {
-    // First check for rain condition
     const rainConditions = ['Rain', 'Drizzle', 'Thunderstorm', 'Mist', 'Fog'];
     if (rainConditions.some((cond) => condition.includes(cond))) {
       return 'Rainy';
     }
 
-    // Then check temperature
     if (temperature >= 30) {
       return 'Hot';
     } else if (temperature >= 25 && temperature < 30) {
@@ -343,19 +414,16 @@ export class HomePage implements OnInit {
     }
   }
 
-  // Update UI with real weather data
   updateWeatherUI(data: any) {
     const temperature = Math.round(data.main.temp);
     const feelsLike = Math.round(data.main.feels_like);
     const condition = data.weather[0].main;
 
-    // Try to get a more specific location name if available
     let cityName = data.name;
     if (cityName === '' || !cityName) {
       cityName = 'Davao de Oro';
     }
 
-    // Get weather category for icon
     const weatherCategory = this.determineWeatherCategory(
       temperature,
       condition,
@@ -376,7 +444,6 @@ export class HomePage implements OnInit {
     };
   }
 
-  // Update outfit suggestion based on temperature
   updateOutfitSuggestion(temperature: number, condition: string) {
     const weatherCategory = this.determineWeatherCategory(
       temperature,
@@ -402,10 +469,9 @@ export class HomePage implements OnInit {
     };
   }
 
-  // Fallback mock data if API fails
   setMockWeatherData() {
     this.weatherData = {
-      temperature: '8°C',
+      temperature: '28°C',
       condition: 'Sunny',
       feelsLike: 'Feels like 30°C',
       city: 'Davao de Oro',
@@ -413,7 +479,6 @@ export class HomePage implements OnInit {
     };
   }
 
-  // Refresh weather
   refreshWeather() {
     this.getWeatherData();
   }

@@ -154,8 +154,9 @@
     .outfit-preview {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 10px;
       margin: 25px 0;
+      flex-wrap: wrap;
 
       .img-wrapper {
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
@@ -166,7 +167,6 @@
         cursor: pointer;
         background: #f0f0f0;
 
-        // Zoom effect on hover
         &:hover {
           transform: translateY(-8px);
           box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
@@ -180,7 +180,6 @@
           }
         }
 
-        // Subtle overlay effect
         &::after {
           content: "";
           position: absolute;
@@ -200,8 +199,8 @@
         }
 
         img {
-          width: 105px;
-          height: 160px;
+          width: 85px;
+          height: 130px;
           object-fit: cover;
           display: block;
           transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -396,7 +395,6 @@
   }
 }
 
-// Ensure proper scrolling on all devices
 ion-content {
   --overflow: auto;
 
@@ -406,7 +404,6 @@ ion-content {
   }
 }
 
-// Add a subtle animation for the outfit cards on load
 @keyframes fadeInScale {
   from {
     opacity: 0;
@@ -430,9 +427,14 @@ ion-content {
   &:nth-child(3) {
     animation-delay: 0.3s;
   }
+  &:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  &:nth-child(5) {
+    animation-delay: 0.5s;
+  }
 }
 
-// Responsive adjustments
 @media (max-width: 768px) {
   .home-content {
     .header-section {
@@ -474,10 +476,14 @@ ion-content {
     .suggestion-card {
       padding: 20px 15px;
 
+      .outfit-preview {
+        gap: 8px;
+      }
+
       .outfit-preview .img-wrapper {
         img {
-          width: 90px;
-          height: 140px;
+          width: 70px;
+          height: 110px;
         }
 
         &:hover {
@@ -500,10 +506,9 @@ ion-content {
   }
 }
 
-// Tablet responsive
 @media (min-width: 768px) and (max-width: 1024px) {
   .suggestion-card .outfit-preview .img-wrapper img {
-    width: 120px;
-    height: 180px;
+    width: 100px;
+    height: 150px;
   }
 }
