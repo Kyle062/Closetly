@@ -10,6 +10,7 @@ import {
   IonThumbnail,
   IonLabel,
   IonButton,
+  AlertController,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -22,6 +23,8 @@ import {
   scanOutline,
   cloudyOutline,
   thunderstormOutline,
+  checkmarkCircleOutline,
+  closeOutline,
 } from 'ionicons/icons';
 
 interface OutfitItem {
@@ -188,7 +191,10 @@ export class WeatherOutfitPage implements OnInit {
     Cold: 'cloudy-outline',
   };
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private alertController: AlertController,
+  ) {
     // Register the icons used in the template
     addIcons({
       arrowBackOutline,
@@ -200,6 +206,8 @@ export class WeatherOutfitPage implements OnInit {
       scanOutline,
       cloudyOutline,
       thunderstormOutline,
+      checkmarkCircleOutline,
+      closeOutline,
     });
   }
 
@@ -319,11 +327,25 @@ export class WeatherOutfitPage implements OnInit {
     this.loadOutfitForCategory(category);
   }
 
-  // Save outfit (placeholder function)
-  saveOutfit() {
-    console.log('Saving outfit:', this.currentOutfit);
-    // Add your save logic here (e.g., save to local storage or backend)
-    alert('Outfit saved successfully!');
+  // Save outfit with modern pill-style alert
+  async saveOutfit() {
+    const alert = await this.alertController.create({
+      header: 'Outfit Saved!',
+      message: 'This outfit has been added to your collection.',
+      mode: 'ios',
+      cssClass: 'modern-pill-alert',
+      buttons: [
+        {
+          text: 'Got it',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            console.log('Outfit saved:', this.currentOutfit);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   // Fallback mock data if API fails
