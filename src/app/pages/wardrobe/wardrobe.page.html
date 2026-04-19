@@ -1,13 +1,98 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>wardrobe</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="wardrobe-page">
+  <div class="top-nav">
+    <img
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
+    />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">wardrobe</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="bottom-sheet">
+    <div class="header-row">
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
+      <h1 class="page-title">My Wardrobe</h1>
+      <div class="spacer"></div>
+    </div>
+
+    <div class="search-container">
+      <div class="search-box">
+        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+        <input
+          type="text"
+          placeholder="Search here..."
+          [(ngModel)]="searchQuery"
+        />
+      </div>
+      <ion-icon
+        name="options-outline"
+        class="filter-icon"
+        (click)="openFilter()"
+      ></ion-icon>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <strong>{{ wardrobeItems.length }}</strong>
+        <span>Total Items</span>
+      </div>
+      <div class="stat-box">
+        <strong>{{ favoriteCount }}</strong>
+        <span>Favorites</span>
+      </div>
+      <div class="stat-box">
+        <strong>{{ categories.length - 1 }}</strong>
+        <span>Categories</span>
+      </div>
+    </div>
+
+    <div class="categories-row">
+      <div
+        class="tab"
+        *ngFor="let category of categories"
+        [class.active]="selectedCategory === category"
+        (click)="selectCategory(category)"
+      >
+        {{ category }}
+        <span class="count-badge">{{ getItemCountByCategory(category) }}</span>
+      </div>
+    </div>
+
+    <div class="wardrobe-grid">
+      <div
+        class="wardrobe-card"
+        *ngFor="let item of filteredItems"
+        (click)="viewItem(item)"
+      >
+        <div class="image-wrapper">
+          <img [src]="item.image" [alt]="item.name" />
+          <div
+            class="fav-badge"
+            [class.active-fav]="item.isFavorite"
+            (click)="toggleFavorite(item, $event)"
+          >
+            <ion-icon
+              [name]="item.isFavorite ? 'heart' : 'heart-outline'"
+            ></ion-icon>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="item-name">{{ item.name }}</span>
+          <span class="item-category">{{ item.category }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="filteredItems.length === 0">
+      <ion-icon name="search-outline"></ion-icon>
+      <h3>No items found</h3>
+      <p>Try adjusting your search or filter</p>
+    </div>
+
+    <div class="bottom-spacer"></div>
+  </div>
 </ion-content>
