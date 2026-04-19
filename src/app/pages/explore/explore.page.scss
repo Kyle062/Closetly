@@ -1,0 +1,200 @@
+.explore-page {
+  --background: transparent;
+
+  /* Full page background image */
+  .page-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  /* Frosted overlay container */
+  .overlay-container {
+    padding: 20px;
+    padding-top: 45px; /* Adjust for safe area */
+    min-height: 100%;
+    background-color: rgba(245, 244, 239, 0.88); /* Frosted beige tint */
+  }
+
+  /* Navigation & Header */
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .brand-logo {
+      border-radius: 8px;
+    }
+    .menu-icon {
+      font-size: 32px;
+      color: #333;
+    }
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+
+    .back-btn {
+      font-size: 24px;
+      color: #000;
+      cursor: pointer;
+    }
+    .page-title {
+      flex: 1;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0;
+      color: #000;
+    }
+    .spacer {
+      width: 24px;
+    }
+  }
+
+  /* Search & Filter Bar */
+  .search-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+
+    .search-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      padding: 0 20px;
+      height: 50px;
+      border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+
+      .search-icon {
+        color: #999;
+        font-size: 20px;
+        margin-right: 10px;
+      }
+
+      input {
+        border: none;
+        background: transparent;
+        outline: none;
+        width: 100%;
+        font-size: 15px;
+        color: #333;
+        font-weight: 500;
+
+        &::placeholder {
+          color: #aaa;
+        }
+      }
+    }
+
+    .filter-icon {
+      font-size: 26px;
+      color: #000;
+      cursor: pointer;
+    }
+  }
+
+  /* Shared Section Titles */
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    margin-top: 0;
+  }
+
+  /* Popular Searches Pills */
+  .popular-searches {
+    margin-bottom: 30px;
+
+    .pill-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .pill {
+        background: #ffffff;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #444;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
+
+  /* Results Grid */
+  .results-section {
+    padding-bottom: 80px; /* Space for the FAB button */
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+
+      .result-card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+
+        .card-img {
+          width: 100%;
+          height: 140px;
+          object-fit: cover;
+          border-radius: 12px;
+          margin-bottom: 12px;
+        }
+
+        .card-content {
+          h4 {
+            font-size: 13px;
+            font-weight: 800;
+            margin: 0 0 4px 0;
+            color: #000;
+          }
+
+          .subtitle {
+            display: block;
+            font-size: 9px;
+            color: #888;
+            margin-bottom: 6px;
+            font-weight: 500;
+          }
+
+          p {
+            font-size: 9px;
+            color: #555;
+            margin: 0;
+            line-height: 1.3;
+          }
+        }
+      }
+    }
+  }
+
+  /* Custom Floating Action Button */
+  .custom-fab {
+    --background: #111111;
+    --background-activated: #333333;
+    --background-hover: #222222;
+    --border-radius: 50%;
+    --color: #ffffff;
+    --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+}

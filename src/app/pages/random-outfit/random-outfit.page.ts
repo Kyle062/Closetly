@@ -44,95 +44,154 @@ interface OutfitItem {
   ],
 })
 export class RandomOutfitPage implements OnInit {
-  // Current random outfit
+  // Current random outfit (5 items)
   currentOutfit: OutfitItem[] = [];
 
   // Pool of available clothing items
   private clothingItems: { [key: string]: OutfitItem[] } = {
     tops: [
       {
-        image: '../../../assets/random-outfit/top/top1.png',
-        title: 'White T-Shirt',
+        image: '../../../assets/homepage/sunny/cloth1.png',
+        title: 'Summer Top',
         category: 'Top',
       },
       {
-        image: '../../../assets/random-outfit/top/top2.png',
-        title: 'Black Tank Top',
+        image: '../../../assets/homepage/hot/cloth1.png',
+        title: 'Tank Top',
         category: 'Top',
       },
       {
-        image: '../../../assets/random-outfit/top/top3.png',
-        title: 'Striped Shirt',
+        image: '../../../assets/homepage/Comfortable/Closetlycloth13.png',
+        title: 'Casual Top',
         category: 'Top',
       },
       {
-        image: '../../../assets/random-outfit/top/top4.png',
-        title: 'Hoodie',
+        image: '../../../assets/homepage/cold/Closetlycloth10.png',
+        title: 'Jacket',
         category: 'Top',
       },
     ],
     bottoms: [
       {
-        image: '../../../assets/random-outfit/bottom/bottom1.png',
-        title: 'Black Jeans',
+        image: '../../../assets/homepage/sunny/cloth2.png',
+        title: 'Shorts',
         category: 'Bottom',
       },
       {
-        image: '../../../assets/random-outfit/bottom/bottom2.png',
-        title: 'Khaki Pants',
+        image: '../../../assets/homepage/hot/cloth2.png',
+        title: 'Linen Pants',
         category: 'Bottom',
       },
       {
-        image: '../../../assets/random-outfit/bottom/bottom3.png',
-        title: 'Denim Shorts',
+        image: '../../../assets/homepage/Comfortable/Closetlycloth14.png',
+        title: 'Jeans',
         category: 'Bottom',
       },
       {
-        image: '../../../assets/random-outfit/bottom/bottom4.png',
-        title: 'Joggers',
+        image: '../../../assets/homepage/cold/Closetlycloth11.png',
+        title: 'Long Pants',
         category: 'Bottom',
       },
     ],
-    layers: [
+    accessories: [
       {
-        image: '../../../assets/random-outfit/layer/layer1.png',
-        title: 'Denim Jacket',
-        category: 'Layer',
+        image: '../../../assets/homepage/sunny/cloth4.png',
+        title: 'Sunglasses',
+        category: 'Accessory',
       },
       {
-        image: '../../../assets/random-outfit/layer/layer2.png',
-        title: 'Cardigan',
-        category: 'Layer',
+        image: '../../../assets/homepage/hot/cloth3.png',
+        title: 'Hat',
+        category: 'Accessory',
       },
       {
-        image: '../../../assets/random-outfit/layer/layer3.png',
-        title: 'Blazer',
-        category: 'Layer',
+        image: '../../../assets/homepage/sunny/accessory.png',
+        title: 'Watch',
+        category: 'Accessory',
       },
       {
-        image: '../../../assets/random-outfit/layer/layer4.png',
-        title: 'Bomber Jacket',
-        category: 'Layer',
+        image: '../../../assets/homepage/cold/scarf.png',
+        title: 'Scarf',
+        category: 'Accessory',
+      },
+    ],
+    shoes: [
+      {
+        image: '../../../assets/homepage/sunny/shoes.png',
+        title: 'Sandals',
+        category: 'Shoes',
+      },
+      {
+        image: '../../../assets/homepage/hot/shoes.png',
+        title: 'Flip Flops',
+        category: 'Shoes',
+      },
+      {
+        image: '../../../assets/homepage/Comfortable/Closetlycloth15.png',
+        title: 'Sneakers',
+        category: 'Shoes',
+      },
+      {
+        image: '../../../assets/homepage/cold/Closetlycloth12.png',
+        title: 'Closed Shoes',
+        category: 'Shoes',
+      },
+    ],
+    extras: [
+      {
+        image: '../../../assets/homepage/sunny/accessory.png',
+        title: 'Watch',
+        category: 'Extra',
+      },
+      {
+        image: '../../../assets/homepage/hot/accessory.png',
+        title: 'Sunglasses',
+        category: 'Extra',
+      },
+      {
+        image: '../../../assets/homepage/rainy/Waterproof bag.png',
+        title: 'Bag',
+        category: 'Extra',
+      },
+      {
+        image: '../../../assets/homepage/cold/gloves.png',
+        title: 'Gloves',
+        category: 'Extra',
+      },
+      {
+        image: '../../../assets/homepage/rainy/Umbrella.png',
+        title: 'Umbrella',
+        category: 'Extra',
       },
     ],
   };
 
-  // Default placeholder outfit
+  // Default outfit (5 items)
   private defaultOutfit: OutfitItem[] = [
     {
-      image: '../../../assets/random-outfit/top/top1.png',
-      title: 'White T-Shirt',
+      image: '../../../assets/homepage/Comfortable/Closetlycloth13.png',
+      title: 'Casual Top',
       category: 'Top',
     },
     {
-      image: '../../../assets/random-outfit/bottom/bottom1.png',
-      title: 'Black Jeans',
+      image: '../../../assets/homepage/Comfortable/Closetlycloth14.png',
+      title: 'Jeans',
       category: 'Bottom',
     },
     {
-      image: '../../../assets/random-outfit/layer/layer1.png',
-      title: 'Denim Jacket',
-      category: 'Layer',
+      image: '../../../assets/homepage/Comfortable/Closetlycloth15.png',
+      title: 'Sneakers',
+      category: 'Shoes',
+    },
+    {
+      image: '../../../assets/homepage/Comfortable/accessory1.png',
+      title: 'Watch',
+      category: 'Accessory',
+    },
+    {
+      image: '../../../assets/homepage/Comfortable/accessory2.png',
+      title: 'Bag',
+      category: 'Extra',
     },
   ];
 
@@ -140,7 +199,6 @@ export class RandomOutfitPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
   ) {
-    // Register the icons used in the template
     addIcons({
       arrowBackOutline,
       optionsOutline,
@@ -150,31 +208,36 @@ export class RandomOutfitPage implements OnInit {
   }
 
   ngOnInit() {
-    // Generate initial random outfit
     this.generateRandomOutfit();
   }
 
-  // Navigate back to home page
   goBack() {
     this.router.navigate(['/home']);
   }
 
-  // Generate random outfit
   generateRandomOutfit() {
     const randomTop = this.getRandomItem(this.clothingItems['tops']);
     const randomBottom = this.getRandomItem(this.clothingItems['bottoms']);
-    const randomLayer = this.getRandomItem(this.clothingItems['layers']);
+    const randomAccessory = this.getRandomItem(
+      this.clothingItems['accessories'],
+    );
+    const randomShoes = this.getRandomItem(this.clothingItems['shoes']);
+    const randomExtra = this.getRandomItem(this.clothingItems['extras']);
 
-    this.currentOutfit = [randomTop, randomBottom, randomLayer];
+    this.currentOutfit = [
+      randomTop,
+      randomBottom,
+      randomAccessory,
+      randomShoes,
+      randomExtra,
+    ];
   }
 
-  // Get random item from array
   private getRandomItem(items: OutfitItem[]): OutfitItem {
     const randomIndex = Math.floor(Math.random() * items.length);
-    return { ...items[randomIndex] }; // Return a copy to avoid reference issues
+    return { ...items[randomIndex] };
   }
 
-  // Save outfit with modern pill-style alert
   async saveOutfit() {
     const alert = await this.alertController.create({
       header: 'Outfit Saved!',
@@ -194,7 +257,6 @@ export class RandomOutfitPage implements OnInit {
 
     await alert.present();
 
-    // Add custom icon to the alert
     setTimeout(() => {
       const alertElement = document.querySelector('.modern-pill-alert');
       if (alertElement) {
