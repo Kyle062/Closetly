@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BottomNavComponent } from '../../components/bottom-nav/bottom-nav.component';
 import {
   IonContent,
   IonIcon,
@@ -36,6 +37,7 @@ interface StyleResult {
     IonFabButton,
     CommonModule,
     FormsModule,
+    BottomNavComponent,
   ],
 })
 export class ExplorePage implements OnInit {

@@ -219,7 +219,11 @@ ion-content.explore-page::part(background) {
     height: 70px;
   }
 
-  /* Custom Floating Action Button */
+  ion-fab {
+    position: absolute;
+    bottom: 60px; // Adjust this value to move it higher
+    right: 5px;
+  }
   .custom-fab {
     --background: #2b2b2b;
     --background-activated: #1a1a1a;
@@ -232,6 +236,7 @@ ion-content.explore-page::part(background) {
     width: 60px;
     height: 60px;
     transition: transform 0.2s ease;
+    --top: -50px;
 
     &:hover {
       transform: scale(1.05);
