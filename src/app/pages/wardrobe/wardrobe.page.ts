@@ -191,6 +191,33 @@ export class WardrobePage implements OnInit {
       category: 'Accessories',
       isFavorite: false,
     },
+    {id: 21,
+      image: '../../../assets/random-outfit/layer/layer1.png',
+      name: 'Denim Jacket',
+      category: 'Layers',
+      isFavorite: true,
+    },
+    {
+      id: 22,
+      image: '../../../assets/random-outfit/layer/layer2.png',
+      name: 'Cardigan',
+      category: 'Layers',
+      isFavorite: false,
+    },
+    {
+      id: 23,
+      image: '../../../assets/random-outfit/layer/layer3.png',
+      name: 'Blazer',
+      category: 'Layers',
+      isFavorite: false,
+    },
+      {
+      id: 24,
+      image: '../../../assets/random-outfit/layer/layer4.png',
+      name: 'Bomber Jacket',
+      category: 'Layers',
+      isFavorite: false,
+    },
   ];
 
   get filteredItems(): WardrobeItem[] {
