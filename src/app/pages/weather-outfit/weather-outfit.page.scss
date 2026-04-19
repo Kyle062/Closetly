@@ -1,0 +1,228 @@
+/* Set the main background image for the page */
+ion-content.weather-page::part(background) {
+  background: url("../../../assets/splash4/BackgroundImageClosetly.png")
+    no-repeat center center / cover;
+}
+
+.weather-page {
+  /* Top Navigation Area */
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px 20px 20px; /* Adjust top padding for safe area */
+
+    .brand-logo {
+      border-radius: 8px;
+    }
+
+    .menu-icon {
+      font-size: 32px;
+      color: white;
+    }
+  }
+
+  /* Main Overlapping Card */
+  .bottom-sheet {
+    background: #f4f3f0; /* Off-white/beige background */
+    border-radius: 40px 40px 0 0;
+    margin-top: 20px;
+    min-height: 85vh;
+    padding: 30px 20px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Header inside sheet */
+  .sheet-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+
+    .back-btn {
+      font-size: 28px;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .title {
+      flex: 1;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+      color: #000;
+    }
+
+    .spacer {
+      width: 28px; /* Balances the flex layout against the back button */
+    }
+  }
+
+  /* Horizontal Weather Selectors */
+  .weather-categories {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    padding-bottom: 10px; /* Space for box-shadow */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-btn {
+      background: white;
+      border-radius: 12px;
+      padding: 15px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      min-width: 70px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      border: 2px solid transparent;
+      color: #555;
+      transition: all 0.2s ease-in-out;
+
+      ion-icon {
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+
+      span {
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      &.active {
+        border-color: #0084ff;
+        color: #0084ff;
+      }
+    }
+  }
+
+  /* Outfit Suggestions Card */
+  .suggested-box {
+    background: white;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    margin-bottom: 25px;
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .outfit-list {
+      background: transparent;
+
+      .outfit-item {
+        --padding-start: 0;
+        --inner-padding-end: 0;
+        --background: transparent;
+        margin-bottom: 15px;
+
+        ion-thumbnail {
+          --size: 80px;
+          --border-radius: 15px;
+          margin-right: 15px;
+          background: #f0f0f0; /* fallback for image */
+        }
+
+        h3 {
+          font-weight: 600;
+          font-size: 16px;
+          color: #111;
+          margin-bottom: 5px;
+        }
+
+        p {
+          font-size: 13px;
+          color: #777;
+        }
+      }
+    }
+
+    .save-btn {
+      --background: #2b2b2b;
+      --background-hover: #1a1a1a;
+      --border-radius: 15px;
+      --box-shadow: none;
+      height: 55px;
+      margin-top: 20px;
+      font-weight: 600;
+      text-transform: none;
+      font-size: 16px;
+    }
+  }
+
+  /* Bottom Forecast Banner */
+  .forecast-banner {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 120px;
+    background: url("../../../assets/homepage/forcast/SunnyForcast.png")
+      no-repeat center center / cover;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+    /* Subtle dark overlay for text readability */
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.1)
+      );
+    }
+
+    .forecast-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+
+      .forecast-label {
+        font-size: 14px;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .forecast-weather {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        ion-icon {
+          font-size: 40px;
+        }
+
+        .temp {
+          font-size: 28px;
+          font-weight: 700;
+        }
+      }
+
+      .condition {
+        font-size: 12px;
+        margin-top: -5px;
+        display: block;
+        margin-left: 50px;
+      }
+    }
+  }
+}

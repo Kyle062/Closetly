@@ -1,13 +1,83 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>weather-outfit</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="weather-page">
+  <div class="top-nav">
+    <img src="../../../assets/homepage/iconLogo.png" alt="logo" class="brand-logo" />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">weather-outfit</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
+  </div>
+
+  <div class="bottom-sheet">
+    <div class="sheet-header">
+      <ion-icon name="arrow-back-outline" class="back-btn"></ion-icon>
+      <h1 class="title">Weather Outfit</h1>
+      <div class="spacer"></div>
+    </div>
+
+    <div class="weather-categories">
+      <div class="category-btn active">
+        <ion-icon name="partly-sunny-outline"></ion-icon>
+        <span>Sunny</span>
+      </div>
+      <div class="category-btn">
+        <ion-icon name="rainy-outline"></ion-icon>
+        <span>Rainy</span>
+      </div>
+      <div class="category-btn">
+        <ion-icon name="sunny-outline"></ion-icon>
+        <span>Summer</span>
+      </div>
+      <div class="category-btn">
+        <ion-icon name="snow-outline"></ion-icon>
+        <span>Winter</span>
+      </div>
+    </div>
+
+    <div class="suggested-box">
+      <h2 class="section-title">Suggested Outfit</h2>
+
+      <ion-list lines="none" class="outfit-list">
+        <ion-item class="outfit-item">
+          <ion-thumbnail slot="start">
+            <img src="https://via.placeholder.com/150" alt="White Shirt" />
+          </ion-thumbnail>
+          <ion-label>
+            <h3>White Shirt</h3>
+            <p>Perfect for sunny weather</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item class="outfit-item">
+          <ion-thumbnail slot="start">
+            <img src="https://via.placeholder.com/150" alt="Tan Pants" />
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Tan Pants</h3>
+            <p>Perfect for sunny weather</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item class="outfit-item">
+          <ion-thumbnail slot="start">
+            <img src="https://via.placeholder.com/150" alt="Sweater" />
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Sweater</h3>
+            <p>Perfect for sunny weather</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" class="save-btn">Save this Outfit</ion-button>
+    </div>
+
+    <div class="forecast-banner">
+      <div class="forecast-content">
+        <span class="forecast-label">Today's Forecast</span>
+        <div class="forecast-weather">
+          <ion-icon name="partly-sunny-outline"></ion-icon>
+          <span class="temp">22°C</span>
+        </div>
+        <span class="condition">Sunny</span>
+      </div>
+    </div>
+  </div>
 </ion-content>
