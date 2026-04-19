@@ -23,7 +23,7 @@
     <div class="weather-categories">
       <div
         class="category-btn"
-        [class.active]="activeCategory === 'Sunny'"
+        [class.active]="selectedCategory === 'Sunny'"
         (click)="onCategoryClick('Sunny')"
       >
         <ion-icon name="partly-sunny-outline"></ion-icon>
@@ -31,7 +31,7 @@
       </div>
       <div
         class="category-btn"
-        [class.active]="activeCategory === 'Rainy'"
+        [class.active]="selectedCategory === 'Rainy'"
         (click)="onCategoryClick('Rainy')"
       >
         <ion-icon name="rainy-outline"></ion-icon>
@@ -39,7 +39,7 @@
       </div>
       <div
         class="category-btn"
-        [class.active]="activeCategory === 'Hot'"
+        [class.active]="selectedCategory === 'Hot'"
         (click)="onCategoryClick('Hot')"
       >
         <ion-icon name="sunny-outline"></ion-icon>
@@ -47,7 +47,7 @@
       </div>
       <div
         class="category-btn"
-        [class.active]="activeCategory === 'Cold'"
+        [class.active]="selectedCategory === 'Cold'"
         (click)="onCategoryClick('Cold')"
       >
         <ion-icon name="snow-outline"></ion-icon>
@@ -75,6 +75,7 @@
       >
     </div>
 
+    <!-- Forecast banner always shows ACTUAL current weather -->
     <div
       class="forecast-banner"
       [style.background-image]="'url(' + forecastBackground + ')'"
@@ -82,12 +83,10 @@
       <div class="forecast-content">
         <span class="forecast-label">Today's Forecast</span>
         <div class="forecast-weather">
-          <ion-icon
-            [name]="activeCategory === 'Rainy' ? 'rainy-outline' : 'partly-sunny-outline'"
-          ></ion-icon>
-          <span class="temp">{{ weatherData.temperature }}</span>
+          <ion-icon [name]="forecastIcon"></ion-icon>
+          <span class="temp">{{ currentWeather.temperature }}</span>
         </div>
-        <span class="condition">{{ weatherData.condition }}</span>
+        <span class="condition">{{ currentWeather.condition }}</span>
       </div>
     </div>
   </div>

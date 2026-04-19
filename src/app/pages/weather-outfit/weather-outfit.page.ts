@@ -54,20 +54,24 @@ interface WeatherOutfitSuggestion {
   ],
 })
 export class WeatherOutfitPage implements OnInit {
-  // Weather properties
-  weatherData: any = {
+  // Current actual weather properties (never changes with category clicks)
+  currentWeather: any = {
     temperature: '--',
     condition: 'Loading...',
     icon: 'cloudy-outline',
     city: 'Davao de Oro',
     feelsLike: '--',
+    category: 'Sunny',
   };
 
   isLoading: boolean = true;
   weatherError: string = '';
-  activeCategory: string = 'Sunny';
+
+  // Selected category for outfit browsing (can be different from actual weather)
+  selectedCategory: string = 'Sunny';
   forecastBackground: string =
     '../../../assets/homepage/forcast/SunnyForcast.png';
+  forecastIcon: string = 'partly-sunny-outline';
 
   // Current outfit suggestion
   currentOutfit: OutfitItem[] = [];
@@ -169,12 +173,19 @@ export class WeatherOutfitPage implements OnInit {
     },
   };
 
-  // Background images for different weather conditions
+  // Background images and icons for different weather conditions
   private forecastBackgrounds: { [key: string]: string } = {
     Sunny: '../../../assets/homepage/forcast/SunnyForcast.png',
-    Hot: '../../../assets/homepage/forcast/SunnyForcast.png',
-    Rainy: '../../../assets/homepage/forcast/RainyForcast.png',
-    Cold: '../../../assets/homepage/forcast/CloudyForcast.png',
+    Hot: '../../../assets/homepage/forcast/HotForcast.png',
+    Rainy: '../../../assets/homepage/forcast/RainForcast.png',
+    Cold: '../../../assets/homepage/forcast/coldForcast.png',
+  };
+
+  private forecastIcons: { [key: string]: string } = {
+    Sunny: 'partly-sunny-outline',
+    Hot: 'sunny-outline',
+    Rainy: 'rainy-outline',
+    Cold: 'cloudy-outline',
   };
 
   constructor(private router: Router) {
@@ -264,32 +275,30 @@ export class WeatherOutfitPage implements OnInit {
       condition,
     );
 
-    this.weatherData = {
+    // Set current weather (this never changes with category clicks)
+    this.currentWeather = {
       temperature: `${temperature}°C`,
       condition: weatherCategory,
       feelsLike: `Feels like ${feelsLike}°C`,
       city: cityName,
+      category: weatherCategory,
     };
 
-    // Set active category based on current weather
-    this.activeCategory = weatherCategory;
+    // Set selected category to match current weather initially
+    this.selectedCategory = weatherCategory;
 
-    // Update forecast background
-    this.updateForecastBackground(weatherCategory, temperature);
+    // Update forecast banner (based on actual weather only)
+    this.updateForecastBanner(weatherCategory);
 
     // Load outfit suggestions for current weather
     this.loadOutfitForCategory(weatherCategory);
   }
 
-  // Update forecast background based on weather
-  updateForecastBackground(category: string, temperature: number) {
-    if (category === 'Rainy') {
-      this.forecastBackground = this.forecastBackgrounds['Rainy'];
-    } else if (category === 'Cold') {
-      this.forecastBackground = this.forecastBackgrounds['Cold'];
-    } else {
-      this.forecastBackground = this.forecastBackgrounds['Sunny'];
-    }
+  // Update forecast banner based on actual weather
+  updateForecastBanner(category: string) {
+    this.forecastBackground =
+      this.forecastBackgrounds[category] || this.forecastBackgrounds['Sunny'];
+    this.forecastIcon = this.forecastIcons[category] || 'partly-sunny-outline';
   }
 
   // Load outfit for selected category
@@ -304,19 +313,9 @@ export class WeatherOutfitPage implements OnInit {
     this.currentOutfit = suggestion.items;
   }
 
-  // Handle category button click
+  // Handle category button click - only changes outfit display, NOT weather forecast
   onCategoryClick(category: string) {
-    this.activeCategory = category;
-
-    // Update forecast background based on selected category
-    if (category === 'Rainy') {
-      this.forecastBackground = this.forecastBackgrounds['Rainy'];
-    } else if (category === 'Cold') {
-      this.forecastBackground = this.forecastBackgrounds['Cold'];
-    } else {
-      this.forecastBackground = this.forecastBackgrounds['Sunny'];
-    }
-
+    this.selectedCategory = category;
     this.loadOutfitForCategory(category);
   }
 
@@ -329,15 +328,17 @@ export class WeatherOutfitPage implements OnInit {
 
   // Fallback mock data if API fails
   setMockWeatherData() {
-    this.weatherData = {
+    this.currentWeather = {
       temperature: '28°C',
       condition: 'Sunny',
       feelsLike: 'Feels like 30°C',
       city: 'Davao de Oro',
+      category: 'Sunny',
     };
 
-    this.activeCategory = 'Sunny';
+    this.selectedCategory = 'Sunny';
     this.forecastBackground = this.forecastBackgrounds['Sunny'];
+    this.forecastIcon = 'partly-sunny-outline';
     this.loadOutfitForCategory('Sunny');
   }
 
