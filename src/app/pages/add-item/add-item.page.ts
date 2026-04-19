@@ -37,9 +37,8 @@ export class AddItemPage implements OnInit {
   // Available options
   categories = [
     'Tops',
-    'Bottoms',
-    'Dresses',
-    'Outerwear',
+    'Bottom',
+    'Layer',
     'Shoes',
     'Accessories',
   ];
@@ -55,7 +54,7 @@ export class AddItemPage implements OnInit {
     'Pink',
     'Purple',
   ];
-  seasons = ['All Season', 'Summer', 'Winter', 'Spring', 'Fall'];
+  seasons = ['Hot', 'Sunny', 'Cold', 'Rainy'];
 
   // Camera background image
   cameraBackground = '../../../assets/cameraClosetly2.png';

@@ -64,21 +64,7 @@
         </div>
       </div>
 
-      <div class="input-group">
-        <label>Color:</label>
-        <div class="select-wrapper">
-          <select [(ngModel)]="formData.color">
-            <option *ngFor="let color of colors" [value]="color.toLowerCase()">
-              {{ color }}
-            </option>
-          </select>
-          <ion-icon
-            name="chevron-down-outline"
-            class="dropdown-icon"
-          ></ion-icon>
-        </div>
-      </div>
-
+     
       <div class="input-group">
         <label>Season:</label>
         <div class="select-wrapper">
