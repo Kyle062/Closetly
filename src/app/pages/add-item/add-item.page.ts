@@ -57,6 +57,9 @@ export class AddItemPage implements OnInit {
   ];
   seasons = ['All Season', 'Summer', 'Winter', 'Spring', 'Fall'];
 
+  // Camera background image
+  cameraBackground = '../../../assets/cameraClosetly2.png';
+
   constructor(
     private router: Router,
     private alertController: AlertController,
@@ -79,17 +82,49 @@ export class AddItemPage implements OnInit {
   }
 
   // Take photo using device camera
-  takePhoto() {
-    console.log('Taking photo...');
-    // Implement camera functionality
-    // You can use Capacitor Camera plugin here
+  async takePhoto() {
+    const alert = await this.alertController.create({
+      header: 'Photo Taken!',
+      message: 'Your photo has been captured successfully.',
+      mode: 'ios',
+      cssClass: 'success-pill-alert',
+      buttons: [
+        {
+          text: 'Continue',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            console.log('Photo taken');
+            // Implement camera functionality here
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+    this.addSuccessIcon();
   }
 
   // Upload image from gallery
-  uploadFromGallery() {
-    console.log('Uploading from gallery...');
-    // Implement gallery picker functionality
-    // You can use Capacitor Filesystem or Camera plugin here
+  async uploadFromGallery() {
+    const alert = await this.alertController.create({
+      header: 'Upload Complete!',
+      message: 'Your photo has been uploaded from gallery successfully.',
+      mode: 'ios',
+      cssClass: 'success-pill-alert',
+      buttons: [
+        {
+          text: 'Continue',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            console.log('Photo uploaded from gallery');
+            // Implement gallery picker functionality here
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+    this.addSuccessIcon();
   }
 
   // Add item to wardrobe
@@ -98,7 +133,7 @@ export class AddItemPage implements OnInit {
       header: 'Item Added!',
       message: 'Your item has been successfully added to your wardrobe.',
       mode: 'ios',
-      cssClass: 'modern-pill-alert',
+      cssClass: 'success-pill-alert',
       buttons: [
         {
           text: 'Great',
@@ -114,21 +149,24 @@ export class AddItemPage implements OnInit {
     });
 
     await alert.present();
+    this.addSuccessIcon();
+  }
 
-    // Add custom icon to the alert
+  // Helper method to add success icon to alert
+  private addSuccessIcon() {
     setTimeout(() => {
-      const alertElement = document.querySelector('.modern-pill-alert');
+      const alertElement = document.querySelector('.success-pill-alert');
       if (alertElement) {
         const wrapper = alertElement.querySelector('.alert-wrapper');
         if (wrapper) {
           const iconContainer = document.createElement('div');
           iconContainer.style.cssText = `
             position: absolute;
-            top: -30px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, #4CAF50, #45a049);
             border-radius: 30px;
             display: flex;

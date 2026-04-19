@@ -203,11 +203,11 @@ export class RandomOutfitPage implements OnInit {
           const iconContainer = document.createElement('div');
           iconContainer.style.cssText = `
             position: absolute;
-            top: -30px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 70px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, #4CAF50, #45a049);
             border-radius: 30px;
             display: flex;

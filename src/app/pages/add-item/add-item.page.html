@@ -20,7 +20,10 @@
     </div>
 
     <div class="camera-container">
-      <div class="camera-placeholder">
+      <div
+        class="camera-placeholder"
+        [style.background-image]="'url(' + cameraBackground + ')'"
+      >
         <div class="dark-tint"></div>
 
         <div class="viewfinder top-left"></div>

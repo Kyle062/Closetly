@@ -68,7 +68,9 @@ ion-content.add-item-page::part(background) {
       height: 240px;
       border-radius: 25px;
       overflow: hidden;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 
       .dark-tint {
@@ -266,7 +268,8 @@ ion-content.add-item-page::part(background) {
 
 /* Modern Pill Alert Styles */
 :host {
-  .modern-pill-alert {
+  .modern-pill-alert,
+  .success-pill-alert {
     --backdrop-opacity: 0.6;
 
     .alert-wrapper {
@@ -275,6 +278,7 @@ ion-content.add-item-page::part(background) {
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
       padding: 0 !important;
       max-width: 320px !important;
+      height: 320px !important;
       animation: alertPopIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
     }
 
