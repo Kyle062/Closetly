@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BottomNavComponent } from '../../components/bottom-nav/bottom-nav.component';
 import {
   IonContent,
   IonIcon,
@@ -10,6 +11,7 @@ import {
 import { addIcons } from 'ionicons';
 import {
   arrowBackOutline,
+  
   optionsOutline,
   searchOutline,
   heart,
@@ -29,7 +31,7 @@ interface WardrobeItem {
   templateUrl: './wardrobe.page.html',
   styleUrls: ['./wardrobe.page.scss'],
   standalone: true,
-  imports: [IonContent, IonIcon, CommonModule, FormsModule],
+  imports: [IonContent, IonIcon, CommonModule, FormsModule,BottomNavComponent],
 })
 export class WardrobePage implements OnInit {
   searchQuery: string = '';
