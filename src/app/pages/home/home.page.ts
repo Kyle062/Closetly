@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; // Add this import
 import { BottomNavComponent } from '../../components/bottom-nav/bottom-nav.component';
 import { CommonModule } from '@angular/common';
 import {
@@ -242,7 +243,8 @@ export class HomePage implements OnInit {
     },
   };
 
-  constructor() {
+  constructor(private router: Router) {
+    // Add Router to constructor
     addIcons({
       searchOutline,
       scanOutline,
@@ -261,6 +263,23 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getWeatherData();
+  }
+
+  // Navigation methods for Quick Actions
+  navigateToWeatherOutfit() {
+    this.router.navigate(['/weather-outfit']);
+  }
+
+  navigateToRandomOutfit() {
+    this.router.navigate(['/random-outfit']);
+  }
+
+  navigateToSearch() {
+    this.router.navigate(['/search']);
+  }
+
+  navigateToAddItem() {
+    this.router.navigate(['/add-item']);
   }
 
   // Get dynamic styles for each clothing item
