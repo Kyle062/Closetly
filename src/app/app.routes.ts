@@ -51,4 +51,20 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/profile/profile.page').then((m) => m.ProfilePage),
   },
+  {
+    path: 'weather-outfit',
+    loadComponent: () => import('./pages/weather-outfit/weather-outfit.page').then( m => m.WeatherOutfitPage)
+  },
+  {
+    path: 'random-outfit',
+    loadComponent: () => import('./pages/random-outfit/random-outfit.page').then( m => m.RandomOutfitPage)
+  },
+  {
+    path: 'search',
+    loadComponent: () => import('./pages/search/search.page').then( m => m.SearchPage)
+  },
+  {
+    path: 'add-item',
+    loadComponent: () => import('./pages/add-item/add-item.page').then( m => m.AddItemPage)
+  },
 ];

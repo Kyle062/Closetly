@@ -93,11 +93,13 @@ export class HomePage implements OnInit {
 
   // Working API key for OpenWeatherMap
   private apiKey = '35efb00415742337258dd1ba28238572';
-  private city = 'Davao de Oro'; // CHANGED: Updated to Davao de Oro
-  private country = 'PH';
-  private apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${this.city},${this.country}&appid=${this.apiKey}&units=metric`;
 
-  // Outfit suggestions with individual image dimensions
+  // Using Compostela Valley coordinates
+  private lat = 7.68333;
+  private lon = 126.11667;
+
+  private apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.lon}&appid=${this.apiKey}&units=metric`;
+
   private outfitSuggestions = {
     Sunny: {
       title: '☀️ Sunny Day Outfit',
@@ -275,28 +277,28 @@ export class HomePage implements OnInit {
     return cloth.customClass || '';
   }
 
-  // Fetch weather data from API for Davao de Oro
+  // Fetch weather data from API using coordinates
   getWeatherData() {
     this.isLoading = true;
+    this.weatherError = '';
 
     fetch(this.apiUrl)
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Weather data unavailable');
+          throw new Error(`Weather data unavailable (HTTP ${response.status})`);
         }
         return response.json();
       })
       .then((data) => {
-        console.log('Weather API Response for Davao de Oro:', data);
+        console.log('Weather API Response:', data);
         this.updateWeatherUI(data);
         this.updateOutfitSuggestion(data.main.temp, data.weather[0].main);
         this.isLoading = false;
       })
       .catch((error) => {
         console.error('Weather API Error:', error);
-        this.weatherError = 'Unable to load weather';
+        this.weatherError = 'Unable to load weather data';
         this.isLoading = false;
-        // Fallback to mock data if API fails
         this.setMockWeatherData();
         this.updateOutfitSuggestion(28, 'Clear');
       });
@@ -327,7 +329,12 @@ export class HomePage implements OnInit {
     const temperature = Math.round(data.main.temp);
     const feelsLike = Math.round(data.main.feels_like);
     const condition = data.weather[0].main;
-    const city = data.name;
+
+    // Try to get a more specific location name if available
+    let cityName = data.name;
+    if (cityName === '' || !cityName) {
+      cityName = 'Davao de Oro';
+    }
 
     // Get weather category for icon
     const weatherCategory = this.determineWeatherCategory(
@@ -345,7 +352,7 @@ export class HomePage implements OnInit {
       temperature: `${temperature}°C`,
       condition: weatherCategory,
       feelsLike: `Feels like ${feelsLike}°C`,
-      city: city,
+      city: cityName,
       icon: iconMap[weatherCategory] || 'partly-sunny-outline',
     };
   }
