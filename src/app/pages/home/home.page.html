@@ -84,25 +84,28 @@
 
     <h4 class="section-title">Quick Actions</h4>
     <div class="quick-actions-grid">
-      <div class="action-card weather-action">
+      <div
+        class="action-card weather-action"
+        (click)="navigateToWeatherOutfit()"
+      >
         <div class="overlay-text">
           <ion-icon name="sunny-outline"></ion-icon>
           <span>Weather Outfit</span>
         </div>
       </div>
-      <div class="action-card random-action">
+      <div class="action-card random-action" (click)="navigateToRandomOutfit()">
         <div class="overlay-text">
           <ion-icon name="shirt-outline"></ion-icon>
           <span>Random Outfit</span>
         </div>
       </div>
-      <div class="action-card search-action">
+      <div class="action-card search-action" (click)="navigateToSearch()">
         <div class="overlay-text">
           <ion-icon name="search-outline"></ion-icon>
           <span>Search</span>
         </div>
       </div>
-      <div class="action-card add-action">
+      <div class="action-card add-action" (click)="navigateToAddItem()">
         <div class="overlay-text">
           <ion-icon name="add-outline"></ion-icon>
           <span>Add Item</span>
