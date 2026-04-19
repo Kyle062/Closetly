@@ -208,7 +208,7 @@ export class RandomOutfitPage implements OnInit {
             left: 50%;
             transform: translateX(-50%);
             width: 60px;
-            height: 60px;
+            height: 70px;
             background: linear-gradient(135deg, #4CAF50, #45a049);
             border-radius: 30px;
             display: flex;

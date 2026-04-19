@@ -1,3 +1,84 @@
+/* Modern Pill Alert Styles */
+:host {
+  .modern-pill-alert {
+    --backdrop-opacity: 0.6;
+    --height: 200px;
+
+    .alert-wrapper {
+      border-radius: 30px !important;
+      background: #ffffff !important;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+      padding: 0 !important;
+      max-width: 320px !important;
+      animation: alertPopIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    }
+
+    .alert-head {
+      padding: 50px 20px 15px !important;
+      text-align: center !important;
+
+      h2 {
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        color: #1a1a1a !important;
+        margin-bottom: 8px !important;
+        letter-spacing: -0.5px !important;
+      }
+    }
+
+    .alert-message {
+      padding: 0 20px 20px !important;
+      text-align: center !important;
+      color: #666 !important;
+      font-size: 15px !important;
+      font-weight: 400 !important;
+      line-height: 1.4 !important;
+    }
+
+    .alert-button-group {
+      padding: 0 !important;
+      border-top: 1px solid #f0f0f0 !important;
+
+      .alert-button {
+        margin: 0 !important;
+        padding: 16px !important;
+        border-radius: 0 0 30px 30px !important;
+        background: transparent !important;
+        color: #1a1a1a !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        text-transform: none !important;
+        transition: all 0.2s ease !important;
+
+        &:hover {
+          background: #f8f8f8 !important;
+        }
+
+        &:active {
+          background: #f0f0f0 !important;
+          transform: scale(0.98) !important;
+        }
+
+        .alert-button-inner {
+          justify-content: center !important;
+        }
+      }
+    }
+  }
+}
+
+// Alert pop-in animation
+@keyframes alertPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
 /* Page Background */
 ion-content.random-page::part(background) {
   background: url("../../../assets/splash4/BackgroundImageClosetly.png")
