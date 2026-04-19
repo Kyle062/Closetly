@@ -51,22 +51,22 @@ export class RandomOutfitPage implements OnInit {
   private clothingItems: { [key: string]: OutfitItem[] } = {
     tops: [
       {
-        image: '../../../assets/homepage/random/top1.png',
+        image: '../../../assets/random-outfit/top/top1.png',
         title: 'White T-Shirt',
         category: 'Top',
       },
       {
-        image: '../../../assets/homepage/random/top2.png',
+        image: '../../../assets/random-outfit/top/top2.png',
         title: 'Black Tank Top',
         category: 'Top',
       },
       {
-        image: '../../../assets/homepage/random/top3.png',
+        image: '../../../assets/random-outfit/top/top3.png',
         title: 'Striped Shirt',
         category: 'Top',
       },
       {
-        image: '../../../assets/homepage/random/top4.png',
+        image: '../../../assets/random-outfit/top/top4.png',
         title: 'Hoodie',
         category: 'Top',
       },
@@ -187,7 +187,6 @@ export class RandomOutfitPage implements OnInit {
           cssClass: 'alert-button-confirm',
           handler: () => {
             console.log('Random outfit saved:', this.currentOutfit);
-            // Add your save logic here
           },
         },
       ],
