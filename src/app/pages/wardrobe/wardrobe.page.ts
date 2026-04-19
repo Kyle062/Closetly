@@ -41,7 +41,7 @@ export class WardrobePage implements OnInit {
     'Tops',
     'Bottoms',
     'Layers',
-    'Shoes',
+    'Shoes/Sandals',
     'Accessories',
   ];
 
@@ -72,7 +72,7 @@ export class WardrobePage implements OnInit {
       id: 4,
       image: '../../../assets/homepage/sunny/shoes.png',
       name: 'Sandals',
-      category: 'Shoes',
+      category: 'Shoes/Sandals',
       isFavorite: false,
     },
     {
@@ -109,7 +109,7 @@ export class WardrobePage implements OnInit {
       id: 9,
       image: '../../../assets/homepage/hot/shoes.png',
       name: 'Flip Flops',
-      category: 'Shoes',
+      category: 'Shoes/Sandals',
       isFavorite: false,
     },
     {
@@ -132,7 +132,7 @@ export class WardrobePage implements OnInit {
       id: 12,
       image: '../../../assets/homepage/rainy/Closetlycloth8.png',
       name: 'Waterproof Boots',
-      category: 'Shoes',
+      category: 'Shoes/Sandals',
       isFavorite: false,
     },
     {
@@ -176,7 +176,7 @@ export class WardrobePage implements OnInit {
       id: 18,
       image: '../../../assets/homepage/cold/Closetlycloth12.png',
       name: 'Closed Shoes',
-      category: 'Shoes',
+      category: 'Shoes/Sandals',
       isFavorite: true,
     },
     {
