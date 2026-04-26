@@ -144,11 +144,6 @@ export class RandomOutfitPage implements OnInit {
         category: 'Extra',
       },
       {
-        image: '../../../assets/homepage/hot/accessory.png',
-        title: 'Sunglasses',
-        category: 'Extra',
-      },
-      {
         image: '../../../assets/homepage/rainy/Waterproof bag.png',
         title: 'Bag',
         category: 'Extra',

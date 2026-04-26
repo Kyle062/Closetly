@@ -119,31 +119,25 @@ export class LoginPage implements OnInit {
   // Method to handle login with validation
   onLogin() {
     this.loginError = '';
-
     // Check if fields are empty
     if (!this.email.trim()) {
       this.showAlert('Please enter username/email', 'error');
       return;
     }
-
     if (!this.password.trim()) {
       this.showAlert('Please enter password', 'error');
       return;
     }
-
     // Get users from localStorage
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-
     // Find user by username or email
     const user = users.find(
       (u: any) => u.username === this.email || u.email === this.email,
     );
-
     // Check if user exists and password matches
     if (user && user.password === this.password) {
       // Successful login
       console.log('Login successful for:', user.username);
-
       // Store current user session
       if (this.rememberMe) {
         localStorage.setItem(

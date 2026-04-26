@@ -25,7 +25,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./signup/signup.page').then((m) => m.SignupPage),
   },
-  // The pages are now top-level routes without the "/tabs/" prefix
   {
     path: 'home',
     loadComponent: () =>

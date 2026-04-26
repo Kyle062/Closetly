@@ -49,37 +49,38 @@
       <div class="input-group">
         <label>Categories:</label>
         <div class="select-wrapper">
-          <select [(ngModel)]="formData.category">
-            <option
-              *ngFor="let category of categories"
+          <ion-select 
+            [(ngModel)]="formData.category"
+            interface="popover"
+            placeholder="Select category"
+            class="custom-select"
+          >
+            <ion-select-option 
+              *ngFor="let category of categories" 
               [value]="category.toLowerCase()"
             >
               {{ category }}
-            </option>
-          </select>
-          <ion-icon
-            name="chevron-down-outline"
-            class="dropdown-icon"
-          ></ion-icon>
+            </ion-select-option>
+          </ion-select>
         </div>
       </div>
 
-     
       <div class="input-group">
         <label>Season:</label>
         <div class="select-wrapper">
-          <select [(ngModel)]="formData.season">
-            <option
-              *ngFor="let season of seasons"
+          <ion-select 
+            [(ngModel)]="formData.season"
+            interface="popover"
+            placeholder="Select season"
+            class="custom-select"
+          >
+            <ion-select-option 
+              *ngFor="let season of seasons" 
               [value]="season.toLowerCase().replace(' ', '-')"
             >
               {{ season }}
-            </option>
-          </select>
-          <ion-icon
-            name="chevron-down-outline"
-            class="dropdown-icon"
-          ></ion-icon>
+            </ion-select-option>
+          </ion-select>
         </div>
       </div>
 

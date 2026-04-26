@@ -6,6 +6,8 @@ import {
   IonContent,
   IonIcon,
   IonButton,
+  IonSelect,
+  IonSelectOption,
   AlertController,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -23,7 +25,15 @@ import {
   templateUrl: './add-item.page.html',
   styleUrls: ['./add-item.page.scss'],
   standalone: true,
-  imports: [IonContent, IonIcon, IonButton, CommonModule, FormsModule],
+  imports: [
+    IonContent,
+    IonIcon,
+    IonButton,
+    IonSelect,
+    IonSelectOption,
+    CommonModule,
+    FormsModule,
+  ],
 })
 export class AddItemPage implements OnInit {
   // Form data

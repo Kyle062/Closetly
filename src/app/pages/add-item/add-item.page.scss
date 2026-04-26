@@ -199,62 +199,50 @@ ion-content.add-item-page::part(background) {
       display: flex;
       flex-direction: column;
       align-items: center;
-
+      
       label {
         display: block;
         font-size: 14px;
         font-weight: 700;
-        color: #111;
+        color: #222222;
         margin-bottom: 10px;
-        width: 85%;
+        width: 100%;
       }
 
       /* Custom Select Design */
       .select-wrapper {
         position: relative;
-        width: 85%;
+        width: 100%;
 
-        select {
+        .custom-select {
+          --background: #f8f8f8;
+          --border: 1.5px solid #e8e8e8;
+          --border-radius: 16px;
+          --padding-start: 20px;
+          --padding-end: 20px;
+          --padding-top: 16px;
+          --padding-bottom: 16px;
+          --color: #1a1a1a;
+          --placeholder-color: #1a1a1a;
+          --font-weight: 500;
+          --font-size: 15px;
+          
           width: 100%;
-          appearance: none;
-          background-color: #f8f8f8;
-          border: 1.5px solid #e8e8e8;
-          border-radius: 16px;
-          padding: 16px 20px;
-          font-size: 15px;
-          color: #1a1a1a;
-          font-weight: 500;
-          outline: none;
-          cursor: pointer;
-          transition: all 0.25s ease;
-          font-family: inherit;
-          line-height: 1.4;
-
+          
+          &::part(native) {
+            font-weight: 500;
+            font-size: 15px;
+          }
+          
           &:hover {
-            background-color: #f3f3f3;
-            border-color: #d0d0d0;
+            --background: #f3f3f3;
+            --border: 1.5px solid #d0d0d0;
           }
-
+          
           &:focus {
-            border-color: #0084ff;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(0, 132, 255, 0.1);
+            --border: 1.5px solid #0084ff;
+            --background: white;
           }
-        }
-
-        .dropdown-icon {
-          position: absolute;
-          right: 20px;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 20px;
-          color: #666;
-          pointer-events: none;
-          transition: color 0.2s ease;
-        }
-
-        &:hover .dropdown-icon {
-          color: #333;
         }
       }
     }
@@ -281,17 +269,6 @@ ion-content.add-item-page::part(background) {
       }
     }
   }
-}
-
-/* Style for select dropdown options panel */
-select option {
-  padding: 16px 20px !important;
-  background: white !important;
-  color: #1a1a1a !important;
-  font-size: 15px !important;
-  font-weight: 500 !important;
-  min-height: 50px !important;
-  line-height: 1.4 !important;
 }
 
 /* Modern Pill Alert Styles */
