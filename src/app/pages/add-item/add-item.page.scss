@@ -215,7 +215,8 @@ ion-content.add-item-page::part(background) {
         width: 100%;
 
         .custom-select {
-          --background: #f8f8f8;
+          color: black;
+          --background: #fcfcfc;
           --border: 1.5px solid #e8e8e8;
           --border-radius: 16px;
           --padding-start: 20px;
@@ -223,7 +224,7 @@ ion-content.add-item-page::part(background) {
           --padding-top: 16px;
           --padding-bottom: 16px;
           --color: #1a1a1a;
-          --placeholder-color: #1a1a1a;
+          --placeholder-color:black;
           --font-weight: 500;
           --font-size: 15px;
           
