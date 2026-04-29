@@ -66,4 +66,20 @@ export const routes: Routes = [
     path: 'add-item',
     loadComponent: () => import('./pages/add-item/add-item.page').then( m => m.AddItemPage)
   },
+  {
+    path: 'outfit-calendar',
+    loadComponent: () => import('./pages/outfit-calendar/outfit-calendar.page').then( m => m.OutfitCalendarPage)
+  },
+  {
+    path: 'packing-list',
+    loadComponent: () => import('./pages/packing-list/packing-list.page').then( m => m.PackingListPage)
+  },
+  {
+    path: 'settings',
+    loadComponent: () => import('./pages/settings/settings.page').then( m => m.SettingsPage)
+  },
+  {
+    path: 'about-us',
+    loadComponent: () => import('./pages/about-us/about-us.page').then( m => m.AboutUsPage)
+  },
 ];

@@ -1,23 +1,28 @@
-<ion-content [fullscreen]="true" class="profile-bg">
-  
-  <div class="top-bar">
-    <div class="logo-placeholder">
-      <img src="assets/icon/logo-small.png" alt="Logo" />
-    </div>
-    <ion-icon name="menu-outline" class="menu-trigger"></ion-icon>
+<ion-content [fullscreen]="true" class="profile-page">
+  <div class="top-nav">
+    <img
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
+    />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
   </div>
 
   <div class="profile-header">
     <div class="avatar-wrapper">
-      <img src="placeholder-user.jpg" alt="User Avatar" class="avatar-img" />
+      <img
+        src="../../../assets/homepage/profileClosetly.png"
+        alt="User Avatar"
+        class="avatar-img"
+      />
       <div class="edit-icon-badge">
         <ion-icon name="pencil-outline"></ion-icon>
       </div>
     </div>
-    
+
     <h1 class="user-name">Kyle Bernard Trimidal</h1>
     <p class="user-role">User</p>
-    
+
     <div class="user-contact">
       <span>KyleAlab79@gmail.com</span>
       <div class="id-wrapper">
@@ -27,8 +32,17 @@
     </div>
   </div>
 
-  <div class="glass-container">
-    
+  <div class="bottom-sheet">
+    <div class="header-row">
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
+      <h1 class="page-title">My Profile</h1>
+      <div class="spacer"></div>
+    </div>
+
     <div class="stats-card">
       <div class="stat-item">
         <ion-icon name="briefcase-outline"></ion-icon>
@@ -38,31 +52,35 @@
       <div class="stat-item">
         <ion-icon name="shirt-outline"></ion-icon>
         <div class="stat-value">8</div>
-        <div class="stat-label">Favorite Outfits</div>
+        <div class="stat-label">Outfits</div>
       </div>
       <div class="stat-item">
         <ion-icon name="bookmark-outline"></ion-icon>
         <div class="stat-value">3</div>
-        <div class="stat-label">Day Streak</div>
+        <div class="stat-label">Favorites</div>
       </div>
     </div>
 
     <div class="menu-list-wrapper">
-      <div class="menu-item ion-activatable ripple-parent" *ngFor="let item of menuItems">
+      <div
+        class="menu-item"
+        *ngFor="let item of menuItems"
+        (click)="navigateTo(item.route)"
+      >
         <div class="menu-prefix">
           <ion-icon [name]="item.icon" [style.color]="item.color"></ion-icon>
           <span class="menu-label">{{ item.label }}</span>
         </div>
         <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
-        <ion-ripple-effect></ion-ripple-effect>
       </div>
     </div>
 
-    <button class="logout-btn ion-activatable ripple-parent" (click)="logout()">
+    <button class="logout-btn" (click)="logout()">
       <ion-icon name="log-out-outline"></ion-icon>
       <span>LogOut</span>
-      <ion-ripple-effect></ion-ripple-effect>
     </button>
 
+    <div class="bottom-spacer"></div>
   </div>
 </ion-content>
+<app-bottom-nav></app-bottom-nav>
