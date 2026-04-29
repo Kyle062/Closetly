@@ -1,61 +1,76 @@
-<ion-content [fullscreen]="true" class="transparent-content">
-  <!-- Background Image -->
-  <img class="bg-image" src="https://via.placeholder.com/1080x1920/D3C5B5/ffffff?text=Background+Image" alt="Background" />
+<ion-content [fullscreen]="true" class="settings-page">
+  <div class="top-nav">
+    <img
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
+    />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
+  </div>
 
-  <!-- Glassmorphism Container -->
-  <div class="glass-container">
-    
-    <!-- Header -->
-    <div class="header">
-      <img src="https://via.placeholder.com/24x24/transparent/000000?text=<-" alt="Back" class="back-btn" />
-      <h1 class="title">Settings</h1>
+  <div class="bottom-sheet">
+    <div class="header-row">
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
+      <h1 class="page-title">Settings</h1>
+      <div class="spacer"></div>
     </div>
 
     <!-- Preferences Section -->
     <div class="section-label">Preferences</div>
     <div class="card-list">
-      
       <div class="list-item">
-        <img src="https://via.placeholder.com/24x24/transparent/000?text=Icon" alt="Notification" class="item-icon" />
+        <ion-icon name="notifications-outline" class="item-icon"></ion-icon>
         <span class="item-label">Notification</span>
-        <span class="item-value">Enabled</span>
-        <ion-toggle checked="true" class="custom-toggle"></ion-toggle>
+        <ion-toggle
+          [checked]="notificationEnabled"
+          (ionChange)="toggleNotification()"
+          class="custom-toggle"
+        ></ion-toggle>
       </div>
-      
+
       <div class="divider"></div>
-      
-      <div class="list-item">
-        <img src="https://via.placeholder.com/24x24/transparent/000?text=Icon" alt="Language" class="item-icon" />
+
+      <div class="list-item" (click)="openLanguageModal()">
+        <ion-icon name="language-outline" class="item-icon"></ion-icon>
         <span class="item-label">Language</span>
-        <span class="item-value">English</span>
-        <img src="https://via.placeholder.com/16x16/transparent/000?text=>" alt="Right" class="chevron-icon" />
+        <span class="item-value">{{ selectedLanguage }}</span>
+        <ion-icon
+          name="chevron-forward-outline"
+          class="chevron-icon"
+        ></ion-icon>
       </div>
 
       <div class="divider"></div>
 
-      <div class="list-item">
-        <img src="https://via.placeholder.com/24x24/transparent/000?text=Icon" alt="Theme" class="item-icon" />
+      <div class="list-item" (click)="openThemeModal()">
+        <ion-icon name="color-palette-outline" class="item-icon"></ion-icon>
         <span class="item-label">Theme</span>
-        <span class="item-value">Light</span>
-        <img src="https://via.placeholder.com/16x16/transparent/000?text=>" alt="Right" class="chevron-icon" />
+        <span class="item-value">{{ selectedTheme }}</span>
+        <ion-icon
+          name="chevron-forward-outline"
+          class="chevron-icon"
+        ></ion-icon>
       </div>
-
     </div>
 
     <!-- Account Information Section -->
     <div class="card-list info-card">
       <h2 class="card-title">Account Information</h2>
-      
+
       <div class="info-row">
         <span class="info-label">Account Created</span>
         <span class="info-value">January 15, 2026</span>
       </div>
-      
+
       <div class="info-row">
         <span class="info-label">Storage Used</span>
         <span class="info-value">24 MB / 1 GB</span>
       </div>
-      
+
       <div class="info-row">
         <span class="info-label">App Version</span>
         <span class="info-value">1.0.0</span>
@@ -63,7 +78,70 @@
     </div>
 
     <!-- Delete Account Button -->
-    <button class="delete-btn">Delete Account</button>
+    <button class="delete-btn" (click)="deleteAccount()">Delete Account</button>
 
+    <div class="bottom-spacer"></div>
   </div>
 </ion-content>
+<app-bottom-nav></app-bottom-nav>
+
+<!-- Language Modal -->
+<div
+  class="modal-overlay"
+  *ngIf="showLanguageModal"
+  (click)="closeLanguageModal()"
+>
+  <div class="modal-content center-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Select Language</h2>
+      <ion-icon name="close-outline" (click)="closeLanguageModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body">
+      <div
+        class="select-option"
+        *ngFor="let lang of languages"
+        [class.selected]="selectedLanguage === lang"
+        (click)="selectLanguage(lang)"
+      >
+        <span>{{ lang }}</span>
+        <ion-icon
+          [name]="selectedLanguage === lang ? 'radio-button-on-outline' : 'radio-button-off-outline'"
+          [class.selected-icon]="selectedLanguage === lang"
+        >
+        </ion-icon>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Theme Modal -->
+<div class="modal-overlay" *ngIf="showThemeModal" (click)="closeThemeModal()">
+  <div class="modal-content center-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Select Theme</h2>
+      <ion-icon name="close-outline" (click)="closeThemeModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body">
+      <div
+        class="select-option"
+        *ngFor="let theme of themes"
+        [class.selected]="selectedTheme === theme"
+        (click)="selectTheme(theme)"
+      >
+        <div class="theme-preview">
+          <ion-icon
+            [name]="theme === 'Light' ? 'sunny-outline' : 'moon-outline'"
+          ></ion-icon>
+        </div>
+        <span>{{ theme }}</span>
+        <ion-icon
+          [name]="selectedTheme === theme ? 'radio-button-on-outline' : 'radio-button-off-outline'"
+          [class.selected-icon]="selectedTheme === theme"
+        >
+        </ion-icon>
+      </div>
+    </div>
+  </div>
+</div>
