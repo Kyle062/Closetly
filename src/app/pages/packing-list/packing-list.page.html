@@ -1,16 +1,26 @@
-<ion-content [fullscreen]="true" class="transparent-bg">
-  <div class="background-image-container">
+<ion-content [fullscreen]="true" class="packing-page">
+  <div class="top-nav">
     <img
-      src="https://placehold.co/800x1600/e0e0e0/ffffff?text=Room+Background"
-      alt="Background"
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
     />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
   </div>
 
-  <div class="page-wrapper">
-    <div class="custom-header">
-      <ion-icon name="arrow-back-outline" class="icon-btn"></ion-icon>
+  <div class="bottom-sheet">
+    <div class="header-row">
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
       <h1 class="page-title">Packing List</h1>
-      <ion-icon name="add-circle-outline" class="icon-btn"></ion-icon>
+      <ion-icon
+        name="add-circle-outline"
+        class="add-trip-icon"
+        (click)="openNewTripModal()"
+      ></ion-icon>
     </div>
 
     <div class="glass-card" *ngFor="let list of packingLists">
@@ -19,7 +29,11 @@
           <ion-icon name="location-outline" class="loc-icon"></ion-icon>
           <h2>{{ list.destination }}</h2>
         </div>
-        <ion-icon name="trash-outline" class="trash-icon"></ion-icon>
+        <ion-icon
+          name="trash-outline"
+          class="trash-icon"
+          (click)="deleteTrip(list)"
+        ></ion-icon>
       </div>
 
       <div class="date-wrap">
@@ -61,10 +75,274 @@
         </div>
       </div>
 
-      <button class="add-btn">
+      <button class="add-btn" (click)="openAddItemModal(list)">
         <ion-icon name="add"></ion-icon>
         <span>Add Item</span>
       </button>
     </div>
+
+    <div class="empty-state" *ngIf="packingLists.length === 0">
+      <ion-icon name="briefcase-outline"></ion-icon>
+      <h3>No trips yet</h3>
+      <p>Create a new packing list</p>
+    </div>
+
+    <div class="bottom-spacer"></div>
   </div>
 </ion-content>
+<app-bottom-nav></app-bottom-nav>
+
+<!-- New Trip Modal -->
+<div
+  class="modal-overlay"
+  *ngIf="showNewTripModal"
+  (click)="closeNewTripModal()"
+>
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>New Trip</h2>
+      <ion-icon name="close-outline" (click)="closeNewTripModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Destination</label>
+        <input
+          type="text"
+          placeholder="e.g. Paris, France"
+          [(ngModel)]="newTrip.destination"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Dates</label>
+        <input
+          type="text"
+          placeholder="e.g. May 10-17, 2026"
+          [(ngModel)]="newTrip.dates"
+        />
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeNewTripModal()">Cancel</button>
+      <button
+        class="btn-save"
+        (click)="createTrip()"
+        [disabled]="!newTrip.destination.trim()"
+      >
+        Create
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Item Modal -->
+<div
+  class="modal-overlay"
+  *ngIf="showAddItemModal"
+  (click)="closeAddItemModal()"
+>
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Add Item to {{ selectedList?.destination }}</h2>
+      <ion-icon name="close-outline" (click)="closeAddItemModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Item Name</label>
+        <input
+          type="text"
+          placeholder="e.g. White Shirt"
+          [(ngModel)]="newItemName"
+        />
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeAddItemModal()">Cancel</button>
+      <button
+        class="btn-save"
+        (click)="addItemToList()"
+        [disabled]="!newItemName.trim()"
+      >
+        Add Item
+      </button>
+    </div>
+  </div>
+</div>
+<ion-content [fullscreen]="true" class="packing-page">
+  <div class="top-nav">
+    <img
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
+    />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
+  </div>
+
+  <div class="bottom-sheet">
+    <div class="header-row">
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
+      <h1 class="page-title">Packing List</h1>
+      <ion-icon
+        name="add-circle-outline"
+        class="add-trip-icon"
+        (click)="openNewTripModal()"
+      ></ion-icon>
+    </div>
+
+    <div class="glass-card" *ngFor="let list of packingLists">
+      <div class="card-header">
+        <div class="destination-wrap">
+          <ion-icon name="location-outline" class="loc-icon"></ion-icon>
+          <h2>{{ list.destination }}</h2>
+        </div>
+        <ion-icon
+          name="trash-outline"
+          class="trash-icon"
+          (click)="deleteTrip(list)"
+        ></ion-icon>
+      </div>
+
+      <div class="date-wrap">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>{{ list.dates }}</span>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-text">
+          <span class="label">Packing Progress</span>
+          <span class="ratio"
+            >{{ getPackedCount(list) }}/{{ list.items.length }}</span
+          >
+        </div>
+        <div class="progress-track">
+          <div
+            class="progress-fill"
+            [style.width.%]="getProgressPercent(list)"
+          ></div>
+        </div>
+      </div>
+
+      <div class="items-container">
+        <div
+          class="item-row"
+          *ngFor="let item of list.items"
+          (click)="toggleItem(item)"
+        >
+          <ion-icon
+            [name]="item.checked ? 'checkbox' : 'square-outline'"
+            [class.checked-icon]="item.checked"
+            [class.unchecked-icon]="!item.checked"
+          >
+          </ion-icon>
+
+          <span class="item-name" [class.checked-text]="item.checked">
+            {{ item.name }}
+          </span>
+        </div>
+      </div>
+
+      <button class="add-btn" (click)="openAddItemModal(list)">
+        <ion-icon name="add"></ion-icon>
+        <span>Add Item</span>
+      </button>
+    </div>
+
+    <div class="empty-state" *ngIf="packingLists.length === 0">
+      <ion-icon name="briefcase-outline"></ion-icon>
+      <h3>No trips yet</h3>
+      <p>Create a new packing list</p>
+    </div>
+
+    <div class="bottom-spacer"></div>
+  </div>
+</ion-content>
+<app-bottom-nav></app-bottom-nav>
+
+<!-- New Trip Modal -->
+<div
+  class="modal-overlay"
+  *ngIf="showNewTripModal"
+  (click)="closeNewTripModal()"
+>
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>New Trip</h2>
+      <ion-icon name="close-outline" (click)="closeNewTripModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Destination</label>
+        <input
+          type="text"
+          placeholder="e.g. Paris, France"
+          [(ngModel)]="newTrip.destination"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Dates</label>
+        <input
+          type="text"
+          placeholder="e.g. May 10-17, 2026"
+          [(ngModel)]="newTrip.dates"
+        />
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeNewTripModal()">Cancel</button>
+      <button
+        class="btn-save"
+        (click)="createTrip()"
+        [disabled]="!newTrip.destination.trim()"
+      >
+        Create
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Item Modal -->
+<div
+  class="modal-overlay"
+  *ngIf="showAddItemModal"
+  (click)="closeAddItemModal()"
+>
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Add Item to {{ selectedList?.destination }}</h2>
+      <ion-icon name="close-outline" (click)="closeAddItemModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Item Name</label>
+        <input
+          type="text"
+          placeholder="e.g. White Shirt"
+          [(ngModel)]="newItemName"
+        />
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeAddItemModal()">Cancel</button>
+      <button
+        class="btn-save"
+        (click)="addItemToList()"
+        [disabled]="!newItemName.trim()"
+      >
+        Add Item
+      </button>
+    </div>
+  </div>
+</div>

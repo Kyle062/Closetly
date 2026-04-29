@@ -59,7 +59,7 @@ export class ProfilePage implements OnInit {
       label: 'Wishlist',
       icon: 'heart-outline',
       color: '#ff5e5e',
-      route: '/outfit',
+      route: '/wishlist',
     },
     {
       label: 'Settings',

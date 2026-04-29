@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BottomNavComponent } from '../../components/bottom-nav/bottom-nav.component';
-import { IonContent, IonIcon, AlertController } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonIcon,
+  AlertController,
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   arrowBackOutline,
@@ -74,7 +78,10 @@ export class PackingListPage implements OnInit {
     },
   ];
 
-  constructor(private router: Router, private alertController: AlertController) {
+  constructor(
+    private router: Router,
+    private alertController: AlertController
+  ) {
     addIcons({
       arrowBackOutline,
       addCircleOutline,
@@ -122,14 +129,14 @@ export class PackingListPage implements OnInit {
 
   createTrip() {
     if (!this.newTrip.destination.trim()) return;
-    
+
     const newList: PackingList = {
       id: Date.now(),
       destination: this.newTrip.destination.trim(),
       dates: this.newTrip.dates.trim() || 'Dates TBD',
       items: [],
     };
-    
+
     this.packingLists.unshift(newList);
     this.closeNewTripModal();
   }
@@ -146,7 +153,9 @@ export class PackingListPage implements OnInit {
         {
           text: 'Delete',
           handler: () => {
-            this.packingLists = this.packingLists.filter((l) => l.id !== list.id);
+            this.packingLists = this.packingLists.filter(
+              (l) => l.id !== list.id
+            );
           },
         },
       ],
@@ -169,12 +178,12 @@ export class PackingListPage implements OnInit {
 
   addItemToList() {
     if (!this.newItemName.trim() || !this.selectedList) return;
-    
+
     this.selectedList.items.push({
       name: this.newItemName.trim(),
       checked: false,
     });
-    
+
     this.closeAddItemModal();
   }
 }
