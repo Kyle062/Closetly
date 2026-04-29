@@ -95,9 +95,9 @@ export class OutfitPage implements OnInit {
       ]
     },
     {
-      title: 'Date Night',
+      title: 'Hot Summer Day',
       itemCount: 3,
-      tags: 'Sensual, Polished, Intimate',
+      tags: 'Light, Airy, Minimal',
       suggestion: 'Tank Top + Linen Pants + Flip Flops',
       image: '../../../assets/homepage/hot/cloth1.png',
       isActive: false,
