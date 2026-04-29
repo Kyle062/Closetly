@@ -1,54 +1,216 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonIcon } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
+import { BottomNavComponent } from '../../components/bottom-nav/bottom-nav.component';
+import {
+  IonContent,
+  IonIcon,
+  AlertController,
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline, arrowBackCircleOutline, arrowForwardCircleOutline } from 'ionicons/icons';
+import {
+  arrowBackOutline,
+  optionsOutline,
+  chevronBackOutline,
+  chevronForwardOutline,
+  closeOutline,
+  checkmarkCircle,
+  radioButtonOffOutline,
+  shirtOutline,
+} from 'ionicons/icons';
+
+interface CalendarDay {
+  date: number | null;
+  outfit?: {
+    title: string;
+    image: string;
+    itemCount: number;
+  };
+}
+
+interface Outfit {
+  title: string;
+  image: string;
+  itemCount: number;
+}
 
 @Component({
   selector: 'app-outfit-calendar',
   templateUrl: './outfit-calendar.page.html',
   styleUrls: ['./outfit-calendar.page.scss'],
   standalone: true,
-  imports: [IonContent, IonIcon, CommonModule, FormsModule]
+  imports: [IonContent, IonIcon, BottomNavComponent, CommonModule, FormsModule],
 })
 export class OutfitCalendarPage implements OnInit {
   daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  calendarDays: { date: number | null, image?: string }[] = [];
-  
-  stats = [
-    { value: '5', label: 'This Week', color: '#ff6b81' }, // Pinkish
-    { value: '18', label: 'This Month', color: '#feca57' }, // Yellowish
-    { value: '7', label: 'Day Streak', color: '#8d6e63' } // Brownish
+  calendarDays: CalendarDay[] = [];
+
+  currentMonth = 'April';
+  currentYear = 2026;
+  currentMonthIndex = 3; // April = 3 (0-indexed)
+  private months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
-  constructor() {
-    // Register standalone Ionic icons
-    addIcons({ arrowBackOutline, arrowBackCircleOutline, arrowForwardCircleOutline });
+  showOutfitModal = false;
+  selectedDay: CalendarDay | null = null;
+
+  stats = {
+    thisWeek: 5,
+    thisMonth: 18,
+    streak: 7,
+  };
+
+  availableOutfits: Outfit[] = [
+    {
+      title: 'The Weston Comfort',
+      image: '../../../assets/homepage/sunny/cloth1.png',
+      itemCount: 3,
+    },
+    {
+      title: 'Office Ready',
+      image: '../../../assets/homepage/cold/Closetlycloth10.png',
+      itemCount: 4,
+    },
+    {
+      title: 'Date Night',
+      image: '../../../assets/homepage/hot/cloth1.png',
+      itemCount: 3,
+    },
+    {
+      title: 'Weekend Vibes',
+      image: '../../../assets/homepage/sunny/accessory.png',
+      itemCount: 5,
+    },
+  ];
+
+  constructor(
+    private router: Router,
+    private alertController: AlertController
+  ) {
+    addIcons({
+      arrowBackOutline,
+      optionsOutline,
+      chevronBackOutline,
+      chevronForwardOutline,
+      closeOutline,
+      checkmarkCircle,
+      radioButtonOffOutline,
+      shirtOutline,
+    });
   }
 
   ngOnInit() {
     this.generateCalendar();
   }
 
+  goBack() {
+    this.router.navigate(['/profile']);
+  }
+
+  previousMonth() {
+    this.currentMonthIndex--;
+    if (this.currentMonthIndex < 0) {
+      this.currentMonthIndex = 11;
+      this.currentYear--;
+    }
+    this.currentMonth = this.months[this.currentMonthIndex];
+    this.generateCalendar();
+  }
+
+  nextMonth() {
+    this.currentMonthIndex++;
+    if (this.currentMonthIndex > 11) {
+      this.currentMonthIndex = 0;
+      this.currentYear++;
+    }
+    this.currentMonth = this.months[this.currentMonthIndex];
+    this.generateCalendar();
+  }
+
   generateCalendar() {
-    // Offset for April 2026 mockup (1st is on a Saturday)
-    for (let i = 0; i < 6; i++) {
+    this.calendarDays = [];
+
+    // Get first day of month (0 = Sunday, 1 = Monday, etc.)
+    const firstDay = new Date(
+      this.currentYear,
+      this.currentMonthIndex,
+      1
+    ).getDay();
+
+    // Get number of days in month
+    const daysInMonth = new Date(
+      this.currentYear,
+      this.currentMonthIndex + 1,
+      0
+    ).getDate();
+
+    // Add empty cells for days before first day of month
+    for (let i = 0; i < firstDay; i++) {
       this.calendarDays.push({ date: null });
     }
-    
-    // Generate 30 days
-    for (let i = 1; i <= 30; i++) {
-      let imgUrl = undefined;
-      
-      // Inject placeholder images for specific dates
-      if (i === 6) imgUrl = 'https://placehold.co/100x100/e0e0e0/555555?text=Img';
-      if (i === 12) imgUrl = 'https://placehold.co/100x100/e0e0e0/555555?text=Img';
-      if (i === 13) imgUrl = 'https://placehold.co/100x100/e0e0e0/555555?text=Img';
-      if (i === 19) imgUrl = 'https://placehold.co/100x100/e0e0e0/555555?text=Img';
-      if (i === 26) imgUrl = 'https://placehold.co/100x100/e0e0e0/555555?text=Img';
 
-      this.calendarDays.push({ date: i, image: imgUrl });
+    // Add days of month
+    for (let i = 1; i <= daysInMonth; i++) {
+      this.calendarDays.push({ date: i });
     }
+  }
+
+  // Single tap with confirmation for adding outfit
+  onDayClick(day: CalendarDay) {
+    if (!day.date) return;
+    this.selectedDay = day;
+    this.showOutfitModal = true;
+  }
+
+  closeOutfitModal() {
+    this.showOutfitModal = false;
+    this.selectedDay = null;
+  }
+
+  selectOutfitForDay(outfit: Outfit) {
+    if (!this.selectedDay) return;
+    this.selectedDay.outfit = outfit;
+  }
+
+  async saveOutfitToDay() {
+    if (!this.selectedDay) return;
+    if (!this.selectedDay.outfit) {
+      const alert = await this.alertController.create({
+        header: 'No Outfit Selected',
+        message: 'Please select an outfit first.',
+        mode: 'ios',
+        cssClass: 'modern-pill-alert',
+        buttons: ['OK'],
+      });
+      await alert.present();
+      return;
+    }
+    this.closeOutfitModal();
+    this.stats.thisMonth++;
+    console.log(
+      'Outfit saved for day:',
+      this.selectedDay.date,
+      this.selectedDay.outfit.title
+    );
+  }
+
+  removeOutfit() {
+    if (!this.selectedDay) return;
+    this.selectedDay.outfit = undefined;
+    this.closeOutfitModal();
+    if (this.stats.thisMonth > 0) this.stats.thisMonth--;
   }
 }

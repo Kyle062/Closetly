@@ -1,47 +1,128 @@
-<ion-content [fullscreen]="true" class="bg-wrapper">
-  <div class="background-image">
-     <img src="https://placehold.co/800x1600/dfd3c3/ffffff?text=Wardrobe+Background" alt="Wardrobe Background">
+<ion-content [fullscreen]="true" class="calendar-page">
+  <div class="top-nav">
+    <img
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
+    />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
   </div>
 
-  <div class="overlay-content">
-    
-    <div class="header">
-      <ion-icon name="arrow-back-outline" class="back-btn"></ion-icon>
-      <h1 class="title">Outfit Calendar</h1>
+  <div class="bottom-sheet">
+    <div class="header-row">
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
+      <h1 class="page-title">Outfit Calendar</h1>
       <div class="spacer"></div>
     </div>
 
     <div class="month-navigator">
-      <ion-icon name="arrow-back-circle-outline"></ion-icon>
-      <h2>April 2026</h2>
-      <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+      <ion-icon
+        name="chevron-back-outline"
+        (click)="previousMonth()"
+      ></ion-icon>
+      <h2>{{ currentMonth }} {{ currentYear }}</h2>
+      <ion-icon name="chevron-forward-outline" (click)="nextMonth()"></ion-icon>
     </div>
 
-    <div class="glass-container calendar-card">
+    <div class="calendar-card">
       <div class="days-of-week">
         <span *ngFor="let day of daysOfWeek">{{ day }}</span>
       </div>
-      
+
       <div class="calendar-grid">
-        <div class="day-cell" *ngFor="let day of calendarDays">
-          <ng-container *ngIf="day.date">
-            <div class="date-number" *ngIf="!day.image">{{ day.date }}</div>
-            
-            <div class="outfit-day" *ngIf="day.image">
-              <img [src]="day.image" alt="Outfit {{day.date}}" class="outfit-img">
-              <span class="outfit-date-badge">{{ day.date }}</span>
-            </div>
-          </ng-container>
+        <div
+          class="day-cell"
+          *ngFor="let day of calendarDays"
+          [class.has-outfit]="day.outfit"
+          (click)="day.date ? onDayClick(day) : null"
+        >
+          <div class="date-number" *ngIf="day.date && !day.outfit">
+            {{ day.date }}
+          </div>
+
+          <div class="outfit-day" *ngIf="day.date && day.outfit">
+            <img [src]="day.outfit.image" alt="Outfit" class="outfit-img" />
+            <span class="outfit-date-badge">{{ day.date }}</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="stats-container">
-      <div class="stat-card glass-container" *ngFor="let stat of stats">
-        <span class="stat-value" [style.color]="stat.color">{{ stat.value }}</span>
-        <span class="stat-label">{{ stat.label }}</span>
+    <div class="stats-card">
+      <div class="stat-item">
+        <div class="stat-value" style="color: #ff6b81">
+          {{ stats.thisWeek }}
+        </div>
+        <div class="stat-label">This Week</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color: #feca57">
+          {{ stats.thisMonth }}
+        </div>
+        <div class="stat-label">This Month</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color: #8d6e63">{{ stats.streak }}</div>
+        <div class="stat-label">Day Streak</div>
       </div>
     </div>
 
+    <div class="bottom-spacer"></div>
   </div>
 </ion-content>
+<app-bottom-nav></app-bottom-nav>
+
+<!-- Outfit Picker Modal -->
+<div class="modal-overlay" *ngIf="showOutfitModal" (click)="closeOutfitModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Select Outfit for {{ selectedDay?.date }}</h2>
+      <ion-icon name="close-outline" (click)="closeOutfitModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body">
+      <div class="outfit-list">
+        <div
+          class="outfit-option"
+          *ngFor="let outfit of availableOutfits"
+          [class.selected]="selectedDay?.outfit?.title === outfit.title"
+          (click)="selectOutfitForDay(outfit)"
+        >
+          <div class="outfit-option-img">
+            <img [src]="outfit.image" [alt]="outfit.title" />
+          </div>
+          <div class="outfit-option-info">
+            <h3>{{ outfit.title }}</h3>
+            <p>{{ outfit.itemCount }} items</p>
+          </div>
+          <ion-icon
+            [name]="selectedDay?.outfit?.title === outfit.title ? 'checkmark-circle' : 'radio-button-off-outline'"
+            class="select-icon"
+          >
+          </ion-icon>
+        </div>
+      </div>
+
+      <div class="empty-state" *ngIf="availableOutfits.length === 0">
+        <ion-icon name="shirt-outline"></ion-icon>
+        <h3>No outfits yet</h3>
+        <p>Create outfits first in My Outfits page</p>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        class="btn-cancel"
+        (click)="removeOutfit()"
+        *ngIf="selectedDay?.outfit"
+      >
+        Remove
+      </button>
+      <button class="btn-save" (click)="saveOutfitToDay()">Save</button>
+    </div>
+  </div>
+</div>

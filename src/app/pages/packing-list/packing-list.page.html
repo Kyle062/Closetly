@@ -1,13 +1,70 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>packing-list</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="transparent-bg">
+  <div class="background-image-container">
+    <img
+      src="https://placehold.co/800x1600/e0e0e0/ffffff?text=Room+Background"
+      alt="Background"
+    />
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">packing-list</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="page-wrapper">
+    <div class="custom-header">
+      <ion-icon name="arrow-back-outline" class="icon-btn"></ion-icon>
+      <h1 class="page-title">Packing List</h1>
+      <ion-icon name="add-circle-outline" class="icon-btn"></ion-icon>
+    </div>
+
+    <div class="glass-card" *ngFor="let list of packingLists">
+      <div class="card-header">
+        <div class="destination-wrap">
+          <ion-icon name="location-outline" class="loc-icon"></ion-icon>
+          <h2>{{ list.destination }}</h2>
+        </div>
+        <ion-icon name="trash-outline" class="trash-icon"></ion-icon>
+      </div>
+
+      <div class="date-wrap">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>{{ list.dates }}</span>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-text">
+          <span class="label">Packing Progress</span>
+          <span class="ratio"
+            >{{ getPackedCount(list) }}/{{ list.items.length }}</span
+          >
+        </div>
+        <div class="progress-track">
+          <div
+            class="progress-fill"
+            [style.width.%]="getProgressPercent(list)"
+          ></div>
+        </div>
+      </div>
+
+      <div class="items-container">
+        <div
+          class="item-row"
+          *ngFor="let item of list.items"
+          (click)="toggleItem(item)"
+        >
+          <ion-icon
+            [name]="item.checked ? 'checkbox' : 'square-outline'"
+            [class.checked-icon]="item.checked"
+            [class.unchecked-icon]="!item.checked"
+          >
+          </ion-icon>
+
+          <span class="item-name" [class.checked-text]="item.checked">
+            {{ item.name }}
+          </span>
+        </div>
+      </div>
+
+      <button class="add-btn">
+        <ion-icon name="add"></ion-icon>
+        <span>Add Item</span>
+      </button>
+    </div>
+  </div>
 </ion-content>
