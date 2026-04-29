@@ -61,40 +61,40 @@ export class HomePage implements OnInit {
   isLoading: boolean = true;
   weatherError: string = '';
 
-  currentSuggestion: any = {
+ currentSuggestion: any = {
     title: "Today's Suggestion",
     description: 'Loading suggestion...',
     clothes: [
       {
-        image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+        image: '../../../assets/homepage/sunny/cloth1.png',  // Use existing image
         alt: 'Clothing item 1',
         width: 'auto',
         height: '180px',
         objectFit: 'contain',
       },
       {
-        image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+        image: '../../../assets/homepage/sunny/cloth2.png',  // Use existing image
         alt: 'Clothing item 2',
         width: 'auto',
         height: '180px',
         objectFit: 'contain',
       },
       {
-        image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+        image: '../../../assets/homepage/sunny/cloth4.png',  // Use existing image
         alt: 'Clothing item 3',
         width: 'auto',
         height: '180px',
         objectFit: 'contain',
       },
       {
-        image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+        image: '../../../assets/homepage/sunny/shoes.png',  // Use existing image
         alt: 'Clothing item 4',
         width: 'auto',
         height: '180px',
         objectFit: 'contain',
       },
       {
-        image: '../../../assets/homeplaceholders/cloth-placeholder.png',
+        image: '../../../assets/homepage/sunny/accessory.png',  // Use existing image
         alt: 'Clothing item 5',
         width: 'auto',
         height: '180px',

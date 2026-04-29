@@ -1,57 +1,123 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar class="custom-toolbar">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/" icon="arrow-back-outline" text=""></ion-back-button>
-    </ion-buttons>
-    <ion-title class="header-title">My Wishlist</ion-title>
-    <ion-buttons slot="end">
-      <ion-button class="add-btn">
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding custom-bg">
-  
-  <div class="summary-card">
-    <div class="summary-label">Total Wishlist Value</div>
-    <div class="summary-underline"></div>
-    <h1 class="summary-total">$781.99</h1>
-    
-    <div class="priority-legend">
-      <div class="legend-item"><span class="dot high"></span> High Priority</div>
-      <div class="legend-item"><span class="dot medium"></span> Medium</div>
-      <div class="legend-item"><span class="dot low"></span> Low</div>
-    </div>
+<ion-content [fullscreen]="true" class="outfit-page">
+  <div class="top-nav">
+    <img
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
+    />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
   </div>
 
-  <div class="items-container">
-    <div class="wishlist-card" *ngFor="let item of wishlistItems">
-      
-      <div class="image-wrapper">
-        <img [src]="item.image" alt="Product Image" />
+  <div class="bottom-sheet">
+    <div class="header-row">
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
+      <h1 class="page-title">My Outfits</h1>
+      <span class="header-meta">{{ outfits.length }} Saved</span>
+    </div>
+
+    <div class="outfits-list">
+      <div 
+        class="outfit-card" 
+        *ngFor="let outfit of outfits; let i = index"
+        [class.active-card]="outfit.isActive"
+        (click)="selectOutfit(outfit, i)">
+        
+        <div class="image-box">
+          <img [src]="outfit.image" alt="Outfit Image" />
+        </div>
+
+        <div class="details-box">
+          <span class="item-count">{{ outfit.itemCount }} items</span>
+          <h2 class="outfit-title">{{ outfit.title }}</h2>
+          <div class="outfit-desc">
+            <p class="tags">{{ outfit.tags }}</p>
+            <p class="suggestion">{{ outfit.suggestion }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="action-container">
+      <button class="create-btn" (click)="openCreateOutfitModal()">
+        <ion-icon name="shirt-outline"></ion-icon>
+        <span>Create New Outfit</span>
+      </button>
+    </div>
+
+    <div class="bottom-spacer"></div>
+  </div>
+</ion-content>
+<app-bottom-nav></app-bottom-nav>
+
+<!-- Create Outfit Modal -->
+<div class="modal-overlay" *ngIf="showCreateModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Create New Outfit</h2>
+      <ion-icon name="close-outline" (click)="closeModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Outfit Title</label>
+        <input type="text" placeholder="Enter outfit name..." [(ngModel)]="newOutfit.title" />
       </div>
 
-      <div class="details-wrapper">
-        <div class="priority-indicator" [ngClass]="item.priority"></div>
-        
-        <h2 class="item-name">{{ item.name }}</h2>
-        <p class="item-brand">{{ item.brand }}</p>
-        <h3 class="item-price">{{ item.price }}</h3>
-        
-        <div class="action-buttons">
-          <button class="btn view-btn">
-            <ion-icon name="eye-outline"></ion-icon> View
-          </button>
-          <button class="btn delete-btn">
-            <ion-icon name="trash-outline"></ion-icon> Delete
-          </button>
+      <div class="form-group">
+        <label>Description / Tags</label>
+        <input type="text" placeholder="e.g. Casual, Breezy, Summer" [(ngModel)]="newOutfit.tags" />
+      </div>
+
+      <!-- Category Selection Tabs -->
+      <div class="modal-categories">
+        <div 
+          class="modal-tab" 
+          *ngFor="let cat of modalCategories"
+          [class.active]="modalSelectedCategory === cat"
+          (click)="selectModalCategory(cat)">
+          {{ cat }}
         </div>
       </div>
 
+      <!-- Items Grid -->
+      <div class="modal-items-grid">
+        <div 
+          class="modal-item" 
+          *ngFor="let item of getModalFilteredItems()"
+          [class.selected]="isItemSelected(item)"
+          (click)="toggleItemSelection(item)">
+          <div class="modal-item-image">
+            <img [src]="item.image" [alt]="item.name" />
+            <div class="check-badge" *ngIf="isItemSelected(item)">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </div>
+          </div>
+          <span class="modal-item-name">{{ item.name }}</span>
+        </div>
+      </div>
+
+      <!-- Selected Items Preview -->
+      <div class="selected-preview" *ngIf="newOutfit.selectedItems.length > 0">
+        <label>Selected Items ({{ newOutfit.selectedItems.length }})</label>
+        <div class="selected-chips">
+          <span class="chip" *ngFor="let item of newOutfit.selectedItems">
+            {{ item.name }}
+            <ion-icon name="close-outline" (click)="removeSelectedItem(item)"></ion-icon>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+      <button class="btn-create" (click)="createOutfit()" [disabled]="!canCreateOutfit()">
+        Create Outfit
+      </button>
     </div>
   </div>
-</ion-content>
-
-
+</div>

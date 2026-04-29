@@ -2,22 +2,37 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { 
-  IonContent, IonIcon, AlertController 
+import { BottomNavComponent } from '../../components/bottom-nav/bottom-nav.component';
+import {
+  IonContent,
+  IonIcon,
+  AlertController,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { 
-  addCircleOutline, arrowBackOutline, eyeOutline, trashOutline, 
-  optionsOutline, heartOutline,
+import {
+  arrowBackOutline,
+  shirtOutline,
+  optionsOutline,
+  closeOutline,
+  checkmarkOutline,
 } from 'ionicons/icons';
 
-interface WishlistItem {
-  id: number;
-  name: string;
-  brand: string;
-  price: number;
-  priority: string;
+interface Outfit {
+  title: string;
+  itemCount: number;
+  tags: string;
+  suggestion: string;
   image: string;
+  isActive: boolean;
+  items: WardrobeItem[];
+}
+
+interface WardrobeItem {
+  id: number;
+  image: string;
+  name: string;
+  category: string;
+  isFavorite: boolean;
 }
 
 @Component({
@@ -25,125 +40,347 @@ interface WishlistItem {
   templateUrl: './outfit.page.html',
   styleUrls: ['./outfit.page.scss'],
   standalone: true,
-  imports: [
-    IonContent, IonIcon, 
-    CommonModule, FormsModule
-  ]
+  imports: [IonContent, IonIcon, BottomNavComponent, CommonModule, FormsModule],
 })
 export class OutfitPage implements OnInit {
+  showCreateModal = false;
 
-  selectedPriority: string = '';
-  
-  wishlistItems: WishlistItem[] = [
+  modalCategories: string[] = [
+    'Tops',
+    'Bottoms',
+    'Layers',
+    'Shoes/Sandals',
+    'Accessories',
+  ];
+  modalSelectedCategory: string = 'Tops';
+
+  newOutfit: {
+    title: string;
+    tags: string;
+    selectedItems: WardrobeItem[];
+  } = {
+    title: '',
+    tags: '',
+    selectedItems: [],
+  };
+
+  outfits: Outfit[] = [
+    {
+      title: 'The Weston Comfort',
+      itemCount: 3,
+      tags: 'Effortless, Breezy, Tropical',
+      suggestion:
+        'Linen button-up + denim short + wide-brim straw hat + flat sandals',
+      image: '../../../assets/outfit/weston.jpg',
+      isActive: false,
+      items: [],
+    },
+    {
+      title: 'Office Ready',
+      itemCount: 4,
+      tags: 'Sharp, Confident, Professional',
+      suggestion:
+        'Tailored vest + wide-leg trousers + pointed loafers + leather tote',
+      image: '../../../assets/outfit/office.jpg',
+      isActive: false,
+      items: [],
+    },
+    {
+      title: 'Date Night',
+      itemCount: 3,
+      tags: 'Sensual, Polished, Intimate',
+      suggestion:
+        'Silk slip dress + draped blazer + heeled mules + delicate gold necklace',
+      image: '../../../assets/outfit/date.jpg',
+      isActive: false,
+      items: [],
+    },
+    {
+      title: 'Weekend Vibes',
+      itemCount: 5,
+      tags: 'Relaxed, Cozy, Unplugged',
+      suggestion:
+        'Oversized knit sweater + biker shorts + chunky sneakers + baseball cap',
+      image: '../../../assets/outfit/weekend.jpg',
+      isActive: false,
+      items: [],
+    },
+  ];
+
+  // Wardrobe items from wardrobe page
+  wardrobeItems: WardrobeItem[] = [
     {
       id: 1,
-      name: 'Vintage Denim Jacket',
-      brand: "Levi's",
-      price: 87.47,
-      priority: 'high',
-      image: '../../../assets/wishlist/denim-jacket.png'
+      image: '../../../assets/homepage/sunny/cloth1.png',
+      name: 'Summer Top',
+      category: 'Tops',
+      isFavorite: false,
     },
     {
       id: 2,
-      name: 'White Sneakers',
-      brand: 'Common Projects',
-      price: 425.00,
-      priority: 'medium',
-      image: '../../../assets/wishlist/white-sneakers.png'
+      image: '../../../assets/homepage/sunny/cloth2.png',
+      name: 'Shorts',
+      category: 'Bottoms',
+      isFavorite: false,
     },
     {
       id: 3,
-      name: 'Minimalist Watch',
-      brand: 'Daniel Wellington',
-      price: 199.00,
-      priority: 'medium',
-      image: '../../../assets/wishlist/watch.png'
+      image: '../../../assets/homepage/sunny/cloth4.png',
+      name: 'Sunglasses',
+      category: 'Accessories',
+      isFavorite: false,
     },
     {
       id: 4,
-      name: 'Silk Blouse',
-      brand: 'Everlane',
-      price: 68.00,
-      priority: 'low',
-      image: '../../../assets/wishlist/silk-blouse.png'
-    }
+      image: '../../../assets/homepage/sunny/shoes.png',
+      name: 'Sandals',
+      category: 'Shoes/Sandals',
+      isFavorite: false,
+    },
+    {
+      id: 5,
+      image: '../../../assets/homepage/sunny/accessory.png',
+      name: 'Watch',
+      category: 'Accessories',
+      isFavorite: false,
+    },
+    {
+      id: 6,
+      image: '../../../assets/homepage/hot/cloth1.png',
+      name: 'Tank Top',
+      category: 'Tops',
+      isFavorite: true,
+    },
+    {
+      id: 7,
+      image: '../../../assets/homepage/hot/cloth2.png',
+      name: 'Linen Pants',
+      category: 'Bottoms',
+      isFavorite: false,
+    },
+    {
+      id: 8,
+      image: '../../../assets/homepage/hot/cloth3.png',
+      name: 'Sun Hat',
+      category: 'Accessories',
+      isFavorite: true,
+    },
+    {
+      id: 9,
+      image: '../../../assets/homepage/hot/shoes.png',
+      name: 'Flip Flops',
+      category: 'Shoes/Sandals',
+      isFavorite: false,
+    },
+    {
+      id: 10,
+      image: '../../../assets/homepage/hot/sunglasses.png',
+      name: 'Sunglasses',
+      category: 'Accessories',
+      isFavorite: false,
+    },
+    {
+      id: 11,
+      image: '../../../assets/homepage/rainy/Closetlycloth7.png',
+      name: 'Raincoat',
+      category: 'Layers',
+      isFavorite: true,
+    },
+    {
+      id: 12,
+      image: '../../../assets/homepage/rainy/Closetlycloth8.png',
+      name: 'Waterproof Boots',
+      category: 'Shoes/Sandals',
+      isFavorite: false,
+    },
+    {
+      id: 13,
+      image: '../../../assets/homepage/rainy/Umbrella.png',
+      name: 'Umbrella',
+      category: 'Accessories',
+      isFavorite: true,
+    },
+    {
+      id: 14,
+      image: '../../../assets/homepage/rainy/Closetlycloth9.png',
+      name: 'Rain Boots',
+      category: 'Accessories',
+      isFavorite: true,
+    },
+    {
+      id: 15,
+      image: '../../../assets/homepage/rainy/Waterproof bag.png',
+      name: 'Waterproof Bag',
+      category: 'Accessories',
+      isFavorite: false,
+    },
+    {
+      id: 16,
+      image: '../../../assets/homepage/cold/Closetlycloth10.png',
+      name: 'Jacket',
+      category: 'Layers',
+      isFavorite: true,
+    },
+    {
+      id: 17,
+      image: '../../../assets/homepage/cold/Closetlycloth11.png',
+      name: 'Long Pants',
+      category: 'Bottoms',
+      isFavorite: false,
+    },
+    {
+      id: 18,
+      image: '../../../assets/homepage/cold/Closetlycloth12.png',
+      name: 'Closed Shoes',
+      category: 'Shoes/Sandals',
+      isFavorite: true,
+    },
+    {
+      id: 19,
+      image: '../../../assets/homepage/cold/scarf.png',
+      name: 'Scarf',
+      category: 'Accessories',
+      isFavorite: false,
+    },
+    {
+      id: 20,
+      image: '../../../assets/homepage/cold/gloves.png',
+      name: 'Gloves',
+      category: 'Accessories',
+      isFavorite: false,
+    },
+    {
+      id: 21,
+      image: '../../../assets/random-outfit/layer/layer1.png',
+      name: 'Denim Jacket',
+      category: 'Layers',
+      isFavorite: true,
+    },
+    {
+      id: 22,
+      image: '../../../assets/random-outfit/layer/layer2.png',
+      name: 'Cardigan',
+      category: 'Layers',
+      isFavorite: false,
+    },
+    {
+      id: 23,
+      image: '../../../assets/random-outfit/layer/layer3.png',
+      name: 'Blazer',
+      category: 'Layers',
+      isFavorite: false,
+    },
+    {
+      id: 24,
+      image: '../../../assets/random-outfit/layer/layer4.png',
+      name: 'Bomber Jacket',
+      category: 'Layers',
+      isFavorite: false,
+    },
   ];
-
-  get filteredItems(): WishlistItem[] {
-    if (!this.selectedPriority) {
-      return this.wishlistItems;
-    }
-    return this.wishlistItems.filter(item => item.priority === this.selectedPriority);
-  }
-
-  get totalValue(): number {
-    return this.wishlistItems.reduce((sum, item) => sum + item.price, 0);
-  }
 
   constructor(
     private router: Router,
     private alertController: AlertController
   ) {
     addIcons({
-      addCircleOutline, arrowBackOutline, eyeOutline, trashOutline,
-      optionsOutline, heartOutline,
+      arrowBackOutline,
+      shirtOutline,
+      optionsOutline,
+      closeOutline,
+      checkmarkOutline,
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   goBack() {
     this.router.navigate(['/home']);
   }
 
-  filterByPriority(priority: string) {
-    if (this.selectedPriority === priority) {
-      this.selectedPriority = '';
+  selectOutfit(outfit: Outfit, index: number) {
+    this.outfits.forEach((o) => (o.isActive = false));
+    outfit.isActive = true;
+  }
+
+  openCreateOutfitModal() {
+    this.showCreateModal = true;
+    this.newOutfit = { title: '', tags: '', selectedItems: [] };
+    this.modalSelectedCategory = 'Tops';
+  }
+
+  closeModal() {
+    this.showCreateModal = false;
+  }
+
+  selectModalCategory(category: string) {
+    this.modalSelectedCategory = category;
+  }
+
+  getModalFilteredItems(): WardrobeItem[] {
+    return this.wardrobeItems.filter(
+      (item) => item.category === this.modalSelectedCategory
+    );
+  }
+
+  isItemSelected(item: WardrobeItem): boolean {
+    return this.newOutfit.selectedItems.some((i) => i.id === item.id);
+  }
+
+  toggleItemSelection(item: WardrobeItem) {
+    const index = this.newOutfit.selectedItems.findIndex(
+      (i) => i.id === item.id
+    );
+    if (index > -1) {
+      this.newOutfit.selectedItems.splice(index, 1);
     } else {
-      this.selectedPriority = priority;
+      this.newOutfit.selectedItems.push({ ...item });
     }
   }
 
-  addNewItem() {
-    console.log('Add new item to wishlist');
-    // Navigate to add item page or open modal
+  removeSelectedItem(item: WardrobeItem) {
+    this.newOutfit.selectedItems = this.newOutfit.selectedItems.filter(
+      (i) => i.id !== item.id
+    );
   }
 
-  async viewItem(item: WishlistItem) {
+  canCreateOutfit(): boolean {
+    return (
+      this.newOutfit.title.trim() !== '' &&
+      this.newOutfit.selectedItems.length > 0
+    );
+  }
+
+  async createOutfit() {
+    if (!this.canCreateOutfit()) return;
+
+    const suggestion = this.newOutfit.selectedItems
+      .map((i) => i.name)
+      .join(' + ');
+
+    const newOutfit: Outfit = {
+      title: this.newOutfit.title,
+      itemCount: this.newOutfit.selectedItems.length,
+      tags: this.newOutfit.tags || 'Custom Outfit',
+      suggestion: suggestion,
+      image:
+        this.newOutfit.selectedItems[0]?.image ||
+        '../../../assets/outfit/default.jpg',
+      isActive: false,
+      items: [...this.newOutfit.selectedItems],
+    };
+
+    this.outfits.unshift(newOutfit);
+
     const alert = await this.alertController.create({
-      header: item.name,
-      message: `Brand: ${item.brand}\nPrice: $${item.price}\nPriority: ${item.priority}`,
+      header: 'Outfit Created!',
+      message: `"${newOutfit.title}" has been added to your outfits.`,
       mode: 'ios',
       cssClass: 'modern-pill-alert',
-      buttons: ['Close']
+      buttons: ['Great'],
     });
 
     await alert.present();
-  }
-
-  async deleteItem(item: WishlistItem) {
-    const alert = await this.alertController.create({
-      header: 'Remove Item?',
-      message: `Are you sure you want to remove ${item.name} from your wishlist?`,
-      mode: 'ios',
-      cssClass: 'modern-pill-alert',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Delete',
-          cssClass: 'danger-button',
-          handler: () => {
-            this.wishlistItems = this.wishlistItems.filter(i => i.id !== item.id);
-            console.log('Deleted:', item.name);
-          }
-        }
-      ]
-    });
-
-    await alert.present();
+    this.closeModal();
   }
 }

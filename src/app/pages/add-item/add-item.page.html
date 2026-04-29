@@ -1,9 +1,9 @@
-<ion-content [fullscreen]="true" class="outfit-page">
+<ion-content [fullscreen]="true" class="add-item-page">
   <div class="top-nav">
     <img
       src="../../../assets/homepage/iconLogo.png"
-      alt="logo"
       class="brand-logo"
+      alt="logo"
     />
     <ion-icon name="options-outline" class="menu-icon"></ion-icon>
   </div>
@@ -15,68 +15,78 @@
         class="back-btn"
         (click)="goBack()"
       ></ion-icon>
-      <h1 class="page-title">My Wishlist</h1>
-      <ion-icon 
-        name="add-circle-outline" 
-        class="add-icon"
-        (click)="addNewItem()"
-      ></ion-icon>
+      <h1 class="page-title">Add New Item</h1>
+      <div class="spacer"></div>
     </div>
 
-    <div class="summary-card">
-      <div class="summary-label">Total Wishlist Value</div>
-      <div class="summary-underline"></div>
-      <h1 class="summary-total">{{ totalValue | currency }}</h1>
-      
-      <div class="priority-legend">
-        <div class="legend-item" (click)="filterByPriority('high')">
-          <span class="dot high"></span> 
-          <span [class.active-filter]="selectedPriority === 'high'">High Priority</span>
-        </div>
-        <div class="legend-item" (click)="filterByPriority('medium')">
-          <span class="dot medium"></span> 
-          <span [class.active-filter]="selectedPriority === 'medium'">Medium</span>
-        </div>
-        <div class="legend-item" (click)="filterByPriority('low')">
-          <span class="dot low"></span> 
-          <span [class.active-filter]="selectedPriority === 'low'">Low</span>
-        </div>
-      </div>
-    </div>
+    <div class="camera-container">
+      <div  
+        class="camera-placeholder"
+        [style.background-image]="'url(' + cameraBackground + ')'"
+      >
+        <div class="dark-tint"></div>
 
-    <div class="items-container">
-      <div class="wishlist-card" *ngFor="let item of filteredItems">
-        
-        <div class="image-wrapper">
-          <img [src]="item.image" [alt]="item.name" />
-        </div>
+        <div class="viewfinder top-left"></div>
+        <div class="viewfinder top-right"></div>
+        <div class="viewfinder bottom-left"></div>
+        <div class="viewfinder bottom-right"></div>
 
-        <div class="details-wrapper">
-          <div class="priority-indicator" [ngClass]="item.priority"></div>
-          
-          <h2 class="item-name">{{ item.name }}</h2>
-          <p class="item-brand">{{ item.brand }}</p>
-          <h3 class="item-price">{{ item.price | currency }}</h3>
-          
-          <div class="action-buttons">
-            <button class="btn view-btn" (click)="viewItem(item)">
-              <ion-icon name="eye-outline"></ion-icon> View
-            </button>
-            <button class="btn delete-btn" (click)="deleteItem(item)">
-              <ion-icon name="trash-outline"></ion-icon> Delete
-            </button>
+        <div class="action-overlay">
+          <div class="primary-action" (click)="takePhoto()">
+            <ion-icon name="camera-outline"></ion-icon>
+            <span>Take Photo</span>
+          </div>
+
+          <div class="secondary-action" (click)="uploadFromGallery()">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+            <span>Upload from Gallery</span>
           </div>
         </div>
-
-      </div>
-
-      <div class="empty-state" *ngIf="filteredItems.length === 0">
-        <ion-icon name="heart-outline"></ion-icon>
-        <h3>No items found</h3>
-        <p>Add items to your wishlist</p>
       </div>
     </div>
 
-    <div class="bottom-spacer"></div>
+    <div class="form-card">
+      <div class="input-group">
+        <label>Categories:</label>
+        <div class="select-wrapper">
+          <ion-select 
+            [(ngModel)]="formData.category"
+            interface="popover"
+            placeholder="Select category"
+            class="custom-select"
+          >
+            <ion-select-option 
+              *ngFor="let category of categories" 
+              [value]="category.toLowerCase()"
+            >
+              {{ category }}
+            </ion-select-option>
+          </ion-select>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Season:</label>
+        <div class="select-wrapper">
+          <ion-select 
+            [(ngModel)]="formData.season"
+            interface="popover"
+            placeholder="Select season"
+            class="custom-select"
+          >
+            <ion-select-option 
+              *ngFor="let season of seasons" 
+              [value]="season.toLowerCase().replace(' ', '-')"
+            >
+              {{ season }}
+            </ion-select-option>
+          </ion-select>
+        </div>
+      </div>
+
+      <ion-button expand="block" class="submit-btn" (click)="addToWardrobe()">
+        ADD TO WARDROBE
+      </ion-button>
+    </div>
   </div>
 </ion-content>
