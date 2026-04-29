@@ -1,13 +1,69 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>settings</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="transparent-content">
+  <!-- Background Image -->
+  <img class="bg-image" src="https://via.placeholder.com/1080x1920/D3C5B5/ffffff?text=Background+Image" alt="Background" />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">settings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Glassmorphism Container -->
+  <div class="glass-container">
+    
+    <!-- Header -->
+    <div class="header">
+      <img src="https://via.placeholder.com/24x24/transparent/000000?text=<-" alt="Back" class="back-btn" />
+      <h1 class="title">Settings</h1>
+    </div>
+
+    <!-- Preferences Section -->
+    <div class="section-label">Preferences</div>
+    <div class="card-list">
+      
+      <div class="list-item">
+        <img src="https://via.placeholder.com/24x24/transparent/000?text=Icon" alt="Notification" class="item-icon" />
+        <span class="item-label">Notification</span>
+        <span class="item-value">Enabled</span>
+        <ion-toggle checked="true" class="custom-toggle"></ion-toggle>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="list-item">
+        <img src="https://via.placeholder.com/24x24/transparent/000?text=Icon" alt="Language" class="item-icon" />
+        <span class="item-label">Language</span>
+        <span class="item-value">English</span>
+        <img src="https://via.placeholder.com/16x16/transparent/000?text=>" alt="Right" class="chevron-icon" />
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="list-item">
+        <img src="https://via.placeholder.com/24x24/transparent/000?text=Icon" alt="Theme" class="item-icon" />
+        <span class="item-label">Theme</span>
+        <span class="item-value">Light</span>
+        <img src="https://via.placeholder.com/16x16/transparent/000?text=>" alt="Right" class="chevron-icon" />
+      </div>
+
+    </div>
+
+    <!-- Account Information Section -->
+    <div class="card-list info-card">
+      <h2 class="card-title">Account Information</h2>
+      
+      <div class="info-row">
+        <span class="info-label">Account Created</span>
+        <span class="info-value">January 15, 2026</span>
+      </div>
+      
+      <div class="info-row">
+        <span class="info-label">Storage Used</span>
+        <span class="info-value">24 MB / 1 GB</span>
+      </div>
+      
+      <div class="info-row">
+        <span class="info-label">App Version</span>
+        <span class="info-value">1.0.0</span>
+      </div>
+    </div>
+
+    <!-- Delete Account Button -->
+    <button class="delete-btn">Delete Account</button>
+
+  </div>
 </ion-content>
