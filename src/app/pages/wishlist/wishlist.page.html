@@ -1,50 +1,205 @@
-<ion-content [fullscreen]="true" class="main-content">
-  <div class="fixed-background">
-    <img src="https://placehold.co/800x1600/dfd3c3/ffffff?text=Wardrobe+Background" alt="background">
+<ion-content [fullscreen]="true" class="wishlist-page">
+  <div class="top-nav">
+    <img
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
+    />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
   </div>
 
-  <div class="content-wrapper">
+  <div class="bottom-sheet">
     <div class="header-row">
-      <ion-icon name="arrow-back-outline" class="back-icon"></ion-icon>
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
       <h1 class="page-title">My Wishlist</h1>
-      <ion-icon name="add-circle-outline" class="add-icon"></ion-icon>
+      <ion-icon
+        name="add-circle-outline"
+        class="add-icon"
+        (click)="openAddModal()"
+      ></ion-icon>
     </div>
 
-    <div class="glass-card total-card">
-      <p class="total-label">Total Wishlist Value</p>
-      <h2 class="total-amount">${{ totalValue | number:'1.2-2' }}</h2>
-      
+    <div class="summary-card">
+      <p class="summary-label">Total Wishlist Value</p>
+      <h2 class="summary-total">${{ totalValue | number:'1.2-2' }}</h2>
+
       <div class="priority-legend">
-        <span class="legend-item"><i class="dot high"></i> High Priority</span>
-        <span class="legend-item"><i class="dot medium"></i> Medium</span>
-        <span class="legend-item"><i class="dot low"></i> Low</span>
+        <span class="legend-item" (click)="filterByPriority('high')">
+          <span class="dot high"></span>
+          <span [class.active-filter]="selectedPriority === 'high'"
+            >High Priority</span
+          >
+        </span>
+        <span class="legend-item" (click)="filterByPriority('medium')">
+          <span class="dot medium"></span>
+          <span [class.active-filter]="selectedPriority === 'medium'"
+            >Medium</span
+          >
+        </span>
+        <span class="legend-item" (click)="filterByPriority('low')">
+          <span class="dot low"></span>
+          <span [class.active-filter]="selectedPriority === 'low'">Low</span>
+        </span>
       </div>
     </div>
 
-    <div class="glass-card product-card" *ngFor="let item of wishlistItems">
-      <div class="product-layout">
-        <div class="image-container">
-          <img [src]="item.image" [alt]="item.name">
-        </div>
-
-        <div class="details-container">
-          <div class="title-row">
-            <h3 class="product-name">{{ item.name }}</h3>
-            <i class="priority-dot" [ngClass]="item.priority"></i>
+    <div class="wishlist-items">
+      <div class="product-card" *ngFor="let item of filteredItems">
+        <div class="product-layout">
+          <div class="image-container">
+            <img [src]="item.image" [alt]="item.name" />
           </div>
-          <p class="brand-name">{{ item.brand }}</p>
-          <p class="price-text">${{ item.price | number:'1.2-2' }}</p>
-          
-          <div class="action-buttons">
-            <button class="btn-view">
-              <ion-icon name="eye-outline"></ion-icon> View
-            </button>
-            <button class="btn-delete">
-              <ion-icon name="trash-outline"></ion-icon> Delete
-            </button>
+
+          <div class="details-container">
+            <div class="title-row">
+              <h3 class="product-name">{{ item.name }}</h3>
+              <span class="priority-dot" [ngClass]="item.priority"></span>
+            </div>
+            <p class="brand-name">{{ item.brand }}</p>
+            <p class="price-text">${{ item.price | number:'1.2-2' }}</p>
+
+            <div class="action-buttons">
+              <button class="btn-view" (click)="viewItem(item)">
+                <ion-icon name="eye-outline"></ion-icon> View
+              </button>
+              <button class="btn-delete" (click)="deleteItem(item)">
+                <ion-icon name="trash-outline"></ion-icon> Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="empty-state" *ngIf="filteredItems.length === 0">
+      <ion-icon name="heart-outline"></ion-icon>
+      <h3>No items found</h3>
+      <p>
+        {{ wishlistItems.length === 0 ? 'Add items to your wishlist' : 'Try
+        changing the filter' }}
+      </p>
+    </div>
+
+    <div class="bottom-spacer"></div>
   </div>
 </ion-content>
+<app-bottom-nav></app-bottom-nav>
+
+<!-- Add Item Modal -->
+<div class="modal-overlay" *ngIf="showAddModal" (click)="closeAddModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Add to Wishlist</h2>
+      <ion-icon name="close-outline" (click)="closeAddModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Item Name</label>
+        <input
+          type="text"
+          placeholder="e.g. Vintage Denim Jacket"
+          [(ngModel)]="newItem.name"
+        />
+      </div>
+      <div class="form-group">
+        <label>Brand</label>
+        <input
+          type="text"
+          placeholder="e.g. Levi's"
+          [(ngModel)]="newItem.brand"
+        />
+      </div>
+      <div class="form-group">
+        <label>Price ($)</label>
+        <input
+          type="number"
+          placeholder="0.00"
+          [(ngModel)]="newItem.price"
+          step="0.01"
+        />
+      </div>
+      <div class="form-group">
+        <label>Priority</label>
+        <div class="priority-selector">
+          <div
+            class="priority-option"
+            [class.selected]="newItem.priority === 'high'"
+            (click)="newItem.priority = 'high'"
+          >
+            <span class="dot high"></span> High
+          </div>
+          <div
+            class="priority-option"
+            [class.selected]="newItem.priority === 'medium'"
+            (click)="newItem.priority = 'medium'"
+          >
+            <span class="dot medium"></span> Medium
+          </div>
+          <div
+            class="priority-option"
+            [class.selected]="newItem.priority === 'low'"
+            (click)="newItem.priority = 'low'"
+          >
+            <span class="dot low"></span> Low
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeAddModal()">Cancel</button>
+      <button
+        class="btn-save"
+        (click)="addItem()"
+        [disabled]="!newItem.name.trim() || !newItem.price"
+      >
+        Add Item
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- View Item Modal -->
+<div class="modal-overlay" *ngIf="showViewModal" (click)="closeViewModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ selectedItem?.name }}</h2>
+      <ion-icon name="close-outline" (click)="closeViewModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body" *ngIf="selectedItem">
+      <div class="view-image">
+        <img [src]="selectedItem.image" [alt]="selectedItem.name" />
+      </div>
+
+      <div class="view-details">
+        <div class="detail-row">
+          <span class="detail-label">Brand</span>
+          <span class="detail-value">{{ selectedItem.brand }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Price</span>
+          <span class="detail-value price"
+            >${{ selectedItem.price | number:'1.2-2' }}</span
+          >
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Priority</span>
+          <span class="detail-value">
+            <span class="dot" [ngClass]="selectedItem.priority"></span>
+            {{ selectedItem.priority | titlecase }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeViewModal()">Close</button>
+    </div>
+  </div>
+</div>
