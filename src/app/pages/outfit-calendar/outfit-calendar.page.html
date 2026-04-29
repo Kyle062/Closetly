@@ -1,13 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>outfit-calendar</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="bg-wrapper">
+  <div class="background-image">
+     <img src="https://placehold.co/800x1600/dfd3c3/ffffff?text=Wardrobe+Background" alt="Wardrobe Background">
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">outfit-calendar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="overlay-content">
+    
+    <div class="header">
+      <ion-icon name="arrow-back-outline" class="back-btn"></ion-icon>
+      <h1 class="title">Outfit Calendar</h1>
+      <div class="spacer"></div>
+    </div>
+
+    <div class="month-navigator">
+      <ion-icon name="arrow-back-circle-outline"></ion-icon>
+      <h2>April 2026</h2>
+      <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+    </div>
+
+    <div class="glass-container calendar-card">
+      <div class="days-of-week">
+        <span *ngFor="let day of daysOfWeek">{{ day }}</span>
+      </div>
+      
+      <div class="calendar-grid">
+        <div class="day-cell" *ngFor="let day of calendarDays">
+          <ng-container *ngIf="day.date">
+            <div class="date-number" *ngIf="!day.image">{{ day.date }}</div>
+            
+            <div class="outfit-day" *ngIf="day.image">
+              <img [src]="day.image" alt="Outfit {{day.date}}" class="outfit-img">
+              <span class="outfit-date-badge">{{ day.date }}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-container">
+      <div class="stat-card glass-container" *ngFor="let stat of stats">
+        <span class="stat-value" [style.color]="stat.color">{{ stat.value }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+    </div>
+
+  </div>
 </ion-content>
