@@ -44,6 +44,8 @@ interface WardrobeItem {
 })
 export class OutfitPage implements OnInit {
   showCreateModal = false;
+  showDetailModal = false;
+  selectedOutfit: Outfit | null = null;
 
   modalCategories: string[] = [
     'Tops',
@@ -69,215 +71,88 @@ export class OutfitPage implements OnInit {
       title: 'The Weston Comfort',
       itemCount: 3,
       tags: 'Effortless, Breezy, Tropical',
-      suggestion:
-        'Linen button-up + denim short + wide-brim straw hat + flat sandals',
-      image: '../../../assets/outfit/weston.jpg',
+      suggestion: 'Summer Top + Shorts + Sandals',
+      image: '../../../assets/homepage/sunny/cloth1.png',
       isActive: false,
-      items: [],
+      items: [
+        { id: 1, image: '../../../assets/homepage/sunny/cloth1.png', name: 'Summer Top', category: 'Tops', isFavorite: false },
+        { id: 2, image: '../../../assets/homepage/sunny/cloth2.png', name: 'Shorts', category: 'Bottoms', isFavorite: false },
+        { id: 4, image: '../../../assets/homepage/sunny/shoes.png', name: 'Sandals', category: 'Shoes/Sandals', isFavorite: false },
+      ]
     },
     {
       title: 'Office Ready',
       itemCount: 4,
       tags: 'Sharp, Confident, Professional',
-      suggestion:
-        'Tailored vest + wide-leg trousers + pointed loafers + leather tote',
-      image: '../../../assets/outfit/office.jpg',
+      suggestion: 'Jacket + Long Pants + Closed Shoes + Scarf',
+      image: '../../../assets/homepage/cold/Closetlycloth10.png',
       isActive: false,
-      items: [],
+      items: [
+        { id: 16, image: '../../../assets/homepage/cold/Closetlycloth10.png', name: 'Jacket', category: 'Layers', isFavorite: true },
+        { id: 17, image: '../../../assets/homepage/cold/Closetlycloth11.png', name: 'Long Pants', category: 'Bottoms', isFavorite: false },
+        { id: 18, image: '../../../assets/homepage/cold/Closetlycloth12.png', name: 'Closed Shoes', category: 'Shoes/Sandals', isFavorite: true },
+        { id: 19, image: '../../../assets/homepage/cold/scarf.png', name: 'Scarf', category: 'Accessories', isFavorite: false },
+      ]
     },
     {
       title: 'Date Night',
       itemCount: 3,
       tags: 'Sensual, Polished, Intimate',
-      suggestion:
-        'Silk slip dress + draped blazer + heeled mules + delicate gold necklace',
-      image: '../../../assets/outfit/date.jpg',
+      suggestion: 'Tank Top + Linen Pants + Flip Flops',
+      image: '../../../assets/homepage/hot/cloth1.png',
       isActive: false,
-      items: [],
+      items: [
+        { id: 6, image: '../../../assets/homepage/hot/cloth1.png', name: 'Tank Top', category: 'Tops', isFavorite: true },
+        { id: 7, image: '../../../assets/homepage/hot/cloth2.png', name: 'Linen Pants', category: 'Bottoms', isFavorite: false },
+        { id: 9, image: '../../../assets/homepage/hot/shoes.png', name: 'Flip Flops', category: 'Shoes/Sandals', isFavorite: false },
+      ]
     },
     {
       title: 'Weekend Vibes',
       itemCount: 5,
       tags: 'Relaxed, Cozy, Unplugged',
-      suggestion:
-        'Oversized knit sweater + biker shorts + chunky sneakers + baseball cap',
-      image: '../../../assets/outfit/weekend.jpg',
+      suggestion: 'Summer Top + Shorts + Sunglasses + Sandals + Watch',
+      image: '../../../assets/homepage/sunny/accessory.png',
       isActive: false,
-      items: [],
-    },
+      items: [
+        { id: 1, image: '../../../assets/homepage/sunny/cloth1.png', name: 'Summer Top', category: 'Tops', isFavorite: false },
+        { id: 2, image: '../../../assets/homepage/sunny/cloth2.png', name: 'Shorts', category: 'Bottoms', isFavorite: false },
+        { id: 3, image: '../../../assets/homepage/sunny/cloth4.png', name: 'Sunglasses', category: 'Accessories', isFavorite: false },
+        { id: 4, image: '../../../assets/homepage/sunny/shoes.png', name: 'Sandals', category: 'Shoes/Sandals', isFavorite: false },
+        { id: 5, image: '../../../assets/homepage/sunny/accessory.png', name: 'Watch', category: 'Accessories', isFavorite: false },
+      ]
+    }
   ];
 
-  // Wardrobe items from wardrobe page
   wardrobeItems: WardrobeItem[] = [
-    {
-      id: 1,
-      image: '../../../assets/homepage/sunny/cloth1.png',
-      name: 'Summer Top',
-      category: 'Tops',
-      isFavorite: false,
-    },
-    {
-      id: 2,
-      image: '../../../assets/homepage/sunny/cloth2.png',
-      name: 'Shorts',
-      category: 'Bottoms',
-      isFavorite: false,
-    },
-    {
-      id: 3,
-      image: '../../../assets/homepage/sunny/cloth4.png',
-      name: 'Sunglasses',
-      category: 'Accessories',
-      isFavorite: false,
-    },
-    {
-      id: 4,
-      image: '../../../assets/homepage/sunny/shoes.png',
-      name: 'Sandals',
-      category: 'Shoes/Sandals',
-      isFavorite: false,
-    },
-    {
-      id: 5,
-      image: '../../../assets/homepage/sunny/accessory.png',
-      name: 'Watch',
-      category: 'Accessories',
-      isFavorite: false,
-    },
-    {
-      id: 6,
-      image: '../../../assets/homepage/hot/cloth1.png',
-      name: 'Tank Top',
-      category: 'Tops',
-      isFavorite: true,
-    },
-    {
-      id: 7,
-      image: '../../../assets/homepage/hot/cloth2.png',
-      name: 'Linen Pants',
-      category: 'Bottoms',
-      isFavorite: false,
-    },
-    {
-      id: 8,
-      image: '../../../assets/homepage/hot/cloth3.png',
-      name: 'Sun Hat',
-      category: 'Accessories',
-      isFavorite: true,
-    },
-    {
-      id: 9,
-      image: '../../../assets/homepage/hot/shoes.png',
-      name: 'Flip Flops',
-      category: 'Shoes/Sandals',
-      isFavorite: false,
-    },
-    {
-      id: 10,
-      image: '../../../assets/homepage/hot/sunglasses.png',
-      name: 'Sunglasses',
-      category: 'Accessories',
-      isFavorite: false,
-    },
-    {
-      id: 11,
-      image: '../../../assets/homepage/rainy/Closetlycloth7.png',
-      name: 'Raincoat',
-      category: 'Layers',
-      isFavorite: true,
-    },
-    {
-      id: 12,
-      image: '../../../assets/homepage/rainy/Closetlycloth8.png',
-      name: 'Waterproof Boots',
-      category: 'Shoes/Sandals',
-      isFavorite: false,
-    },
-    {
-      id: 13,
-      image: '../../../assets/homepage/rainy/Umbrella.png',
-      name: 'Umbrella',
-      category: 'Accessories',
-      isFavorite: true,
-    },
-    {
-      id: 14,
-      image: '../../../assets/homepage/rainy/Closetlycloth9.png',
-      name: 'Rain Boots',
-      category: 'Accessories',
-      isFavorite: true,
-    },
-    {
-      id: 15,
-      image: '../../../assets/homepage/rainy/Waterproof bag.png',
-      name: 'Waterproof Bag',
-      category: 'Accessories',
-      isFavorite: false,
-    },
-    {
-      id: 16,
-      image: '../../../assets/homepage/cold/Closetlycloth10.png',
-      name: 'Jacket',
-      category: 'Layers',
-      isFavorite: true,
-    },
-    {
-      id: 17,
-      image: '../../../assets/homepage/cold/Closetlycloth11.png',
-      name: 'Long Pants',
-      category: 'Bottoms',
-      isFavorite: false,
-    },
-    {
-      id: 18,
-      image: '../../../assets/homepage/cold/Closetlycloth12.png',
-      name: 'Closed Shoes',
-      category: 'Shoes/Sandals',
-      isFavorite: true,
-    },
-    {
-      id: 19,
-      image: '../../../assets/homepage/cold/scarf.png',
-      name: 'Scarf',
-      category: 'Accessories',
-      isFavorite: false,
-    },
-    {
-      id: 20,
-      image: '../../../assets/homepage/cold/gloves.png',
-      name: 'Gloves',
-      category: 'Accessories',
-      isFavorite: false,
-    },
-    {
-      id: 21,
-      image: '../../../assets/random-outfit/layer/layer1.png',
-      name: 'Denim Jacket',
-      category: 'Layers',
-      isFavorite: true,
-    },
-    {
-      id: 22,
-      image: '../../../assets/random-outfit/layer/layer2.png',
-      name: 'Cardigan',
-      category: 'Layers',
-      isFavorite: false,
-    },
-    {
-      id: 23,
-      image: '../../../assets/random-outfit/layer/layer3.png',
-      name: 'Blazer',
-      category: 'Layers',
-      isFavorite: false,
-    },
-    {
-      id: 24,
-      image: '../../../assets/random-outfit/layer/layer4.png',
-      name: 'Bomber Jacket',
-      category: 'Layers',
-      isFavorite: false,
-    },
+    { id: 1, image: '../../../assets/homepage/sunny/cloth1.png', name: 'Summer Top', category: 'Tops', isFavorite: false },
+    { id: 2, image: '../../../assets/homepage/sunny/cloth2.png', name: 'Shorts', category: 'Bottoms', isFavorite: false },
+    { id: 3, image: '../../../assets/homepage/sunny/cloth4.png', name: 'Sunglasses', category: 'Accessories', isFavorite: false },
+    { id: 4, image: '../../../assets/homepage/sunny/shoes.png', name: 'Sandals', category: 'Shoes/Sandals', isFavorite: false },
+    { id: 5, image: '../../../assets/homepage/sunny/accessory.png', name: 'Watch', category: 'Accessories', isFavorite: false },
+    { id: 6, image: '../../../assets/homepage/hot/cloth1.png', name: 'Tank Top', category: 'Tops', isFavorite: true },
+    { id: 7, image: '../../../assets/homepage/hot/cloth2.png', name: 'Linen Pants', category: 'Bottoms', isFavorite: false },
+    { id: 8, image: '../../../assets/homepage/hot/cloth3.png', name: 'Sun Hat', category: 'Accessories', isFavorite: true },
+    { id: 9, image: '../../../assets/homepage/hot/shoes.png', name: 'Flip Flops', category: 'Shoes/Sandals', isFavorite: false },
+    { id: 10, image: '../../../assets/homepage/hot/sunglasses.png', name: 'Sunglasses', category: 'Accessories', isFavorite: false },
+    { id: 11, image: '../../../assets/homepage/rainy/Closetlycloth7.png', name: 'Raincoat', category: 'Layers', isFavorite: true },
+    { id: 12, image: '../../../assets/homepage/rainy/Closetlycloth8.png', name: 'Waterproof Boots', category: 'Shoes/Sandals', isFavorite: false },
+    { id: 13, image: '../../../assets/homepage/rainy/Umbrella.png', name: 'Umbrella', category: 'Accessories', isFavorite: true },
+    { id: 14, image: '../../../assets/homepage/rainy/Closetlycloth9.png', name: 'Rain Boots', category: 'Accessories', isFavorite: true },
+    { id: 15, image: '../../../assets/homepage/rainy/Waterproof bag.png', name: 'Waterproof Bag', category: 'Accessories', isFavorite: false },
+    { id: 16, image: '../../../assets/homepage/cold/Closetlycloth10.png', name: 'Jacket', category: 'Layers', isFavorite: true },
+    { id: 17, image: '../../../assets/homepage/cold/Closetlycloth11.png', name: 'Long Pants', category: 'Bottoms', isFavorite: false },
+    { id: 18, image: '../../../assets/homepage/cold/Closetlycloth12.png', name: 'Closed Shoes', category: 'Shoes/Sandals', isFavorite: true },
+    { id: 19, image: '../../../assets/homepage/cold/scarf.png', name: 'Scarf', category: 'Accessories', isFavorite: false },
+    { id: 20, image: '../../../assets/homepage/cold/gloves.png', name: 'Gloves', category: 'Accessories', isFavorite: false },
+    { id: 21, image: '../../../assets/random-outfit/layer/layer1.png', name: 'Denim Jacket', category: 'Layers', isFavorite: true },
+    { id: 22, image: '../../../assets/random-outfit/layer/layer2.png', name: 'Cardigan', category: 'Layers', isFavorite: false },
+    { id: 23, image: '../../../assets/random-outfit/layer/layer3.png', name: 'Blazer', category: 'Layers', isFavorite: false },
+    { id: 24, image: '../../../assets/random-outfit/layer/layer4.png', name: 'Bomber Jacket', category: 'Layers', isFavorite: false },
   ];
+
+  private clickTimer: any;
+  private lastClickedIndex: number = -1;
 
   constructor(
     private router: Router,
@@ -298,9 +173,68 @@ export class OutfitPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  selectOutfit(outfit: Outfit, index: number) {
+  onOutfitClick(outfit: Outfit, index: number) {
+    if (this.clickTimer) {
+      clearTimeout(this.clickTimer);
+    }
+
+    if (this.lastClickedIndex === index) {
+      this.openOutfitDetail(outfit);
+      this.lastClickedIndex = -1;
+      return;
+    }
+
     this.outfits.forEach((o) => (o.isActive = false));
     outfit.isActive = true;
+    this.lastClickedIndex = index;
+
+    this.clickTimer = setTimeout(() => {
+      this.lastClickedIndex = -1;
+    }, 300);
+  }
+
+  openOutfitDetail(outfit: Outfit) {
+    this.selectedOutfit = outfit;
+    this.showDetailModal = true;
+  }
+
+  closeDetailModal() {
+    this.showDetailModal = false;
+    this.selectedOutfit = null;
+  }
+
+  async deleteOutfit(outfit: Outfit) {
+    const alert = await this.alertController.create({
+      header: 'Delete Outfit?',
+      message: `Are you sure you want to delete "${outfit.title}"?`,
+      mode: 'ios',
+      cssClass: 'modern-pill-alert',
+      buttons: [
+        { text: 'Cancel', role: 'cancel' },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.outfits = this.outfits.filter((o) => o !== outfit);
+            this.closeDetailModal();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  getItemsByCategory(items: WardrobeItem[]): { category: string; items: WardrobeItem[] }[] {
+    const grouped: { [key: string]: WardrobeItem[] } = {};
+    items.forEach((item) => {
+      if (!grouped[item.category]) {
+        grouped[item.category] = [];
+      }
+      grouped[item.category].push(item);
+    });
+    return Object.keys(grouped).map((category) => ({
+      category,
+      items: grouped[category],
+    }));
   }
 
   openCreateOutfitModal() {
@@ -363,9 +297,7 @@ export class OutfitPage implements OnInit {
       itemCount: this.newOutfit.selectedItems.length,
       tags: this.newOutfit.tags || 'Custom Outfit',
       suggestion: suggestion,
-      image:
-        this.newOutfit.selectedItems[0]?.image ||
-        '../../../assets/outfit/default.jpg',
+      image: this.newOutfit.selectedItems[0]?.image || '../../../assets/homepage/sunny/cloth1.png',
       isActive: false,
       items: [...this.newOutfit.selectedItems],
     };

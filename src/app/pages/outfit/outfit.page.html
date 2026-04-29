@@ -24,7 +24,7 @@
         class="outfit-card" 
         *ngFor="let outfit of outfits; let i = index"
         [class.active-card]="outfit.isActive"
-        (click)="selectOutfit(outfit, i)">
+        (click)="onOutfitClick(outfit, i)">
         
         <div class="image-box">
           <img [src]="outfit.image" alt="Outfit Image" />
@@ -73,7 +73,6 @@
         <input type="text" placeholder="e.g. Casual, Breezy, Summer" [(ngModel)]="newOutfit.tags" />
       </div>
 
-      <!-- Category Selection Tabs -->
       <div class="modal-categories">
         <div 
           class="modal-tab" 
@@ -84,7 +83,6 @@
         </div>
       </div>
 
-      <!-- Items Grid -->
       <div class="modal-items-grid">
         <div 
           class="modal-item" 
@@ -101,7 +99,6 @@
         </div>
       </div>
 
-      <!-- Selected Items Preview -->
       <div class="selected-preview" *ngIf="newOutfit.selectedItems.length > 0">
         <label>Selected Items ({{ newOutfit.selectedItems.length }})</label>
         <div class="selected-chips">
@@ -118,6 +115,54 @@
       <button class="btn-create" (click)="createOutfit()" [disabled]="!canCreateOutfit()">
         Create Outfit
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal-overlay" *ngIf="showDetailModal" (click)="closeDetailModal()">
+  <div class="modal-content detail-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ selectedOutfit?.title }}</h2>
+      <ion-icon name="close-outline" (click)="closeDetailModal()"></ion-icon>
+    </div>
+
+    <div class="modal-body" *ngIf="selectedOutfit">
+      <div class="detail-image">
+        <img [src]="selectedOutfit.image" [alt]="selectedOutfit.title" />
+      </div>
+
+      <div class="detail-info">
+        <div class="detail-tags">
+          <span class="tag">{{ selectedOutfit.tags }}</span>
+          <span class="item-count-badge">{{ selectedOutfit.itemCount }} items</span>
+        </div>
+
+        <div class="detail-suggestion">
+          <label>Style Suggestion</label>
+          <p>{{ selectedOutfit.suggestion }}</p>
+        </div>
+
+        <div class="detail-items">
+          <label>Outfit Items</label>
+          <div class="category-group" *ngFor="let group of getItemsByCategory(selectedOutfit.items)">
+            <h4>{{ group.category }}</h4>
+            <div class="detail-item-list">
+              <div class="detail-item" *ngFor="let item of group.items">
+                <div class="detail-item-img">
+                  <img [src]="item.image" [alt]="item.name" />
+                </div>
+                <span>{{ item.name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeDetailModal()">Close</button>
+      <button class="btn-delete" (click)="deleteOutfit(selectedOutfit!)">Delete Outfit</button>
     </div>
   </div>
 </div>
