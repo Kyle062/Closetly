@@ -1,13 +1,127 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>about-us</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="about-page">
+  <div class="top-nav">
+    <img
+      src="../../../assets/homepage/iconLogo.png"
+      alt="logo"
+      class="brand-logo"
+    />
+    <ion-icon name="options-outline" class="menu-icon"></ion-icon>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">about-us</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="bottom-sheet">
+    <div class="header-row">
+      <ion-icon
+        name="arrow-back-outline"
+        class="back-btn"
+        (click)="goBack()"
+      ></ion-icon>
+      <h1 class="page-title">About Us</h1>
+      <div class="spacer"></div>
+    </div>
+
+    <div class="app-logo-section">
+      <div class="app-logo">
+        <img src="../../../assets/homepage/iconLogo.png" alt="Closetly Logo" />
+      </div>
+      <h2 class="app-name">Closetly</h2>
+      <p class="app-tagline">Your Smart Wardrobe Assistant</p>
+      <p class="app-version">Version 1.0.0</p>
+    </div>
+
+    <div class="description-card">
+      <p class="description-text">
+        Closetly helps you organize your wardrobe, plan outfits based on
+        weather, and discover new styles. Never wonder what to wear again!
+      </p>
+    </div>
+
+    <div class="features-card">
+      <h3 class="card-title">Features</h3>
+
+      <div class="feature-item">
+        <ion-icon name="sunny-outline" class="feature-icon"></ion-icon>
+        <div class="feature-info">
+          <h4>Weather-Based Suggestions</h4>
+          <p>Get outfit recommendations based on real-time weather</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <ion-icon name="shuffle-outline" class="feature-icon"></ion-icon>
+        <div class="feature-info">
+          <h4>Random Outfit Generator</h4>
+          <p>Shake things up with random outfit combinations</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <ion-icon name="calendar-outline" class="feature-icon"></ion-icon>
+        <div class="feature-info">
+          <h4>Outfit Calendar</h4>
+          <p>Plan your outfits days ahead</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <ion-icon name="briefcase-outline" class="feature-icon"></ion-icon>
+        <div class="feature-info">
+          <h4>Packing List</h4>
+          <p>Never forget essentials for your trips</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <h3 class="card-title">Development Team</h3>
+
+      <div class="team-member">
+        <div class="member-avatar">
+          <ion-icon name="person-outline"></ion-icon>
+        </div>
+        <div class="member-info">
+          <h4>Kyle Bernard Trimidal</h4>
+          <p>Lead Developer & Designer</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3 class="card-title">Contact Us</h3>
+
+      <div class="contact-item" (click)="openEmail()">
+        <ion-icon name="mail-outline" class="contact-icon"></ion-icon>
+        <span>KyleAlab79@gmail.com</span>
+      </div>
+
+      <div class="contact-item">
+        <ion-icon name="call-outline" class="contact-icon"></ion-icon>
+        <span>+63 912 345 6789</span>
+      </div>
+
+      <div class="contact-item">
+        <ion-icon name="location-outline" class="contact-icon"></ion-icon>
+        <span>Davao de Oro, Philippines</span>
+      </div>
+    </div>
+
+    <div class="social-links">
+      <div class="social-icon">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </div>
+      <div class="social-icon">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </div>
+      <div class="social-icon">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </div>
+      <div class="social-icon">
+        <ion-icon name="logo-github"></ion-icon>
+      </div>
+    </div>
+
+    <p class="copyright">© 2026 Closetly. All rights reserved.</p>
+
+    <div class="bottom-spacer"></div>
+  </div>
 </ion-content>
+<app-bottom-nav></app-bottom-nav>

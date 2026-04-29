@@ -1,0 +1,302 @@
+/* Page Background */
+ion-content.about-page::part(background) {
+  background: url("../../../assets/splash4/BackgroundImageClosetly.png")
+    no-repeat center center / cover;
+}
+
+.about-page {
+  /* Top Navigation */
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px 20px 20px;
+
+    .brand-logo {
+      border-radius: 8px;
+    }
+
+    .menu-icon {
+      font-size: 32px;
+      color: white;
+    }
+  }
+
+  /* Main Overlapping Card */
+  .bottom-sheet {
+    background: #f4f3f0;
+    border-radius: 40px 40px 0 0;
+    margin-top: 20px;
+    min-height: 85vh;
+    padding: 30px 20px 40px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Header Row */
+  .header-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+
+    .back-btn {
+      font-size: 28px;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .page-title {
+      flex: 1;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+      color: #000;
+    }
+
+    .spacer {
+      width: 28px;
+    }
+  }
+
+  /* App Logo Section */
+  .app-logo-section {
+    text-align: center;
+    margin-bottom: 25px;
+
+    .app-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 12px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(187, 187, 187, 0.63);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .app-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin: 0 0 4px 0;
+    }
+
+    .app-tagline {
+      font-size: 13px;
+      color: #888;
+      margin: 0 0 4px 0;
+    }
+
+    .app-version {
+      font-size: 12px;
+      color: #bbb;
+      margin: 0;
+    }
+  }
+
+  /* Description Card */
+  .description-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+
+    .description-text {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0;
+      text-align: center;
+    }
+  }
+
+  /* Card Titles */
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 16px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  /* Features Card */
+  .features-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .feature-icon {
+        font-size: 24px;
+        color: #1a1a1a;
+        background: #f5f5f5;
+        padding: 10px;
+        border-radius: 12px;
+        flex-shrink: 0;
+      }
+
+      .feature-info {
+        h4 {
+          font-size: 14px;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin: 0 0 4px 0;
+        }
+
+        p {
+          font-size: 12px;
+          color: #888;
+          margin: 0;
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+
+  /* Team Card */
+  .team-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+
+    .team-member {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      .member-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        ion-icon {
+          font-size: 28px;
+          color: #1a1a1a;
+        }
+      }
+
+      .member-info {
+        h4 {
+          font-size: 15px;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin: 0 0 4px 0;
+        }
+
+        p {
+          font-size: 12px;
+          color: #888;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  /* Contact Card */
+  .contact-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f5;
+      cursor: pointer;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .contact-icon {
+        font-size: 20px;
+        color: #1a1a1a;
+        flex-shrink: 0;
+      }
+
+      span {
+        font-size: 13px;
+        color: #555;
+        font-weight: 500;
+      }
+    }
+  }
+
+  /* Social Links */
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(187, 187, 187, 0.63);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      ion-icon {
+        font-size: 22px;
+        color: #1a1a1a;
+      }
+    }
+  }
+
+  /* Copyright */
+  .copyright {
+    text-align: center;
+    font-size: 12px;
+    color: #bbb;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  .bottom-spacer {
+    height: 30px;
+  }
+}
