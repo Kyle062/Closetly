@@ -81,9 +81,9 @@ export class OutfitPage implements OnInit {
       ]
     },
     {
-      title: 'Office Ready',
+      title: 'Cold Weather Ready',
       itemCount: 4,
-      tags: 'Sharp, Confident, Professional',
+      tags: 'Sharp, Confident, Practical',
       suggestion: 'Jacket + Long Pants + Closed Shoes + Scarf',
       image: '../../../assets/homepage/cold/Closetlycloth10.png',
       isActive: false,
