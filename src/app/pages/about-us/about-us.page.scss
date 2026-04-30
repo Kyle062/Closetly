@@ -181,11 +181,16 @@ ion-content.about-page::part(background) {
     margin-bottom: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 
+    .mbember-1 {
+       margin-bottom: 10px;
+     }
+
     .team-member {
       display: flex;
       align-items: center;
       gap: 14px;
-
+      
+    
       .member-avatar {
         width: 50px;
         height: 50px;
@@ -202,6 +207,7 @@ ion-content.about-page::part(background) {
       }
 
       .member-info {
+        
         h4 {
           font-size: 15px;
           font-weight: 600;
